@@ -60,6 +60,16 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;g
 .btn-ghost{border-color:var(--line);color:var(--text)}
 .btn-ghost:hover{border-color:var(--muted)}
 .nav .btn{padding:9px 16px;font-size:14px}
+.dd{position:relative}
+.dd-btn{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.dd-btn:hover,.dd-btn[aria-expanded="true"]{color:var(--text)}
+.dd-btn span{font-size:11px}
+.dd-menu{position:absolute;top:calc(100% + 14px);left:-16px;min-width:300px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px;display:grid;gap:2px;box-shadow:0 20px 50px -20px rgba(0,0,0,.8);z-index:20}
+.dd-menu a{display:grid;gap:2px;padding:10px 12px;border-radius:8px;color:var(--text)}
+.dd-menu a:hover,.dd-menu a:focus-visible{background:rgba(255,255,255,.05)}
+.dd-menu b{font-weight:600;font-size:14px}
+.dd-menu small{color:var(--muted);font-size:12.5px}
+.dd-menu .dd-all{border-top:1px solid var(--line);border-radius:0 0 8px 8px;margin-top:4px;color:var(--cyan);font-size:13px;font-weight:600}
 @media (max-width:860px){.nav ul{display:none}}
 
 /* hero */
@@ -275,7 +285,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <li><a href="#estimate">Estimate</a></li>
       <li><a href="#packages">Packages</a></li>
       <li><a href="#ai">AI-assisted</a></li>
-      <li><a href="#products">Products</a></li>
+      <li class="dd">
+        <button type="button" class="dd-btn" id="dd-btn" aria-expanded="false" aria-controls="dd-menu">Products <span aria-hidden="true">▾</span></button>
+        <div class="dd-menu" id="dd-menu" hidden>
+          <a href="#signavio"><b>CALM2Signavio</b><small>Cloud ALM ⇄ SAP Signavio process sync</small></a>
+          <a href="#sharepoint"><b>SharePoint DMS for Cloud ALM</b><small>Cloud ALM documents stored in SharePoint</small></a>
+          <a href="#products" class="dd-all">All products</a>
+        </div>
+      </li>
       <li><a href="#services">Cloud ALM services</a></li>
       <li><a href="#about">About</a></li>
     </ul>
@@ -842,6 +859,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   var d=Math.max(0,Math.ceil((end-new Date())/864e5));
   document.getElementById('d-days').textContent=d.toLocaleString('en-US');
   document.getElementById('yr').textContent=new Date().getFullYear();
+  var ddb=document.getElementById('dd-btn'),ddm=document.getElementById('dd-menu');
+  function ddSet(o){ddm.hidden=!o;ddb.setAttribute('aria-expanded',o?'true':'false')}
+  ddb.addEventListener('click',function(e){e.stopPropagation();ddSet(ddm.hidden)});
+  ddm.addEventListener('click',function(e){if(e.target.closest('a'))ddSet(false)});
+  document.addEventListener('click',function(e){if(!e.target.closest('.dd'))ddSet(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ddm.hidden){ddSet(false);ddb.focus()}});
   document.getElementById('copy').addEventListener('click',function(){
     var t=document.getElementById('mail').textContent,b=this;
     var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)};
