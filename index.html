@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ALM365 Cloud</title>
+<meta name="description" content="SAP Solution Manager to SAP Cloud ALM transition services: readiness assessment, core transition, gap closure, process customization and tool integrations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="ALM365 Cloud">
+<meta property="og:description" content="SAP Solution Manager to SAP Cloud ALM transition services and CALM2Signavio.">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+/* Layout: dark single-theme product site. Wide hero with a live "transition console", then a stacked catalogue of packages on a 12-col grid. */
+:root{
+  --ink:#0A0F1C;          /* page ground, blue-biased near black */
+  --panel:#111829;        /* raised surfaces */
+  --line:#222C44;         /* hairlines */
+  --text:#E7ECF6;
+  --muted:#93A0BA;
+  --amber:#F6A23A;        /* primary accent, from the hexagon mark */
+  --cyan:#3FB6E8;         /* secondary, from the hexagon mark */
+  --ok:#4CC38A; --warn:#E8B341; --gap:#EF6C5A;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --wrap:1180px;
+  color-scheme:dark;
+}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--ink);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.02em}
+h2{font-size:clamp(30px,4.2vw,48px);font-weight:700}
+h3{font-size:22px;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.lead{color:var(--muted);font-size:18px;max-width:62ch}
+section{padding-block:96px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:16px;margin-bottom:48px}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+/* nav */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--ink) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.02em}
+.brand span{color:var(--muted);font-weight:500}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-size:14px;color:var(--muted)}
+.nav ul a{text-decoration:none}.nav ul a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--body)}
+.btn-primary{background:var(--amber);color:#1A1205}
+.btn-primary:hover{background:#FFB653}
+.btn-ghost{border-color:var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--muted)}
+.nav .btn{padding:9px 16px;font-size:14px}
+@media (max-width:860px){.nav ul{display:none}}
+
+/* hero */
+.hero{padding-block:80px 96px;border-top:0;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:-20% -10% auto auto;width:640px;height:640px;background:radial-gradient(closest-side,rgba(63,182,232,.16),transparent);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
+.hero-grid > *{min-width:0}
+.hero h1{font-size:clamp(42px,6.4vw,80px);font-weight:800;margin-top:18px}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero .lead{margin-top:24px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.deadline{display:flex;gap:28px;flex-wrap:wrap;margin-top:44px;padding-top:24px;border-top:1px solid var(--line)}
+.deadline div{display:grid;gap:2px}
+.deadline b{font-family:var(--display);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+.deadline small{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr}}
+
+/* console */
+.console{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 80px -30px rgba(0,0,0,.7);font-family:var(--mono);font-size:13px;overflow:hidden}
+.console-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
+.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+.map{display:grid}
+.map-row{display:grid;grid-template-columns:1fr 18px 1fr auto;gap:10px;align-items:center;padding:11px 16px;border-bottom:1px solid var(--line)}
+.map-row:last-child{border-bottom:0}
+.map-row .from{color:var(--muted)}
+.map-row .arrow{color:var(--line)}
+.map-row .to{color:var(--text)}
+.pill{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.pill.ok{color:var(--ok)}.pill.warn{color:var(--warn)}.pill.gap{color:var(--gap)}
+.console-foot{display:flex;flex-wrap:wrap;gap:14px;padding:12px 16px;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px}
+.console-foot span{display:flex;align-items:center;gap:6px}
+.console-foot i{width:8px;height:8px;border-radius:50%;display:block}
+@media (max-width:520px){.map-row{grid-template-columns:1fr auto;row-gap:2px}.map-row .arrow{display:none}.map-row .to{grid-column:1}.map-row .pill{grid-column:2;grid-row:1 / span 2}}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.step{background:var(--ink);padding:32px 28px;display:grid;gap:12px;align-content:start}
+.step .n{font-family:var(--mono);font-size:12px;color:var(--cyan)}
+.step p{color:var(--muted)}
+.step ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px;display:grid;gap:4px}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+
+/* path */
+.path{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:40px;font-family:var(--mono);font-size:12.5px}
+.path span{padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.path span.core{border-color:var(--amber);color:var(--amber)}
+.path b{color:var(--line);font-weight:400}
+
+/* packages */
+.pkgs{display:grid;gap:20px}
+.pkg{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
+.pkg-top{display:grid;grid-template-columns:120px 1fr auto;gap:28px;padding:32px;align-items:start}
+.pkg-top > *{min-width:0}
+.pkg-num{font-family:var(--display);font-size:64px;font-weight:800;line-height:.9;color:transparent;-webkit-text-stroke:1px var(--muted)}
+.pkg.core .pkg-num{-webkit-text-stroke:1px var(--amber)}
+.pkg-kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+.pkg.core .pkg-kicker{color:var(--amber)}
+.pkg-top h3{font-size:clamp(24px,2.6vw,30px)}
+.pkg-top p{color:var(--muted);margin-top:10px;max-width:64ch}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:5px 9px;white-space:nowrap}
+details.more{border-top:1px solid var(--line)}
+details.more summary{list-style:none;cursor:pointer;padding:16px 32px;font-size:14px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+";font-family:var(--mono);font-size:18px;color:var(--amber);transition:transform .2s}
+details.more[open] summary::after{transform:rotate(45deg)}
+details.more summary:hover{background:rgba(255,255,255,.02)}
+.more-body{padding:4px 32px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.more-body > div{min-width:0}
+.more-body h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:500}
+.more-body ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:15px}
+.more-body li{padding-left:18px;position:relative}
+.more-body li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--amber)}
+.more-body li.no::before{background:var(--gap)}
+.more-body li small{display:block;color:var(--muted);font-size:13.5px}
+.phases{grid-column:1 / -1;display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.phase{border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:4px}
+.phase b{font-family:var(--mono);font-size:11px;color:var(--amber);font-weight:500}
+.phase span{font-weight:600;font-size:14px}
+.phase small{color:var(--muted);font-size:12.5px;line-height:1.4}
+@media (max-width:860px){.phases{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:700px){.pkg-top{grid-template-columns:1fr;gap:12px;padding:24px}.pkg-num{font-size:44px}details.more summary{padding:16px 24px}.more-body{padding:4px 24px 24px}}
+
+.tbl-wrap{overflow-x:auto;grid-column:1 / -1}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+td.c{text-align:center;color:var(--ok);font-family:var(--mono);font-size:13px}
+td.c.o{color:var(--muted)}
+td:first-child{color:var(--text)}
+
+/* AI track */
+.ai{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.ai > *{min-width:0}
+.ai-card{border:1px solid var(--cyan);border-radius:16px;padding:32px;background:linear-gradient(180deg,rgba(63,182,232,.08),transparent 60%);display:grid;gap:20px}
+.ai-card h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin:0;font-weight:500}
+.ai-card ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--text);font-size:15px}
+.ai-cmp{display:grid;grid-template-columns:auto 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;margin-top:28px}
+.ai-cmp div{padding:10px 14px;border-bottom:1px solid var(--line)}
+.ai-cmp .h{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ai-cmp .k{color:var(--muted)}
+.ai-cmp .hl{color:var(--cyan)}
+@media (max-width:900px){.ai{grid-template-columns:1fr}}
+
+/* bundles */
+.bundles{display:grid;gap:0;border-top:1px solid var(--line)}
+.bundle{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--line);align-items:center}
+.bundle > *{min-width:0}
+.bundle p{color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(246,162,58,.1);color:var(--amber);border:1px solid rgba(246,162,58,.35)}
+.chip.ai{background:rgba(63,182,232,.1);color:var(--cyan);border-color:rgba(63,182,232,.35)}
+@media (max-width:700px){.bundle{grid-template-columns:1fr;gap:10px}}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.svc article{border-top:2px solid var(--line);padding-top:20px;display:grid;gap:10px;align-content:start}
+.svc article:hover{border-top-color:var(--amber)}
+.svc p{color:var(--muted);font-size:15px}
+@media (max-width:960px){.svc{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.svc{grid-template-columns:1fr}}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.about > *{min-width:0}
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.creds div{background:var(--ink);padding:24px;display:grid;gap:6px}
+.creds b{font-family:var(--display);font-size:34px;font-weight:700;line-height:1}
+.creds span{color:var(--muted);font-size:14px}
+@media (max-width:900px){.about{grid-template-columns:1fr}}
+
+/* contact */
+.contact{background:radial-gradient(800px 300px at 20% 0%,rgba(246,162,58,.12),transparent),var(--ink)}
+.contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start}
+.contact-grid > *{min-width:0}
+.mailcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;display:grid;gap:14px}
+.mailcard h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:500}
+.mailcard ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:15px}
+label{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:15px;color:var(--text);background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;box-sizing:border-box}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--amber)}
+textarea{min-height:96px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-note{font-size:13px;color:var(--muted)}
+.form-ok{color:var(--ok);font-size:14px}
+.mail{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:28px;font-family:var(--mono);font-size:15px}
+.mail code{padding:8px 12px;border:1px solid var(--line);border-radius:8px;user-select:all}
+.mail button{font:inherit;font-size:12px;background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:8px 10px;cursor:pointer}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.row2{grid-template-columns:1fr}}
+
+/* CALM2Signavio */
+.sgv-head{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:end;margin-bottom:48px}
+.sgv-head > *{min-width:0}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(246,162,58,.4);border-radius:999px;padding:5px 12px}
+.coverage{border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14px}
+.coverage div{display:grid;grid-template-columns:1fr auto;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);align-items:center}
+.coverage div:last-child{border-bottom:0}
+.coverage .h{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lanes{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow-x:auto;margin-bottom:40px}
+.lanes-in{min-width:760px;display:grid;grid-template-columns:130px repeat(3,1fr)}
+.lanes-in > div{padding:16px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-size:14px;display:grid;gap:6px;align-content:start}
+.lanes-in > div:nth-child(4n){border-right:0}
+.lanes-in > div:nth-last-child(-n+4){border-bottom:0}
+.lanes-in .ph{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lanes-in .ph b{display:block;font-family:var(--display);font-size:18px;letter-spacing:-.01em;text-transform:none;color:var(--text);margin-top:4px}
+.lanes-in .ln{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center}
+.lanes-in .ln.s{color:var(--cyan)}.lanes-in .ln.e{color:var(--amber)}.lanes-in .ln.c{color:var(--ok)}
+.lanes-in .w{color:var(--text)}
+.lanes-in .r{color:var(--muted)}
+.lanes-in .g{color:var(--warn)}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px}
+.feat article{border-top:2px solid var(--cyan);padding-top:18px;display:grid;gap:8px;align-content:start}
+.feat p{color:var(--muted);font-size:15px}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.modes div{background:var(--ink);padding:22px;display:grid;gap:6px;align-content:start}
+.modes b{font-family:var(--mono);font-size:12px;color:var(--amber);font-weight:500}
+.modes span{font-weight:600}
+.modes p{color:var(--muted);font-size:14px}
+.sgv-foot{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:40px}
+.sgv-foot > div{min-width:0}
+.sgv-foot h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:500}
+.sgv-foot ol,.sgv-foot ul{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px}
+@media (max-width:900px){.sgv-head,.sgv-foot{grid-template-columns:1fr}.feat,.modes{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="ALM365 Cloud home">
+      <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><polygon points="13,1 25,8 25,20 13,27 1,20 1,8" fill="none" stroke="#F6A23A" stroke-width="3"/><polygon points="13,7 19,10.5 19,17.5 13,21 7,17.5 7,10.5" fill="#3FB6E8"/></svg>
+      ALM365 <span>Cloud</span>
+    </a>
+    <ul>
+      <li><a href="#estimate">Estimate</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#ai">AI-assisted</a></li>
+      <li><a href="#signavio">CALM2Signavio</a></li>
+      <li><a href="#services">Cloud ALM services</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#contact">Get an estimate</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">SAP Solution Manager → SAP Cloud ALM</div>
+      <h1>Move off Solution Manager <em>without losing</em> your change process.</h1>
+      <p class="lead">Transition services for SolMan 7.2 customers. We deliver SAP's standard path to Cloud ALM, then close the gaps it leaves: ITSM, custom ChaRM logic, history, approvals and your ServiceNow, Jira or Azure DevOps integration.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#estimate">Send us your Readiness Check</a>
+        <a class="btn btn-ghost" href="#packages">See the packages</a>
+      </div>
+      <div class="deadline" aria-label="SolMan 7.2 maintenance end">
+        <div><b id="d-days">—</b><small>days left</small></div>
+        <div><b>31.12.2027</b><small>SolMan 7.2 mainstream maintenance ends</small></div>
+      </div>
+    </div>
+
+    <div class="console" role="img" aria-label="Example mapping of Solution Manager capabilities to Cloud ALM">
+      <div class="console-bar"><div class="dots"><i></i><i></i><i></i></div><span>readiness-check · fit/gap</span><span>example</span></div>
+      <div class="map">
+        <div class="map-row"><span class="from">SolDoc / libraries</span><span class="arrow">→</span><span class="to">Solution processes (SDT)</span><span class="pill ok">Available</span></div>
+        <div class="map-row"><span class="from">Test Suite</span><span class="arrow">→</span><span class="to">Test Management</span><span class="pill ok">Available</span></div>
+        <div class="map-row"><span class="from">ChaRM cycles</span><span class="arrow">→</span><span class="to">Features + Deployment Mgmt</span><span class="pill ok">Available</span></div>
+        <div class="map-row"><span class="from">Focused Build WBS</span><span class="arrow">→</span><span class="to">Requirements / User stories</span><span class="pill warn">Manual</span></div>
+        <div class="map-row"><span class="from">Technical monitoring</span><span class="arrow">→</span><span class="to">Operations (re-implement)</span><span class="pill warn">Rebuild</span></div>
+        <div class="map-row"><span class="from">Retrofit / CSOL</span><span class="arrow">→</span><span class="to">Roadmap / partner tool</span><span class="pill warn">Roadmap</span></div>
+        <div class="map-row"><span class="from">Custom ChaRM (Z-flows)</span><span class="arrow">→</span><span class="to">Customization (Pkg 3)</span><span class="pill gap">Gap</span></div>
+        <div class="map-row"><span class="from">IT Service Desk</span><span class="arrow">→</span><span class="to">External ITSM (Pkg 2)</span><span class="pill gap">Only SolMan</span></div>
+      </div>
+      <div class="console-foot">
+        <span><i style="background:var(--ok)"></i>SAP path covers it</span>
+        <span><i style="background:var(--warn)"></i>Rebuild or roadmap</span>
+        <span><i style="background:var(--gap)"></i>Outside SAP scope</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="estimate">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Start here</div>
+      <h2>An estimate from your Readiness Check, without touching your system.</h2>
+      <p class="lead">SAP Readiness Check for SAP Cloud ALM is free and runs on your SolMan. Send us the export and we return a scoped estimate per package.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="n">STEP 1 · YOU</span>
+        <h3>Run the Readiness Check</h3>
+        <p>Install the data collector on SolMan 7.2 and upload the results in SAP for Me. We guide you through the prerequisites.</p>
+      </div>
+      <div class="step">
+        <span class="n">STEP 2 · YOU</span>
+        <h3>Send us the export</h3>
+        <ul>
+          <li>The ZIP: Word report and capability lists</li>
+          <li>ChangeReqManagement.xlsx</li>
+          <li>Answers to 10 intake questions (ITSM, approvals, tools, compliance, dates)</li>
+        </ul>
+      </div>
+      <div class="step">
+        <span class="n">STEP 3 · US</span>
+        <h3>Get your estimate</h3>
+        <ul>
+          <li>Fit/gap register for every capability you use</li>
+          <li>Recommended package bundle</li>
+          <li>Effort per package in S / M / L bands, with the drivers</li>
+          <li>Risk list: roadmap items, custom logic, volumes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="packages">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Transition packages</div>
+      <h2>One core package. Three add-ons for what SAP's path leaves out.</h2>
+      <p class="lead">Every project starts with the Core transition. The add-ons are picked from the gaps found in the assessment and can run in parallel or later.</p>
+    </div>
+
+    <div class="path" aria-label="Typical sequence">
+      <span>Readiness assessment</span><b>→</b><span class="core">1 · Core</span><b>→</b><span>2 · Gaps (parallel)</span><b>→</b><span>3 · Customization</span><b>→</b><span>4 · Integrations</span><b>→</b><span>Run / AMS</span>
+    </div>
+
+    <div class="pkgs">
+      <article class="pkg core">
+        <div class="pkg-top">
+          <div class="pkg-num">01</div>
+          <div>
+            <div class="pkg-kicker">Core · always included</div>
+            <h3>Standard Transition</h3>
+            <p>End-to-end delivery of SAP's official transition path: assessment, tenant and landscape setup, Selective Data Transfer, Deployment Management in place of ChaRM, Operations, cutover and hypercare.</p>
+          </div>
+          <span class="tag">Fixed scope</span>
+        </div>
+        <details class="more">
+          <summary>Scope, phases and deliverables</summary>
+          <div class="more-body">
+            <div>
+              <h4>Scope</h4>
+              <ul>
+                <li>Readiness & scoping<small>Usage inventory, fit/gap, SDT scope, cutover calendar</small></li>
+                <li>Tenant & landscape<small>Provisioning, IAS/IPS roles, Cloud Connector, managed systems, LMS</small></li>
+                <li>Solution documentation<small>SDT: process hierarchy, libraries, process content, test cases</small></li>
+                <li>Projects & requirements<small>Focused Build / project WBS mapped to requirements, user stories, features</small></li>
+                <li>Change & deployment<small>Features, TMS / CTMS / gCTS, release planning, quality gates</small></li>
+                <li>Operations<small>Health, Integration & Exception, Job & Automation, Real User and Business Process Monitoring</small></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Deliverables</h4>
+              <ul>
+                <li>Readiness and fit/gap report</li>
+                <li>Target design: landscape, roles, solution, change, operations</li>
+                <li>Configured Cloud ALM tenant</li>
+                <li>SDT execution log and traceability reports</li>
+                <li>Cutover plan and go-live sign-off</li>
+                <li>Training material and admin runbook</li>
+              </ul>
+              <h4 style="margin-top:22px">Not in this package</h4>
+              <ul>
+                <li class="no">ITSM, custom ChaRM logic, history, BPCA/TBOM → Package 2</li>
+                <li class="no">Custom approval workflows → Package 3</li>
+                <li class="no">Third-party tool integrations → Package 4</li>
+              </ul>
+            </div>
+            <div class="phases">
+              <div class="phase"><b>01</b><span>Assess</span><small>Readiness Check, fit/gap, scope</small></div>
+              <div class="phase"><b>02</b><span>Design</span><small>Landscape, roles, change flow, monitoring</small></div>
+              <div class="phase"><b>03</b><span>Build</span><small>Tenant, connectivity, configuration</small></div>
+              <div class="phase"><b>04</b><span>Transfer</span><small>SDT runs, WBS import, verification</small></div>
+              <div class="phase"><b>05</b><span>Cutover</span><small>Freeze SolMan, go-live, training</small></div>
+              <div class="phase"><b>06</b><span>Hypercare</span><small>Stabilise, hand over, optional AMS</small></div>
+            </div>
+          </div>
+        </details>
+      </article>
+
+      <article class="pkg">
+        <div class="pkg-top">
+          <div class="pkg-num">02</div>
+          <div>
+            <div class="pkg-kicker">Beyond SAP scope</div>
+            <h3>Gap Closure</h3>
+            <p>Everything SolMan does today that has no SAP-provided path to Cloud ALM. One module per gap found in the assessment.</p>
+          </div>
+          <span class="tag">Modular</span>
+        </div>
+        <details class="more">
+          <summary>Modules</summary>
+          <div class="more-body">
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>SolMan capability</th><th>SAP path</th><th>Our module</th></tr></thead>
+                <tbody>
+                  <tr><td>IT Service Management</td><td>Not in scope</td><td>ITSM relocation to ServiceNow, Jira Service Management or other; ticket migration; Cloud ALM alerts into the ITSM tool</td></tr>
+                  <tr><td>Custom ChaRM developments</td><td>Not planned</td><td>Reverse-engineering of Z-flows, BAdIs and reports; decision per item</td></tr>
+                  <tr><td>ChaRM history</td><td>Not transferred</td><td>Audit-ready archive of change documents, cycles and transport logs</td></tr>
+                  <tr><td>BPCA / TBOM</td><td>Not planned</td><td>Change-impact approach with Cloud ALM test traceability</td></tr>
+                  <tr><td>Test automation</td><td>Per scenario</td><td>Tricentis integration; re-recording plan for CBTA and others</td></tr>
+                  <tr><td>Dashboards and history</td><td>Not transferred</td><td>Rebuild in Cloud ALM Analytics or SAC</td></tr>
+                  <tr><td>Job Management</td><td>Not transferred</td><td>Job inventory and Job & Automation Monitoring setup</td></tr>
+                  <tr><td>SolMan itself</td><td>—</td><td>Decommissioning: retention, cleanup, shutdown plan</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+      </article>
+
+      <article class="pkg">
+        <div class="pkg-top">
+          <div class="pkg-num">03</div>
+          <div>
+            <div class="pkg-kicker">Extended scope</div>
+            <h3>Process Customization</h3>
+            <p>Cloud ALM's standard flows rarely match a ChaRM setup one to one. We tailor Cloud ALM so the change process your teams know survives the move, with configuration first and SAP BTP only where configuration ends.</p>
+          </div>
+          <span class="tag">Workshop-scoped</span>
+        </div>
+        <details class="more">
+          <summary>What we tailor</summary>
+          <div class="more-body">
+            <div>
+              <h4>Change & deployment</h4>
+              <ul>
+                <li>Feature workflows mirroring your ChaRM cycles (normal, urgent, admin, defect)</li>
+                <li>Approval steps, approver groups, segregation of duties</li>
+                <li>Quality gates and transport policies per release</li>
+                <li>Custom fields, templates, release calendar, freeze periods</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Automation</h4>
+              <ul>
+                <li>Approval automation with SAP Build Process Automation</li>
+                <li>Email and Teams notifications on status changes</li>
+                <li>Role-based entry points in SAP Build Work Zone</li>
+                <li>Mass operations through the Cloud ALM APIs</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Governance</h4>
+              <ul>
+                <li>Change KPIs: lead time, failure rate, gate violations</li>
+                <li>CAB and audit dashboards</li>
+                <li>Audit evidence pack: who approved what, and when</li>
+                <li>Scope set in 3–5 workshops: keep, simplify or drop each flow</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </article>
+
+      <article class="pkg">
+        <div class="pkg-top">
+          <div class="pkg-num">04</div>
+          <div>
+            <div class="pkg-kicker">Integrations</div>
+            <h3>Tool Integrations</h3>
+            <p>For teams whose change or ITSM process lives outside SAP. Cloud ALM stays the system of record for transports and deployments; your tool stays the system of record for tickets. We keep both in sync.</p>
+          </div>
+          <span class="tag">Per connector</span>
+        </div>
+        <details class="more">
+          <summary>Use cases by tool</summary>
+          <div class="more-body">
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Use case</th><th>ServiceNow</th><th>Jira</th><th>Azure DevOps</th></tr></thead>
+                <tbody>
+                  <tr><td>Change request / story → Cloud ALM feature</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+                  <tr><td>Approval in your tool releases the Cloud ALM gate</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+                  <tr><td>Deployment and transport status back to the ticket</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+                  <tr><td>Cloud ALM alerts → incident or work item</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+                  <tr><td>CI/CD pipeline triggers (gCTS, CTMS, BTP)</td><td class="c o">n/a</td><td class="c o">optional</td><td class="c">✓</td></tr>
+                  <tr><td>Requirements and tasks sync</td><td class="c o">optional</td><td class="c">✓</td><td class="c">✓</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h4>How we build it</h4>
+              <ul>
+                <li>Cloud ALM public APIs and event subscriptions</li>
+                <li>SAP Integration Suite or Build Process Automation as middleware</li>
+                <li>Native SAP integrations where they exist</li>
+                <li>On top of a partner connector you already license</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Deliverables</h4>
+              <ul>
+                <li>Integration design: field mapping, status model, ownership</li>
+                <li>Configured and tested flows</li>
+                <li>Error handling and monitoring of the integration</li>
+                <li>Runbook and handover</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="ai">
+  <div class="wrap ai">
+    <div>
+      <div class="eyebrow" style="color:var(--cyan)">AI-assisted delivery</div>
+      <h2 style="margin-top:16px">The Core transition, faster and at lower cost.</h2>
+      <p class="lead" style="margin-top:20px">Most of Package 1 is repetitive work the Cloud ALM APIs expose. AI agents execute it; our consultants design the target, approve every change set and sign off. Same scope, same deliverables, fewer hours.</p>
+      <div class="ai-cmp" role="table" aria-label="Standard versus AI-assisted delivery">
+        <div class="h"></div><div class="h">Standard</div><div class="h hl">AI-assisted</div>
+        <div class="k">Fit</div><div>All sizes, complex landscapes</div><div>S and M profiles, standard ChaRM</div>
+        <div class="k">Configuration</div><div>Consultants, manually</div><div class="hl">Agents via APIs, consultant approves</div>
+        <div class="k" style="border:0">Duration</div><div style="border:0">Baseline</div><div class="hl" style="border:0">Shorter</div>
+      </div>
+    </div>
+    <div class="ai-card">
+      <div>
+        <h4>Agents execute</h4>
+        <ul style="margin-top:10px">
+          <li>Fit/gap draft from your Readiness Check export</li>
+          <li>Users, groups, roles and notification settings</li>
+          <li>Managed systems and landscape model</li>
+          <li>Deployment tracks, routes and quality gates</li>
+          <li>Monitoring configuration and alert rules per system</li>
+          <li>SDT runs and reconciliation against SolMan</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guardrails</h4>
+        <ul style="margin-top:10px">
+          <li>Scoped technical user with minimum roles</li>
+          <li>Dry run on a test tenant before any productive change</li>
+          <li>Every action logged with input, result and approver</li>
+          <li>Read-only access to SolMan</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bundles">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Which bundle fits you</div>
+      <h2>Recommended combinations by SolMan profile.</h2>
+    </div>
+    <div class="bundles">
+      <div class="bundle"><p>SolDoc and Test Suite only; standard ChaRM or none</p><div class="chips"><span class="chip">1</span><span class="chip ai">AI-assisted</span></div></div>
+      <div class="bundle"><p>Heavy ChaRM with custom flows, no external ITSM</p><div class="chips"><span class="chip">1</span><span class="chip">3</span><span class="chip">2 for custom logic and history</span></div></div>
+      <div class="bundle"><p>IT service desk running in SolMan today</p><div class="chips"><span class="chip">1</span><span class="chip">2 · ITSM</span><span class="chip">4</span></div></div>
+      <div class="bundle"><p>Change process already in ServiceNow, Jira or Azure DevOps</p><div class="chips"><span class="chip">1</span><span class="chip">4</span></div></div>
+      <div class="bundle"><p>Full scope: Focused Build, ChaRM, ITSM, monitoring, BPCA</p><div class="chips"><span class="chip">1</span><span class="chip">2</span><span class="chip">3</span><span class="chip">4</span><span class="chip">in 2–3 waves</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="signavio">
+  <div class="wrap">
+    <div class="sgv-head">
+      <div class="sec-head" style="margin:0">
+        <span class="badge">Product · CALM2Signavio</span>
+        <h2>One process model in SAP Cloud ALM and SAP Signavio.</h2>
+        <p class="lead">CALM2Signavio loads your Cloud ALM process content into Signavio in bulk, then keeps both sides in sync with an approval step for every design change. It fills the direction SAP's standard integration does not cover.</p>
+        <div class="cta-row" style="margin-top:8px"><a class="btn btn-primary" href="#contact">Ask for a coverage check</a></div>
+      </div>
+      <div class="coverage" aria-label="What the SAP standard integration covers">
+        <div><span class="h">Flow</span><span class="h">SAP standard</span></div>
+        <div><span>Signavio → Cloud ALM: BPMN diagrams</span><span class="pill ok">Covered</span></div>
+        <div><span>Cloud ALM requirements shown in Signavio</span><span class="pill ok">Read-only</span></div>
+        <div><span>Cloud ALM → Signavio: hierarchy, custom processes, diagrams</span><span class="pill gap">Not covered</span></div>
+        <div><span>Scope and project status mirrored in Signavio</span><span class="pill gap">Not covered</span></div>
+        <div><span>Change approval across both tools</span><span class="pill gap">Not covered</span></div>
+      </div>
+    </div>
+
+    <div class="lanes" role="table" aria-label="How CALM2Signavio works, by phase and system">
+      <div class="lanes-in">
+        <div></div>
+        <div class="ph">Phase 1<b>Bulk load</b></div>
+        <div class="ph">Phase 2<b>Continuous sync</b></div>
+        <div class="ph">Phase 3<b>Conflicts</b></div>
+
+        <div class="ln s">SAP Signavio</div>
+        <div class="w">Folders, BPMN diagrams, dictionary activities and calm_* attributes created</div>
+        <div class="w">Design changes approved in Process Governance, then published</div>
+        <div class="g">Process owner decides: keep Signavio, keep Cloud ALM or merge</div>
+
+        <div class="ln e">Sync engine</div>
+        <div class="r">Inventory, BPMN coverage report, dry run, rate-limited load, hash verification</div>
+        <div class="r">Detects changes on both sides and applies the ownership rules per object</div>
+        <div class="r">Three-way diff against the last synced version; propagation frozen until decided</div>
+
+        <div class="ln c">SAP Cloud ALM</div>
+        <div class="w">External reference written back so the SAP standard sync updates instead of duplicating</div>
+        <div class="w">Scope, projects and activities flow to Signavio as attributes</div>
+        <div class="g">Task for the implementation lead; the losing version stays in history</div>
+      </div>
+    </div>
+
+    <div class="feat">
+      <article><h3>Bulk load with a dry run first</h3><p>Hierarchy becomes folders, each solution process becomes a BPMN diagram with its original element IDs. You see what will be created, what has no BPMN and what is invalid before anything is written.</p></article>
+      <article><h3>Nothing overwritten without approval</h3><p>Design changes go through Signavio Process Governance. Conflicts become change requests with a three-way diff. Deletions are never automatic.</p></article>
+      <article><h3>Built on public APIs</h3><p>Cloud ALM Process Hierarchy, Custom Processes and Process Management APIs; Signavio Process Manager API. Runs on SAP BTP or your own cloud, with a full audit log.</p></article>
+    </div>
+
+    <div class="modes">
+      <div><b>Mode A · default</b><span>Signavio leads</span><p>After the bulk load, diagrams are edited in Signavio only. Cloud ALM receives approved changes.</p></div>
+      <div><b>Mode B · transition</b><span>Cloud ALM leads</span><p>For projects still documenting in Cloud ALM. Changes flow to Signavio until handover.</p></div>
+      <div><b>Mode C · link-only</b><span>Reference, no copy</span><p>For SAP Best Practices content already in Signavio Process Explorer. Attributes and links only.</p></div>
+    </div>
+
+    <div class="sgv-foot">
+      <div>
+        <h4>Typical rollout · 4–6 weeks</h4>
+        <ol>
+          <li>Inventory and dry run: process list, BPMN coverage, proposed folder tree</li>
+          <li>Initial load with folders, diagrams and attributes</li>
+          <li>Delta runs and continuous sync</li>
+          <li>Quality report: invalid BPMN, diagrams without BPMN, duplicates</li>
+        </ol>
+      </div>
+      <div>
+        <h4>What you need</h4>
+        <ul>
+          <li>Cloud ALM API access (OAuth client credentials)</li>
+          <li>Signavio technical user with API Edition</li>
+          <li>Signavio Process Governance for the approval flow</li>
+          <li>Fits customers coming from SolMan's Signavio connector, which has no Cloud ALM successor</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Not coming from SolMan?</div>
+      <h2>Cloud ALM services for new and existing tenants.</h2>
+    </div>
+    <div class="svc">
+      <article><h3>Implementation</h3><p>Tenant setup and configuration tailored to your processes and landscape, from three-tier connection to the first release.</p></article>
+      <article><h3>Monitoring & Operations</h3><p>Health, integration, job and user monitoring with alerting, so failures surface before the business feels them.</p></article>
+      <article><h3>Integration</h3><p>Cloud ALM connected to your ITSM, DevOps and documentation tools for end-to-end traceability.</p></article>
+      <article><h3>Run & Advisory</h3><p>Ongoing support, health checks and role-based training as SAP ships new Cloud ALM releases.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="sec-head" style="margin:0">
+      <div class="eyebrow">Who we are</div>
+      <h2>ALM specialists, from Solution Manager to Cloud ALM.</h2>
+      <p class="lead">We have built and run SAP change and application lifecycle management for two decades: ChaRM, STMS, gCTS, Focused Build and now Cloud ALM. We work with enterprise customers across Europe, North America and Latin America, in English, Spanish and Italian.</p>
+    </div>
+    <div class="creds">
+      <div><b>20+</b><span>years in SAP ALM</span></div>
+      <div><b>2013–23</b><span>SAP Mentor</span></div>
+      <div><b>Focused Build</b><span>Certified Tool Coach</span></div>
+      <div><b>ServiceNow</b><span>Certified Administrator</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap contact-grid">
+    <div class="sec-head" style="margin:0">
+      <div class="eyebrow">Contact</div>
+      <h2>Tell us where you stand. Write to us and we reply within two working days.</h2>
+      <p class="lead">Already have a Readiness Check export? Mention it and we will send instructions to share it securely. Do not attach it to the first email.</p>
+      <div class="mail"><a href="mailto:info@alm365cloud.com" style="text-decoration:none"><code id="mail">info@alm365cloud.com</code></a><button type="button" id="copy">Copy</button></div>
+    </div>
+    <div class="mailcard">
+      <h4>What to include in your email</h4>
+      <ul>
+        <li>Your SolMan release and which parts you use (ChaRM, SolDoc, Test Suite, Focused Build, ITSM, monitoring)</li>
+        <li>Your change or ITSM tool, if any (ServiceNow, Jira, Azure DevOps)</li>
+        <li>Whether you use or plan to use SAP Signavio</li>
+        <li>Target dates and freeze periods</li>
+        <li>Whether you already have a Readiness Check for Cloud ALM export</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> ALM365 Cloud</span>
+    <span>SAP, SAP Cloud ALM and SAP Solution Manager are trademarks of SAP SE. Roadmap items may change; scope is confirmed per project.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var end=new Date('2027-12-31T23:59:59');
+  var d=Math.max(0,Math.ceil((end-new Date())/864e5));
+  document.getElementById('d-days').textContent=d.toLocaleString('en-US');
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.getElementById('copy').addEventListener('click',function(){
+    var t=document.getElementById('mail').textContent,b=this;
+    var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)};
+    try{navigator.clipboard.writeText(t).then(done,function(){sel()})}catch(e){sel()}
+    function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  });
+})();
+</script>
+
+</body>
+</html>
