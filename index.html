@@ -271,6 +271,8 @@ textarea{min-height:96px;resize:vertical}
 
 footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);font-size:13px}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* Hybrid V2 */
+.solutions{background:linear-gradient(180deg,#111c30,#0a0f1c)}.solutions-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.solution-card{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:32px;text-decoration:none;display:grid;gap:16px;transition:transform .2s,border-color .2s}.solution-card:hover{transform:translateY(-3px);border-color:var(--cyan)}.solution-card span{font:500 11px var(--mono);color:var(--cyan)}.solution-card p{color:var(--muted)}.solution-card b{font-size:14px;color:var(--amber)}.mobile-menu-toggle{display:none;background:var(--panel);color:var(--text);font:600 14px var(--body);border:1px solid var(--line);border-radius:8px;padding:8px 12px}@media(max-width:860px){header.nav .wrap{height:auto;min-height:64px;flex-wrap:wrap;padding-block:8px}.mobile-menu-toggle{display:block;margin-left:auto}.nav>.wrap>.btn{display:none}.nav ul{display:none;width:100%;order:3;flex-direction:column;gap:0;padding:8px 0}.nav ul.is-open{display:flex}.nav ul>li{padding:12px;border-bottom:1px solid var(--line)}.dd-menu{position:static;min-width:0;margin-top:10px}.solutions-grid{grid-template-columns:1fr}}@media(max-width:520px){section{padding-block:64px}.solution-card{padding:24px}}
 </style>
 </head>
 <body>
@@ -281,10 +283,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><polygon points="13,1 25,8 25,20 13,27 1,20 1,8" fill="none" stroke="#F6A23A" stroke-width="3"/><polygon points="13,7 19,10.5 19,17.5 13,21 7,17.5 7,10.5" fill="#3FB6E8"/></svg>
       ALM365 <span>Cloud</span>
     </a>
-    <ul>
-      <li><a href="#estimate">Estimate</a></li>
+    <button id="mobile-toggle" class="mobile-menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false">☰ Menu</button><ul id="site-nav">
+      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="#estimate">Assessment</a></li>
       <li><a href="#packages">Packages</a></li>
-      <li><a href="#ai">AI-assisted</a></li>
+      <li><a href="#ai">AI & Automation</a></li>
       <li class="dd">
         <button type="button" class="dd-btn" id="dd-btn" aria-expanded="false" aria-controls="dd-menu">Products <span aria-hidden="true">▾</span></button>
         <div class="dd-menu" id="dd-menu" hidden>
@@ -305,10 +308,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow">SAP Solution Manager → SAP Cloud ALM</div>
-      <h1>Move off Solution Manager <em>without losing</em> your change process.</h1>
+      <h1>Transform your SAP ALM. <em>Keep control</em> of what matters.</h1>
       <p class="lead">Transition services for SolMan 7.2 customers. We deliver SAP's standard path to Cloud ALM, then close the gaps it leaves: ITSM, custom ChaRM logic, history, approvals and your ServiceNow, Jira or Azure DevOps integration.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="#estimate">Send us your Readiness Check</a>
+        <a class="btn btn-primary" href="#solutions">Explore solutions</a>
         <a class="btn btn-ghost" href="#packages">See the packages</a>
       </div>
       <div class="deadline" aria-label="SolMan 7.2 maintenance end">
@@ -338,7 +341,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </section>
 
-<section id="estimate">
+<section id="solutions" class="solutions"><div class="wrap"><div class="sec-head"><div class="eyebrow">Our expertise</div><h2>Four ways to move your SAP ALM forward.</h2><p class="lead">Specialized consulting, integration solutions and intelligent automation for your SAP landscape.</p></div><div class="solutions-grid">
+<a class="solution-card" href="#estimate"><span>01 / TRANSITION</span><h3>Solution Manager → Cloud ALM</h3><p>Readiness, transition packages and targeted fit/gap.</p><b>Explore transition →</b></a>
+<a class="solution-card" href="#products"><span>02 / PRODUCTS</span><h3>Connected ALM ecosystem</h3><p>Process and document integration offerings.</p><b>Explore products →</b></a>
+<a class="solution-card" href="#ai"><span>03 / AUTOMATION</span><h3>AI-assisted delivery</h3><p>Practical acceleration with consultant oversight.</p><b>Explore AI →</b></a>
+<a class="solution-card" href="#services"><span>04 / SERVICES</span><h3>Implementation & Operations</h3><p>Monitoring, integration, support and advisory.</p><b>Explore services →</b></a>
+</div></div></section><section id="estimate">
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Start here</div>
@@ -571,8 +579,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="wrap ai">
     <div>
       <div class="eyebrow" style="color:var(--cyan)">AI-assisted delivery</div>
-      <h2 style="margin-top:16px">The Core transition, faster and at lower cost.</h2>
-      <p class="lead" style="margin-top:20px">Most of Package 1 is repetitive work the Cloud ALM APIs expose. AI agents execute it; our consultants design the target, approve every change set and sign off. Same scope, same deliverables, fewer hours.</p>
+      <h2 style="margin-top:16px">AI-assisted delivery with expert control.</h2>
+      <p class="lead" style="margin-top:20px">We use supported APIs and automation to accelerate selected assessment, configuration and reporting activities. Every action requires feasibility checks and consultant oversight; the scope and savings are validated during discovery.</p>
       <div class="ai-cmp" role="table" aria-label="Standard versus AI-assisted delivery">
         <div class="h"></div><div class="h">Standard</div><div class="h hl">AI-assisted</div>
         <div class="k">Fit</div><div>All sizes, complex landscapes</div><div>S and M profiles, standard ChaRM</div>
@@ -626,173 +634,29 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="sec-head">
       <div class="eyebrow" style="color:var(--cyan)">Products</div>
       <h2>Ready-built integrations for SAP Cloud ALM.</h2>
-      <p class="lead">Software we have built on the Cloud ALM public APIs, delivered with setup and support. They work alongside the transition packages or on their own.</p>
+      <p class="lead">Specialized integration offerings for SAP Cloud ALM. Delivery and supported capabilities are confirmed through technical discovery.</p>
     </div>
     <div class="prod-cards">
       <a class="prod-card" href="#signavio">
         <span class="badge">Product 01</span>
         <h3>CALM2Signavio</h3>
         <div class="flowline"><b>SAP Cloud ALM</b><span>⇄</span><b>SAP Signavio</b></div>
-        <p>Bulk load of your Cloud ALM process hierarchy and diagrams into Signavio, then continuous sync with approval of every design change.</p>
+        <p>Additional process onboarding, hierarchy reconciliation and governance requirements beyond SAP standard integration.</p>
         <span class="more-link">How it works ↓</span>
       </a>
       <a class="prod-card" href="#sharepoint">
         <span class="badge">Product 02</span>
         <h3>SharePoint DMS for Cloud ALM</h3>
         <div class="flowline"><b>SAP Cloud ALM</b><span>⇄</span><b>Microsoft SharePoint</b></div>
-        <p>Replaces SAP BTP Document Management Service as the Cloud ALM file store. Every uploaded file lands in your SharePoint, and SharePoint files appear in Cloud ALM.</p>
+        <p>Explore supported links, metadata and document governance between Cloud ALM and SharePoint.</p>
         <span class="more-link">How it works ↓</span>
       </a>
     </div>
   </div>
 </section>
 
-<section id="signavio" class="prod-sub">
-  <div class="wrap">
-    <div class="sgv-head">
-      <div class="sec-head" style="margin:0">
-        <span class="badge">Product 01 · CALM2Signavio</span>
-        <h2>One process model in SAP Cloud ALM and SAP Signavio.</h2>
-        <p class="lead">CALM2Signavio loads your Cloud ALM process content into Signavio in bulk, then keeps both sides in sync with an approval step for every design change. It fills the direction SAP's standard integration does not cover.</p>
-        <div class="cta-row" style="margin-top:8px"><a class="btn btn-primary" href="#contact">Ask for a coverage check</a></div>
-      </div>
-      <div class="coverage" aria-label="What the SAP standard integration covers">
-        <div><span class="h">Flow</span><span class="h">SAP standard</span></div>
-        <div><span>Signavio → Cloud ALM: BPMN diagrams</span><span class="pill ok">Covered</span></div>
-        <div><span>Cloud ALM requirements shown in Signavio</span><span class="pill ok">Read-only</span></div>
-        <div><span>Cloud ALM → Signavio: hierarchy, custom processes, diagrams</span><span class="pill gap">Not covered</span></div>
-        <div><span>Scope and project status mirrored in Signavio</span><span class="pill gap">Not covered</span></div>
-        <div><span>Change approval across both tools</span><span class="pill gap">Not covered</span></div>
-      </div>
-    </div>
-
-    <div class="lanes" role="table" aria-label="How CALM2Signavio works, by phase and system">
-      <div class="lanes-in">
-        <div></div>
-        <div class="ph">Phase 1<b>Bulk load</b></div>
-        <div class="ph">Phase 2<b>Continuous sync</b></div>
-        <div class="ph">Phase 3<b>Conflicts</b></div>
-
-        <div class="ln s">SAP Signavio</div>
-        <div class="w">Folders, BPMN diagrams, dictionary activities and calm_* attributes created</div>
-        <div class="w">Design changes approved in Process Governance, then published</div>
-        <div class="g">Process owner decides: keep Signavio, keep Cloud ALM or merge</div>
-
-        <div class="ln e">Sync engine</div>
-        <div class="r">Inventory, BPMN coverage report, dry run, rate-limited load, hash verification</div>
-        <div class="r">Detects changes on both sides and applies the ownership rules per object</div>
-        <div class="r">Three-way diff against the last synced version; propagation frozen until decided</div>
-
-        <div class="ln c">SAP Cloud ALM</div>
-        <div class="w">External reference written back so the SAP standard sync updates instead of duplicating</div>
-        <div class="w">Scope, projects and activities flow to Signavio as attributes</div>
-        <div class="g">Task for the implementation lead; the losing version stays in history</div>
-      </div>
-    </div>
-
-    <div class="feat">
-      <article><h3>Bulk load with a dry run first</h3><p>Hierarchy becomes folders, each solution process becomes a BPMN diagram with its original element IDs. You see what will be created, what has no BPMN and what is invalid before anything is written.</p></article>
-      <article><h3>Nothing overwritten without approval</h3><p>Design changes go through Signavio Process Governance. Conflicts become change requests with a three-way diff. Deletions are never automatic.</p></article>
-      <article><h3>Built on public APIs</h3><p>Cloud ALM Process Hierarchy, Custom Processes and Process Management APIs; Signavio Process Manager API. Runs on SAP BTP or your own cloud, with a full audit log.</p></article>
-    </div>
-
-    <div class="modes">
-      <div><b>Mode A · default</b><span>Signavio leads</span><p>After the bulk load, diagrams are edited in Signavio only. Cloud ALM receives approved changes.</p></div>
-      <div><b>Mode B · transition</b><span>Cloud ALM leads</span><p>For projects still documenting in Cloud ALM. Changes flow to Signavio until handover.</p></div>
-      <div><b>Mode C · link-only</b><span>Reference, no copy</span><p>For SAP Best Practices content already in Signavio Process Explorer. Attributes and links only.</p></div>
-    </div>
-
-    <div class="sgv-foot">
-      <div>
-        <h4>Typical rollout · 4–6 weeks</h4>
-        <ol>
-          <li>Inventory and dry run: process list, BPMN coverage, proposed folder tree</li>
-          <li>Initial load with folders, diagrams and attributes</li>
-          <li>Delta runs and continuous sync</li>
-          <li>Quality report: invalid BPMN, diagrams without BPMN, duplicates</li>
-        </ol>
-      </div>
-      <div>
-        <h4>What you need</h4>
-        <ul>
-          <li>Cloud ALM API access (OAuth client credentials)</li>
-          <li>Signavio technical user with API Edition</li>
-          <li>Signavio Process Governance for the approval flow</li>
-          <li>Fits customers coming from SolMan's Signavio connector, which has no Cloud ALM successor</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="sharepoint">
-  <div class="wrap">
-    <div class="sgv-head">
-      <div class="sec-head" style="margin:0">
-        <span class="badge">Product 02 · SharePoint DMS</span>
-        <h2>Your Cloud ALM documents, stored in your own SharePoint.</h2>
-        <p class="lead">By default Cloud ALM keeps uploaded files in SAP BTP Document Management Service. Our connector takes its place: Cloud ALM writes every file to a SharePoint library you own, with versions and metadata, and the documents your teams keep in SharePoint show up in Cloud ALM as linked documents.</p>
-        <div class="cta-row" style="margin-top:8px"><a class="btn btn-primary" href="#contact">Ask for a demo</a></div>
-      </div>
-      <div class="coverage" aria-label="What changes when SharePoint replaces BTP Document Management Service">
-        <div><span class="h">With the SharePoint connector</span><span class="h"></span></div>
-        <div><span>Files stored in your Microsoft 365 tenant, not in SAP BTP</span><span class="pill ok">Yes</span></div>
-        <div><span>No separate BTP DMS subscription for Cloud ALM files</span><span class="pill ok">Yes</span></div>
-        <div><span>Readable by people without a Cloud ALM user</span><span class="pill ok">Yes</span></div>
-        <div><span>Microsoft 365 retention, search and permissions apply</span><span class="pill ok">Yes</span></div>
-        <div><span>Existing SharePoint documents visible in Cloud ALM</span><span class="pill ok">Yes</span></div>
-      </div>
-    </div>
-
-    <div class="lanes" role="table" aria-label="The two flows of the SharePoint connector">
-      <div class="lanes-in two">
-        <div></div>
-        <div class="ph">Flow A<b>Cloud ALM → SharePoint</b></div>
-        <div class="ph" style="border-right:0">Flow B<b>SharePoint → Cloud ALM</b></div>
-
-        <div class="ln c">SAP Cloud ALM</div>
-        <div class="w">A user uploads a file in the Documents app, as today</div>
-        <div class="w" style="border-right:0">A document appears with a link to the SharePoint file, assigned to project, process and document type</div>
-
-        <div class="ln e">Connector</div>
-        <div class="r">Acts as the external document repository Cloud ALM calls through a BTP destination</div>
-        <div class="r" style="border-right:0">Scheduled reconciliation per mapped folder; handles new, moved and deleted files</div>
-
-        <div class="ln s" style="border-bottom:0">SharePoint</div>
-        <div class="w" style="border-bottom:0">File stored under its real name, a new version on every re-upload, Cloud ALM title and ID as columns</div>
-        <div class="w" style="border:0">Teams keep working in SharePoint folders; folder rules decide where each file belongs in Cloud ALM</div>
-      </div>
-    </div>
-
-    <div class="feat">
-      <article><h3>Nothing changes for Cloud ALM users</h3><p>They upload and open documents in Cloud ALM as before. Only the storage behind it moves to SharePoint.</p></article>
-      <article><h3>No copies, no drift</h3><p>Binaries live once, in SharePoint. Linked documents in Cloud ALM hold a reference, and the sync keeps no local state.</p></article>
-      <article><h3>Built on public interfaces</h3><p>Cloud ALM external repository and Documents API on one side, Microsoft Graph with an Entra ID app on the other. Runs on SAP BTP or your own infrastructure.</p></article>
-    </div>
-
-    <div class="sgv-foot" style="margin-top:0">
-      <div>
-        <h4>Typical rollout · 2–4 weeks</h4>
-        <ol>
-          <li>SharePoint site and library design: folders, columns, permissions</li>
-          <li>Connector deployment and BTP destination setup</li>
-          <li>Folder rules for project, process and document type</li>
-          <li>Test on a non-productive tenant, then go-live</li>
-        </ol>
-      </div>
-      <div>
-        <h4>What you need</h4>
-        <ul>
-          <li>A SharePoint Online site in your Microsoft 365 tenant</li>
-          <li>An Entra ID app registration with access to that site</li>
-          <li>A Cloud ALM API service key and a BTP subaccount for the destination</li>
-          <li>A place to run the connector: SAP BTP Cloud Foundry or a container in your cloud</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
+<section id="signavio" class="prod-sub"><div class="wrap"><div class="sec-head"><div class="eyebrow">Product 01 · CALM2Signavio</div><h2>Process integration beyond the standard.</h2><p class="lead">SAP already supports diagram synchronization from Signavio to Cloud ALM, including approval-based automatic sync. We assess supplementary bulk onboarding, hierarchy mapping, reconciliation and governance scenarios. Custom functionality depends on validated API capabilities.</p><div class="cta-row"><a class="btn btn-primary" href="#contact">Request a fit assessment</a></div></div><div class="feat"><article><h3>Assess</h3><p>Map native SAP integration and the actual functional gaps.</p></article><article><h3>Reconcile</h3><p>Assess process coverage, hierarchy mapping and duplication.</p></article><article><h3>Govern</h3><p>Plan process ownership, approvals and traceability.</p></article></div><p class="lead" style="margin-top:28px;font-size:14px"><a href="https://help.sap.com/docs/erp-transformation-with-itc/buildable-map/sap-signavio-and-sap-cloud-alm-integration">SAP integration documentation</a></p></div></section>
+<section id="sharepoint" class="prod-sub"><div class="wrap"><div class="sec-head"><div class="eyebrow">Product 02 · SharePoint integration</div><h2>Document governance across SAP Cloud ALM and SharePoint.</h2><p class="lead">Explore supported document linking, metadata mapping and Microsoft 365 governance. SAP Cloud ALM does not currently support replacing its automatically created SAP Document Management Service repository with an arbitrary external repository. Our approach starts with technical feasibility rather than promising a drop-in replacement.</p><div class="cta-row"><a class="btn btn-primary" href="#contact">Discuss a supported design</a></div></div><div class="feat"><article><h3>Reference</h3><p>Review link-based document access and available interfaces.</p></article><article><h3>Secure</h3><p>Align permissions, retention and document ownership.</p></article><article><h3>Validate</h3><p>Test the proposed integration with your tenant and licensing.</p></article></div><p class="lead" style="margin-top:28px;font-size:14px"><a href="https://help.sap.com/docs/cloud-alm/setup-administration/connecting-sap-document-management-service">SAP repository documentation</a></p></div></section>
 <section id="services">
   <div class="wrap">
     <div class="sec-head">
@@ -829,7 +693,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="sec-head" style="margin:0">
       <div class="eyebrow">Contact</div>
       <h2>Tell us where you stand. Write to us and we reply within two working days.</h2>
-      <p class="lead">Already have a Readiness Check export? Mention it and we will send instructions to share it securely. Do not attach it to the first email.</p>
+      <p class="lead">Have a Readiness Check export? Mention it first and we will agree a secure transfer method. Do not attach confidential files to the first email.</p>
       <div class="mail"><a href="mailto:info@alm365cloud.com" style="text-decoration:none"><code id="mail">info@alm365cloud.com</code></a><button type="button" id="copy">Copy</button></div>
     </div>
     <div class="mailcard">
@@ -855,6 +719,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <script>
 (function(){
+  var toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('site-nav');toggle.addEventListener('click',function(){var on=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',on?'true':'false')});menu.addEventListener('click',function(e){if(e.target.closest('a')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false')}});
   var end=new Date('2027-12-31T23:59:59');
   var d=Math.max(0,Math.ceil((end-new Date())/864e5));
   document.getElementById('d-days').textContent=d.toLocaleString('en-US');
