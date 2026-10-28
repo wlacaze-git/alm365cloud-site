@@ -3,13 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>ALM365 Cloud</title>
+<title>SAP Cloud ALM Transition & Integration | ALM365 Cloud</title>
+<link rel="canonical" href="https://alm365cloud.com/">
+<meta property="og:url" content="https://alm365cloud.com/">
+<meta property="og:type" content="website">
 <meta name="description" content="SAP Solution Manager to SAP Cloud ALM transition services: readiness assessment, core transition, gap closure, process customization and tool integrations.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<meta property="og:title" content="ALM365 Cloud">
+<meta property="og:title" content="SAP Cloud ALM Transition & Integration | ALM365 Cloud">
 <meta property="og:description" content="SAP Solution Manager to SAP Cloud ALM transition services, CALM2Signavio and SharePoint DMS for Cloud ALM.">
 <style>
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -304,6 +307,28 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
 .product-detail .cta-row{margin-top:24px}
 @media(max-width:960px){.product-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.product-flow{grid-template-columns:1fr}.flow-link{padding:8px}.flow-link strong{font-size:28px}}
 @media(max-width:600px){.product-steps,.product-panels{grid-template-columns:1fr}.flow-node{padding:20px}.product-subtitle{font-size:26px}}
+
+/* Accessible mobile navigation and contact flow */
+.nav-actions{display:flex;align-items:center;gap:10px}
+#contact-draft{display:grid;gap:14px}
+#contact-draft .cta-row{margin-top:0}
+#draft-text{min-height:190px}
+section{scroll-margin-top:130px}
+@media(max-width:860px){
+ header.nav .wrap{height:64px;min-height:64px;box-sizing:border-box;flex-wrap:nowrap;gap:8px}
+ header.nav .mobile-menu-toggle{display:block!important;min-height:44px;cursor:pointer}
+ .brand{font-size:16px;gap:6px}.brand svg{width:22px}
+ .nav-actions{gap:7px}.nav .btn{padding:10px 12px;white-space:nowrap}
+ .view-tabs{top:64px;max-height:calc(100dvh - 64px);overflow:auto}
+ body.view-mode .view-tabs:not(.is-open){display:none}
+ .view-tabs-inner{display:grid;grid-template-columns:1fr 1fr;white-space:normal;overflow:visible;padding-block:12px}
+ .view-tabs a{min-height:44px;box-sizing:border-box;display:flex;align-items:center}
+ .hero{padding-top:40px}.hero h1{font-size:clamp(36px,9vw,56px)}
+ .hero .lead{font-size:17px}
+ section{scroll-margin-top:80px}
+ .mailcard{padding:22px}
+}
+@media(max-width:360px){.brand span{display:none}}
 </style>
 </head>
 <body>
@@ -314,27 +339,11 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
       <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><polygon points="13,1 25,8 25,20 13,27 1,20 1,8" fill="none" stroke="#F6A23A" stroke-width="3"/><polygon points="13,7 19,10.5 19,17.5 13,21 7,17.5 7,10.5" fill="#3FB6E8"/></svg>
       ALM365 <span>Cloud</span>
     </a>
-    <button id="mobile-toggle" class="mobile-menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false">☰ Menu</button><ul id="site-nav">
-      <li><a href="#solutions">Solutions</a></li>
-      <li><a href="#estimate">Assessment</a></li>
-      <li><a href="#packages">Packages</a></li>
-      <li><a href="#ai">AI & Automation</a></li>
-      <li class="dd">
-        <button type="button" class="dd-btn" id="dd-btn" aria-expanded="false" aria-controls="dd-menu">Products <span aria-hidden="true">▾</span></button>
-        <div class="dd-menu" id="dd-menu" hidden>
-          <a href="#signavio"><b>CALM2Signavio</b><small>Cloud ALM ⇄ SAP Signavio process sync</small></a>
-          <a href="#sharepoint"><b>SharePoint DMS for Cloud ALM</b><small>Cloud ALM documents stored in SharePoint</small></a>
-          <a href="#products" class="dd-all">All products</a>
-        </div>
-      </li>
-      <li><a href="#services">Cloud ALM services</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-    <a class="btn btn-primary" href="#contact">Get an estimate</a>
+    <div class="nav-actions"><a class="btn btn-primary" href="#contact">Let's talk</a><button id="mobile-toggle" class="mobile-menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false">Menu</button></div>
   </div>
 </header>
 
-<nav class="view-tabs" aria-label="Main sections"><div class="wrap view-tabs-inner">
+<nav id="main-navigation" class="view-tabs" aria-label="Main sections"><div class="wrap view-tabs-inner">
 <a href="#top" data-view-tab="home">Overview</a><a href="#estimate" data-view-tab="transition">Transition & ChaRM</a><a href="#ai" data-view-tab="ai">AI & Automation</a><a href="#products" data-view-tab="products">Products</a><a href="#services" data-view-tab="services">Services</a><a href="#about" data-view-tab="about">About</a><a href="#contact" data-view-tab="contact">Contact</a>
 </div></nav>
 <main id="top">
@@ -343,9 +352,9 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
     <div>
       <div class="eyebrow">SAP Solution Manager → SAP Cloud ALM</div>
       <h1>Transform your SAP ALM. <em>Keep control</em> of what matters.</h1>
-      <p class="lead">Transition services for SolMan 7.2 customers. We deliver SAP's standard path to Cloud ALM, then close the gaps it leaves: ITSM, custom ChaRM logic, history, approvals and your ServiceNow, Jira or Azure DevOps integration.</p>
+      <p class="lead">Move from Solution Manager to SAP Cloud ALM with a clear plan. Preserve the change controls, history and integrations your business relies on.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="#solutions">Explore solutions</a>
+        <a class="btn btn-primary" href="#contact">Discuss your transition</a>
         <a class="btn btn-ghost" href="#packages">See the packages</a>
       </div>
       <div class="deadline" aria-label="SolMan 7.2 maintenance end">
@@ -667,19 +676,19 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow" style="color:var(--cyan)">Products</div>
-      <h2>Ready-built integrations for SAP Cloud ALM.</h2>
+      <h2>Integration solutions for your SAP Cloud ALM landscape.</h2>
       <p class="lead">Specialized integration offerings for SAP Cloud ALM. Delivery and supported capabilities are confirmed through technical discovery.</p>
     </div>
     <div class="prod-cards">
       <a class="prod-card" href="#signavio">
-        <span class="badge">Product 01</span>
+        <span class="badge">Scope validated in discovery</span>
         <h3>CALM2Signavio</h3>
         <div class="flowline"><b>SAP Cloud ALM</b><span>⇄</span><b>SAP Signavio</b></div>
         <p>Additional process onboarding, hierarchy reconciliation and governance requirements beyond SAP standard integration.</p>
         <span class="more-link">How it works ↓</span>
       </a>
       <a class="prod-card" href="#sharepoint">
-        <span class="badge">Product 02</span>
+        <span class="badge">Scope validated in discovery</span>
         <h3>SharePoint DMS for Cloud ALM</h3>
         <div class="flowline"><b>SAP Cloud ALM</b><span>⇄</span><b>Microsoft SharePoint</b></div>
         <p>Explore supported links, metadata and document governance between Cloud ALM and SharePoint.</p>
@@ -715,7 +724,7 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
   <div><h3>Technical scope & prerequisites</h3><ul><li>Cloud ALM API service access and permission to read the process model</li><li>Signavio API access and target workspace/folder design</li><li>BPMN availability check: legacy or SVG-only content may require remediation</li><li>Dry run, ownership rules, reconciliation report and scoped deployment</li></ul></div>
  </div>
  <p class="product-caveat"><b>Delivery note:</b> This describes the intended solution workflow, not a claim that all use cases are already deployed. API coverage, BPMN portability, Signavio licensing and conflict handling are validated during discovery.</p>
- <div class="cta-row"><a class="btn btn-primary" href="#contact">Request a CALM2Signavio demo / coverage check</a><a class="btn btn-ghost" href="https://help.sap.com/docs/erp-transformation-with-itc/buildable-map/sap-signavio-and-sap-cloud-alm-integration" target="_blank" rel="noopener">SAP standard integration</a></div>
+ <div class="cta-row"><a class="btn btn-primary" href="#contact">Discuss CALM2Signavio coverage</a><a class="btn btn-ghost" href="https://help.sap.com/docs/erp-transformation-with-itc/buildable-map/sap-signavio-and-sap-cloud-alm-integration" target="_blank" rel="noopener">SAP standard integration</a></div>
 </div>
 </section>
 <section id="sharepoint" class="prod-sub product-detail">
@@ -764,10 +773,13 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
   <div class="wrap about">
     <div class="sec-head" style="margin:0">
       <div class="eyebrow">Who we are</div>
-      <h2>ALM specialists, from Solution Manager to Cloud ALM.</h2>
+      <h2>Meet Wence Lacaze.</h2>
+      <p class="eyebrow">SAP Cloud ALM specialist · 20+ years in SAP ALM</p>
       <p class="lead">We have built and run SAP change and application lifecycle management for two decades: ChaRM, STMS, gCTS, Focused Build and now Cloud ALM. We work with enterprise customers across Europe, North America and Latin America, in English, Spanish and Italian.</p>
+      <p><a class="btn btn-ghost" href="https://www.linkedin.com/in/solutionmanager/" target="_blank" rel="noopener noreferrer">Meet Wence on LinkedIn ↗</a></p>
+      <p class="form-note">Explore Wence’s professional background, SAP community contributions and recommendations on LinkedIn.</p>
     </div>
-    <div class="creds">
+    <div class="creds" aria-label="Professional experience and credentials">
       <div><b>20+</b><span>years in SAP ALM</span></div>
       <div><b>2013–23</b><span>SAP Mentor</span></div>
       <div><b>Focused Build</b><span>Certified Tool Coach</span></div>
@@ -780,20 +792,23 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
   <div class="wrap contact-grid">
     <div class="sec-head" style="margin:0">
       <div class="eyebrow">Contact</div>
-      <h2>Tell us where you stand. Write to us and we reply within two working days.</h2>
-      <p class="lead">Have a Readiness Check export? Mention it first and we will agree a secure transfer method. Do not attach confidential files to the first email.</p>
+      <h2>Start with a conversation.</h2>
+      <p class="lead">Tell us what you want to achieve. No Readiness Check or technical documents needed to get started. We reply within two working days.</p>
       <div class="mail"><a href="mailto:info@alm365cloud.com" style="text-decoration:none"><code id="mail">info@alm365cloud.com</code></a><button type="button" id="copy">Copy</button></div>
     </div>
-    <div class="mailcard">
-      <h4>What to include in your email</h4>
-      <ul>
-        <li>Your SolMan release and which parts you use (ChaRM, SolDoc, Test Suite, Focused Build, ITSM, monitoring)</li>
-        <li>Your change or ITSM tool, if any (ServiceNow, Jira, Azure DevOps)</li>
-        <li>Whether you use or plan to use SAP Signavio or SharePoint for documents</li>
-        <li>Target dates and freeze periods</li>
-        <li>Whether you already have a Readiness Check for Cloud ALM export</li>
-      </ul>
-    </div>
+    <form class="mailcard" id="contact-form">
+      <h3>A few details to get started</h3>
+      <label for="contact-name">Your name<input id="contact-name" name="name" autocomplete="name" maxlength="100" required></label>
+      <label for="contact-topic">What can we help with?<select id="contact-topic" name="topic"><option>Solution Manager to Cloud ALM</option><option>CALM2Signavio</option><option>SharePoint document integration</option><option>Cloud ALM services</option><option>Something else</option></select></label>
+      <label for="contact-message">Your goal (optional)<textarea id="contact-message" name="message" maxlength="1500" placeholder="A brief description is enough."></textarea></label>
+      <button class="btn btn-primary" type="submit">Prepare my email</button>
+      <p class="form-note">This form prepares a draft on your device. Nothing is sent until you send it from your email app. Please leave out confidential information.</p>
+      <div id="contact-draft" hidden>
+        <label for="draft-text">Your email draft<textarea id="draft-text" readonly rows="7"></textarea></label>
+        <div class="cta-row"><a id="open-email" class="btn btn-primary">Open email app</a><button id="copy-draft" class="btn btn-ghost" type="button">Copy email</button></div>
+        <p class="form-note" id="draft-status" role="status">Review your draft, then open your email app or copy it and send it to info@alm365cloud.com.</p>
+      </div>
+    </form>
   </div>
 </section>
 </main>
@@ -807,7 +822,8 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
 
 <script>
 (function(){
-  var toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('site-nav');toggle.addEventListener('click',function(){var on=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',on?'true':'false')});menu.addEventListener('click',function(e){if(e.target.closest('a')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false')}});
+  var toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('main-navigation');toggle.addEventListener('click',function(){var on=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',on?'true':'false')});menu.addEventListener('click',function(e){if(e.target.closest('a')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false')}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('is-open')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.focus()}});
   var views={home:['top','solutions'],transition:['estimate','packages','bundles'],ai:['ai'],products:['products','signavio','sharepoint'],services:['services'],about:['about'],contact:['contact']};
   var routes={top:'home',solutions:'home',estimate:'transition',packages:'transition',bundles:'transition',ai:'ai',products:'products',signavio:'products',sharepoint:'products',services:'services',about:'about',contact:'contact'};
   var sections=Array.from(document.querySelectorAll('main > section'));
@@ -817,7 +833,13 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
     sections.forEach(function(section){var id=section.id||(section.classList.contains('hero')?'top':'');section.hidden=views[view].indexOf(id)===-1});
     navTabs.forEach(function(a){if(a.getAttribute('data-view-tab')===view){a.setAttribute('aria-current','page')}else{a.removeAttribute('aria-current')}});
     document.body.classList.add('view-mode');
-    if(scroll){window.scrollTo({top:0,behavior:'instant'})}
+    if(scroll){
+      var target=document.getElementById(key);
+      if(target && key!=='top'){target.scrollIntoView({block:'start',behavior:'instant'})}
+      else{window.scrollTo({top:0,behavior:'instant'})}
+      var heading=target&&target.querySelector('h1,h2');
+      if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true})}
+    }
   }
   document.addEventListener('click',function(event){
     var a=event.target.closest('a[href^="#"]');if(!a)return;
@@ -825,17 +847,28 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
     event.preventDefault();if(location.hash!==hash)history.pushState(null,'',hash);showView(hash,true);
   });
   window.addEventListener('popstate',function(){showView(location.hash,true)});
-  showView(location.hash,false);
+  window.addEventListener('hashchange',function(){showView(location.hash,true)});
+  showView(location.hash,!!location.hash);
   var end=new Date('2027-12-31T23:59:59');
   var d=Math.max(0,Math.ceil((end-new Date())/864e5));
   document.getElementById('d-days').textContent=d.toLocaleString('en-US');
   document.getElementById('yr').textContent=new Date().getFullYear();
-  var ddb=document.getElementById('dd-btn'),ddm=document.getElementById('dd-menu');
-  function ddSet(o){ddm.hidden=!o;ddb.setAttribute('aria-expanded',o?'true':'false')}
-  ddb.addEventListener('click',function(e){e.stopPropagation();ddSet(ddm.hidden)});
-  ddm.addEventListener('click',function(e){if(e.target.closest('a'))ddSet(false)});
-  document.addEventListener('click',function(e){if(!e.target.closest('.dd'))ddSet(false)});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ddm.hidden){ddSet(false);ddb.focus()}});
+  document.getElementById('contact-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=document.getElementById('contact-name').value.trim();
+    var topic=document.getElementById('contact-topic').value;
+    var message=document.getElementById('contact-message').value.trim();
+    var body='Hello ALM365 Cloud,\n\nI would like to discuss: '+topic+'.\n\n'+(message?message+'\n\n':'')+'Best regards,\n'+name;
+    document.getElementById('draft-text').value=body;
+    document.getElementById('open-email').href='mailto:info@alm365cloud.com?subject='+encodeURIComponent('Website enquiry: '+topic)+'&body='+encodeURIComponent(body);
+    document.getElementById('contact-draft').hidden=false;
+    document.getElementById('draft-text').focus();
+  });
+  document.getElementById('copy-draft').addEventListener('click',function(){
+    var field=document.getElementById('draft-text'),status=document.getElementById('draft-status');
+    function fallback(){field.focus();field.select();status.textContent='Select and copy the draft, then send it to info@alm365cloud.com.'}
+    if(navigator.clipboard){navigator.clipboard.writeText(field.value).then(function(){status.textContent='Draft copied. Paste it into an email to info@alm365cloud.com. Nothing has been sent.'},fallback)}else{fallback()}
+  });
   document.getElementById('copy').addEventListener('click',function(){
     var t=document.getElementById('mail').textContent,b=this;
     var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)};
