@@ -273,6 +273,16 @@ footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);fo
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 /* Hybrid V2 */
 .solutions{background:linear-gradient(180deg,#111c30,#0a0f1c)}.solutions-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.solution-card{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:32px;text-decoration:none;display:grid;gap:16px;transition:transform .2s,border-color .2s}.solution-card:hover{transform:translateY(-3px);border-color:var(--cyan)}.solution-card span{font:500 11px var(--mono);color:var(--cyan)}.solution-card p{color:var(--muted)}.solution-card b{font-size:14px;color:var(--amber)}.mobile-menu-toggle{display:none;background:var(--panel);color:var(--text);font:600 14px var(--body);border:1px solid var(--line);border-radius:8px;padding:8px 12px}@media(max-width:860px){header.nav .wrap{height:auto;min-height:64px;flex-wrap:wrap;padding-block:8px}.mobile-menu-toggle{display:block;margin-left:auto}.nav>.wrap>.btn{display:none}.nav ul{display:none;width:100%;order:3;flex-direction:column;gap:0;padding:8px 0}.nav ul.is-open{display:flex}.nav ul>li{padding:12px;border-bottom:1px solid var(--line)}.dd-menu{position:static;min-width:0;margin-top:10px}.solutions-grid{grid-template-columns:1fr}}@media(max-width:520px){section{padding-block:64px}.solution-card{padding:24px}}
+
+/* Hybrid V2: discrete views instead of long vertical anchor scrolling */
+.view-tabs{position:sticky;top:64px;z-index:8;background:var(--ink);border-bottom:1px solid var(--line)}
+.view-tabs-inner{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;white-space:nowrap}
+.view-tabs a{padding:12px 14px;color:var(--muted);text-decoration:none;font-weight:600;font-size:13px;border-bottom:2px solid transparent}
+.view-tabs a[aria-current="page"]{color:var(--amber);border-bottom-color:var(--amber);background:rgba(246,162,58,.05)}
+.view-tabs a:hover{color:var(--text)}
+body.view-mode main > section[hidden]{display:none!important}
+body.view-mode main > section:not([hidden]){border-top:0}
+body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
@@ -303,6 +313,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </header>
 
+<nav class="view-tabs" aria-label="Main sections"><div class="wrap view-tabs-inner">
+<a href="#top" data-view-tab="home">Overview</a><a href="#estimate" data-view-tab="transition">Transition & ChaRM</a><a href="#ai" data-view-tab="ai">AI & Automation</a><a href="#products" data-view-tab="products">Products</a><a href="#services" data-view-tab="services">Services</a><a href="#about" data-view-tab="about">About</a><a href="#contact" data-view-tab="contact">Contact</a>
+</div></nav>
 <main id="top">
 <section class="hero">
   <div class="wrap hero-grid">
@@ -325,11 +338,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="map">
         <div class="map-row"><span class="from">SolDoc / libraries</span><span class="arrow">→</span><span class="to">Solution processes (SDT)</span><span class="pill ok">Available</span></div>
         <div class="map-row"><span class="from">Test Suite</span><span class="arrow">→</span><span class="to">Test Management</span><span class="pill ok">Available</span></div>
-        <div class="map-row"><span class="from">ChaRM cycles</span><span class="arrow">→</span><span class="to">Features + Deployment Mgmt</span><span class="pill ok">Available</span></div>
+        <div class="map-row"><span class="from">ChaRM change execution</span><span class="arrow">→</span><span class="to">Features + Deployment Mgmt</span><span class="pill warn">Partial</span></div>
         <div class="map-row"><span class="from">Focused Build WBS</span><span class="arrow">→</span><span class="to">Requirements / User stories</span><span class="pill warn">Manual</span></div>
         <div class="map-row"><span class="from">Technical monitoring</span><span class="arrow">→</span><span class="to">Operations (re-implement)</span><span class="pill warn">Rebuild</span></div>
         <div class="map-row"><span class="from">Retrofit / CSOL</span><span class="arrow">→</span><span class="to">Roadmap / partner tool</span><span class="pill warn">Roadmap</span></div>
-        <div class="map-row"><span class="from">Custom ChaRM (Z-flows)</span><span class="arrow">→</span><span class="to">Customization (Pkg 3)</span><span class="pill gap">Gap</span></div>
+        <div class="map-row"><span class="from">ChaRM variants / approvals</span><span class="arrow">→</span><span class="to">ServiceNow / Jira / Azure DevOps</span><span class="pill warn">Integration</span></div>
         <div class="map-row"><span class="from">IT Service Desk</span><span class="arrow">→</span><span class="to">External ITSM (Pkg 2)</span><span class="pill gap">Only SolMan</span></div>
       </div>
       <div class="console-foot">
@@ -486,7 +499,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <div>
             <div class="pkg-kicker">Extended scope</div>
             <h3>Process Customization</h3>
-            <p>Cloud ALM's standard flows rarely match a ChaRM setup one to one. We tailor Cloud ALM so the change process your teams know survives the move, with configuration first and SAP BTP only where configuration ends.</p>
+            <p>SAP Cloud ALM Features provide standard change and deployment execution, but are not a one-to-one replacement for ChaRM. For additional change types, custom statuses, approval paths and differentiated workflows, we design governance in ServiceNow, Jira or Azure DevOps and integrate it with Cloud ALM Features and deployment status.</p>
           </div>
           <span class="tag">Workshop-scoped</span>
         </div>
@@ -496,16 +509,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <div>
               <h4>Change & deployment</h4>
               <ul>
-                <li>Feature workflows mirroring your ChaRM cycles (normal, urgent, admin, defect)</li>
-                <li>Approval steps, approver groups, segregation of duties</li>
-                <li>Quality gates and transport policies per release</li>
-                <li>Custom fields, templates, release calendar, freeze periods</li>
+                <li>Map ChaRM change types (normal, urgent, administrative, defect) to Cloud ALM Features and external workflow records</li>
+                <li>Additional approval chains, custom statuses and segregation of duties in ServiceNow, Jira or Azure DevOps where needed</li>
+                <li>Connect external governance approvals to Cloud ALM feature and deployment gates using supported APIs</li>
+                <li>Define field mapping, status ownership, release calendar and freeze periods across both tools</li>
               </ul>
             </div>
             <div>
               <h4>Automation</h4>
               <ul>
-                <li>Approval automation with SAP Build Process Automation</li>
+                <li>Approval orchestration in external workflow tools or SAP Build Process Automation when technically appropriate</li>
                 <li>Email and Teams notifications on status changes</li>
                 <li>Role-based entry points in SAP Build Work Zone</li>
                 <li>Mass operations through the Cloud ALM APIs</li>
@@ -530,7 +543,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <div>
             <div class="pkg-kicker">Integrations</div>
             <h3>Tool Integrations</h3>
-            <p>For teams whose change or ITSM process lives outside SAP. Cloud ALM stays the system of record for transports and deployments; your tool stays the system of record for tickets. We keep both in sync.</p>
+            <p>For teams whose change or ITSM process lives outside SAP. SAP Cloud ALM Features manage SAP-side change and deployment execution. ServiceNow, Jira or Azure DevOps can manage richer change types, statuses and approval processes, with agreed status mapping and integration between tools.</p>
           </div>
           <span class="tag">Per connector</span>
         </div>
@@ -595,7 +608,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <li>Fit/gap draft from your Readiness Check export</li>
           <li>Users, groups, roles and notification settings</li>
           <li>Managed systems and landscape model</li>
-          <li>Deployment tracks, routes and quality gates</li>
+          <li>Review deployment tracks, routes and quality gates</li>
           <li>Monitoring configuration and alert rules per system</li>
           <li>SDT runs and reconciliation against SolMan</li>
         </ul>
@@ -720,6 +733,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <script>
 (function(){
   var toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('site-nav');toggle.addEventListener('click',function(){var on=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',on?'true':'false')});menu.addEventListener('click',function(e){if(e.target.closest('a')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false')}});
+  var views={home:['top','solutions'],transition:['estimate','packages','bundles'],ai:['ai'],products:['products','signavio','sharepoint'],services:['services'],about:['about'],contact:['contact']};
+  var routes={top:'home',solutions:'home',estimate:'transition',packages:'transition',bundles:'transition',ai:'ai',products:'products',signavio:'products',sharepoint:'products',services:'services',about:'about',contact:'contact'};
+  var sections=Array.from(document.querySelectorAll('main > section'));
+  var navTabs=Array.from(document.querySelectorAll('[data-view-tab]'));
+  function showView(hash,scroll){
+    var key=(hash||'#top').replace(/^#/,'')||'top',view=routes[key]||'home';
+    sections.forEach(function(section){var id=section.id||(section.classList.contains('hero')?'top':'');section.hidden=views[view].indexOf(id)===-1});
+    navTabs.forEach(function(a){if(a.getAttribute('data-view-tab')===view){a.setAttribute('aria-current','page')}else{a.removeAttribute('aria-current')}});
+    document.body.classList.add('view-mode');
+    if(scroll){window.scrollTo({top:0,behavior:'instant'})}
+  }
+  document.addEventListener('click',function(event){
+    var a=event.target.closest('a[href^="#"]');if(!a)return;
+    var hash=a.getAttribute('href');if(!hash||hash==='#')return;
+    event.preventDefault();if(location.hash!==hash)history.pushState(null,'',hash);showView(hash,true);
+  });
+  window.addEventListener('popstate',function(){showView(location.hash,true)});
+  showView(location.hash,false);
   var end=new Date('2027-12-31T23:59:59');
   var d=Math.max(0,Math.ceil((end-new Date())/864e5));
   document.getElementById('d-days').textContent=d.toLocaleString('en-US');
