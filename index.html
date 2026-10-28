@@ -285,6 +285,25 @@ header.nav ul,header.nav .mobile-menu-toggle{display:none!important}
 body.view-mode main > section[hidden]{display:none!important}
 body.view-mode main > section:not([hidden]){border-top:0}
 body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1px solid var(--line)}
+
+/* Expanded product explanation */
+.product-flow{display:grid;grid-template-columns:minmax(0,1fr) 220px minmax(0,1fr);align-items:stretch;gap:14px;margin:36px 0 10px}
+.flow-node{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;display:grid;gap:9px}
+.flow-node span,.product-steps article>span{font:500 11px var(--mono);letter-spacing:.1em;color:var(--cyan)}
+.flow-node strong{font-family:var(--display);font-size:24px}.flow-node small{color:var(--muted);font-size:14px}
+.flow-link{display:grid;align-content:center;text-align:center;gap:5px;color:var(--muted);font-size:13px}.flow-link strong{font:700 40px var(--display);color:var(--amber)}.flow-link small{line-height:1.5}
+.flow-note{text-align:center;font:500 12px var(--mono);color:var(--muted);margin-bottom:48px}
+.product-subtitle{margin:40px 0 22px;font-size:30px}
+.product-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.product-steps article{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;align-content:start;gap:12px}
+.product-steps article h3{font-size:19px}.product-steps article p{color:var(--muted);font-size:14px;line-height:1.55}
+.product-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:26px 0}
+.product-panels>div{border:1px solid var(--line);border-radius:14px;padding:26px}
+.product-panels h3{font-size:22px}.product-panels ul{color:var(--muted);padding-left:19px;display:grid;gap:10px}
+.product-caveat{padding:18px 20px;border-left:3px solid var(--amber);background:rgba(246,162,58,.055);font-size:14px;color:var(--muted);border-radius:5px}
+.product-detail .cta-row{margin-top:24px}
+@media(max-width:960px){.product-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.product-flow{grid-template-columns:1fr}.flow-link{padding:8px}.flow-link strong{font-size:28px}}
+@media(max-width:600px){.product-steps,.product-panels{grid-template-columns:1fr}.flow-node{padding:20px}.product-subtitle{font-size:26px}}
 </style>
 </head>
 <body>
@@ -670,8 +689,62 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
   </div>
 </section>
 
-<section id="signavio" class="prod-sub"><div class="wrap"><div class="sec-head"><div class="eyebrow">Product 01 · CALM2Signavio</div><h2>Process integration beyond the standard.</h2><p class="lead">SAP already supports diagram synchronization from Signavio to Cloud ALM, including approval-based automatic sync. We assess supplementary bulk onboarding, hierarchy mapping, reconciliation and governance scenarios. Custom functionality depends on validated API capabilities.</p><div class="cta-row"><a class="btn btn-primary" href="#contact">Request a fit assessment</a></div></div><div class="feat"><article><h3>Assess</h3><p>Map native SAP integration and the actual functional gaps.</p></article><article><h3>Reconcile</h3><p>Assess process coverage, hierarchy mapping and duplication.</p></article><article><h3>Govern</h3><p>Plan process ownership, approvals and traceability.</p></article></div><p class="lead" style="margin-top:28px;font-size:14px"><a href="https://help.sap.com/docs/erp-transformation-with-itc/buildable-map/sap-signavio-and-sap-cloud-alm-integration">SAP integration documentation</a></p></div></section>
-<section id="sharepoint" class="prod-sub"><div class="wrap"><div class="sec-head"><div class="eyebrow">Product 02 · SharePoint integration</div><h2>Document governance across SAP Cloud ALM and SharePoint.</h2><p class="lead">Explore supported document linking, metadata mapping and Microsoft 365 governance. SAP Cloud ALM does not currently support replacing its automatically created SAP Document Management Service repository with an arbitrary external repository. Our approach starts with technical feasibility rather than promising a drop-in replacement.</p><div class="cta-row"><a class="btn btn-primary" href="#contact">Discuss a supported design</a></div></div><div class="feat"><article><h3>Reference</h3><p>Review link-based document access and available interfaces.</p></article><article><h3>Secure</h3><p>Align permissions, retention and document ownership.</p></article><article><h3>Validate</h3><p>Test the proposed integration with your tenant and licensing.</p></article></div><p class="lead" style="margin-top:28px;font-size:14px"><a href="https://help.sap.com/docs/cloud-alm/setup-administration/connecting-sap-document-management-service">SAP repository documentation</a></p></div></section>
+
+<section id="signavio" class="prod-sub product-detail">
+<div class="wrap">
+ <div class="sec-head">
+  <div class="eyebrow">Product 01 · CALM2Signavio</div>
+  <h2>From SAP Cloud ALM to Signavio: bring your process content into your design hub.</h2>
+  <p class="lead">SAP's standard BPMN integration synchronizes process diagrams from Signavio to Cloud ALM. CALM2Signavio addresses the complementary direction: inventory, map and transfer eligible process hierarchies and custom diagrams from Cloud ALM into Signavio, with controlled synchronization and process ownership. Exact coverage is validated against the APIs and BPMN data available in your tenant.</p>
+ </div>
+ <div class="product-flow" aria-label="CALM2Signavio architecture">
+  <div class="flow-node"><span>SOURCE</span><strong>SAP Cloud ALM</strong><small>Hierarchy · custom processes · BPMN · metadata</small></div>
+  <div class="flow-link"><strong>→</strong><small>CALM2Signavio<br>Mapping · diff · validation</small></div>
+  <div class="flow-node"><span>TARGET</span><strong>SAP Signavio</strong><small>Folders · diagrams · attributes · governance</small></div>
+ </div>
+ <div class="flow-note">SAP standard: Signavio → Cloud ALM (BPMN) &nbsp; | &nbsp; CALM2Signavio offering: Cloud ALM → Signavio (assessed scope)</div>
+ <h3 class="product-subtitle">How it works</h3>
+ <div class="product-steps">
+  <article><span>01 · Discover</span><h3>Inventory & coverage</h3><p>Read Cloud ALM process hierarchy, custom processes, diagram availability and external references. Flag missing BPMN, duplicate IDs and unsupported content before any change.</p></article>
+  <article><span>02 · Map</span><h3>Preview target structure</h3><p>Translate eligible hierarchy and process metadata into Signavio folders, attributes and diagrams. Produce a dry-run mapping for review.</p></article>
+  <article><span>03 · Transfer</span><h3>Controlled initial load</h3><p>Create approved target content through the supported Signavio interfaces, preserving traceability with source references and import logs.</p></article>
+  <article><span>04 · Reconcile</span><h3>Delta & governance</h3><p>Detect changes, respect the designated owner and flag conflicts. No automatic overwriting of independently edited diagrams; changes require explicit approval.</p></article>
+ </div>
+ <div class="product-panels">
+  <div><h3>Operating modes</h3><ul><li><b>Migration:</b> one-time bulk onboarding from Cloud ALM to Signavio</li><li><b>Transition:</b> periodic delta review during handover of process authorship</li><li><b>Signavio-led:</b> after handover, SAP standard Signavio → Cloud ALM sync remains the primary diagram flow</li></ul></div>
+  <div><h3>Technical scope & prerequisites</h3><ul><li>Cloud ALM API service access and permission to read the process model</li><li>Signavio API access and target workspace/folder design</li><li>BPMN availability check: legacy or SVG-only content may require remediation</li><li>Dry run, ownership rules, reconciliation report and scoped deployment</li></ul></div>
+ </div>
+ <p class="product-caveat"><b>Delivery note:</b> This describes the intended solution workflow, not a claim that all use cases are already deployed. API coverage, BPMN portability, Signavio licensing and conflict handling are validated during discovery.</p>
+ <div class="cta-row"><a class="btn btn-primary" href="#contact">Request a CALM2Signavio demo / coverage check</a><a class="btn btn-ghost" href="https://help.sap.com/docs/erp-transformation-with-itc/buildable-map/sap-signavio-and-sap-cloud-alm-integration" target="_blank" rel="noopener">SAP standard integration</a></div>
+</div>
+</section>
+<section id="sharepoint" class="prod-sub product-detail">
+<div class="wrap">
+ <div class="sec-head">
+  <div class="eyebrow">Product 02 · SharePoint DMS for Cloud ALM</div>
+  <h2>Link your Cloud ALM documentation with the Microsoft 365 ecosystem.</h2>
+  <p class="lead">A governed integration approach for keeping documents in SharePoint while making them discoverable and traceable from SAP Cloud ALM. The supported architecture uses SAP Cloud ALM Document API references and mappings; it does not replace the SAP-managed BTP Document Management Service repository.</p>
+ </div>
+ <div class="product-flow" aria-label="SharePoint document integration architecture">
+  <div class="flow-node"><span>SAP SIDE</span><strong>SAP Cloud ALM</strong><small>Document records · URL references · project & process assignments</small></div>
+  <div class="flow-link"><strong>↔</strong><small>Integration service<br>Microsoft Graph + Cloud ALM Document API</small></div>
+  <div class="flow-node"><span>MICROSOFT SIDE</span><strong>SharePoint Online</strong><small>Files · folders · versions · Microsoft 365 permissions</small></div>
+ </div>
+ <h3 class="product-subtitle">How it works</h3>
+ <div class="product-steps">
+  <article><span>01 · Connect</span><h3>Configure access</h3><p>Authorize a SharePoint site through Microsoft Entra ID and connect the integration service to Cloud ALM APIs using least-privilege credentials.</p></article>
+  <article><span>02 · Map</span><h3>Define document rules</h3><p>Map SharePoint folder structure and file metadata to Cloud ALM projects, process hierarchy and document types. Validate the rules in a dry run.</p></article>
+  <article><span>03 · Reference</span><h3>Publish linked records</h3><p>For eligible SharePoint files, create Cloud ALM document records with URL references and process/project assignments, without relocating the original binary.</p></article>
+  <article><span>04 · Reconcile</span><h3>Keep links current</h3><p>Scheduled checks identify renamed, moved or deleted files. Handle link changes and deletions according to agreed rules and supported API operations.</p></article>
+ </div>
+ <div class="product-panels">
+  <div><h3>Flow A · SharePoint → Cloud ALM</h3><ul><li>Files remain in Microsoft 365 under existing permissions and retention policies</li><li>Cloud ALM receives document entries and SharePoint URL references</li><li>Mapping and reconciliation preserve traceability to the source file</li></ul></div>
+  <div><h3>Flow B · Cloud ALM → SharePoint</h3><ul><li>Review Cloud ALM metadata and document references for reporting or linked-document workflows</li><li>Any binary extraction or file synchronization requires separate API and licensing validation</li><li>Cloud ALM native uploads continue using its SAP-managed DMS repository</li></ul></div>
+ </div>
+ <p class="product-caveat"><b>Important boundary:</b> SAP currently does not support using an arbitrary external SharePoint repository as a direct replacement for Cloud ALM's automatically created SAP BTP DMS repository. This offering targets supported document linking and integration patterns. Scope is subject to technical discovery.</p>
+ <div class="cta-row"><a class="btn btn-primary" href="#contact">Request a SharePoint integration walkthrough</a><a class="btn btn-ghost" href="https://help.sap.com/docs/cloud-alm/apis/document-api" target="_blank" rel="noopener">SAP Document API</a></div>
+</div>
+</section>
 <section id="services">
   <div class="wrap">
     <div class="sec-head">
