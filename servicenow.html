@@ -524,7 +524,7 @@ footer a{color:var(--text)}
     <div id="dfa">
   <div class="stage">
     <div class="stage-scroll">
-      <svg id="dfa-stage" viewBox="0 0 1000 500" role="img" aria-label="Animation: Cloud ALM events pass through the DIFF Adapter; stateless events are grouped by key; ServiceNow receives events and a rule opens one incident per key">
+      <svg id="dfa-stage" viewBox="0 0 1000 540" role="img" aria-label="Animation: Cloud ALM events pass through the DIFF Adapter; stateless events are grouped by key; ServiceNow receives events and a rule opens one incident per key">
         <defs>
           <filter id="dfa-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
         </defs>
@@ -534,11 +534,11 @@ footer a{color:var(--text)}
         <text class="t-col" x="652" y="30" style="fill:var(--ok)">ServiceNow</text>
 
         <!-- ServiceNow frame spanning both SN columns -->
-        <rect x="640" y="40" width="348" height="448" rx="14" fill="none" stroke="var(--ok)" stroke-opacity=".3" stroke-dasharray="4 4"/>
+        <rect x="640" y="40" width="348" height="488" rx="14" fill="none" stroke="var(--ok)" stroke-opacity=".3" stroke-dasharray="4 4"/>
         <!-- Cloud ALM frame -->
-        <rect x="10" y="40" width="262" height="448" rx="14" fill="none" stroke="var(--cyan)" stroke-opacity=".4" stroke-dasharray="4 4"/>
+        <rect x="10" y="40" width="262" height="488" rx="14" fill="none" stroke="var(--cyan)" stroke-opacity=".4" stroke-dasharray="4 4"/>
         <!-- adapter frame -->
-        <rect x="288" y="40" width="292" height="448" rx="14" fill="none" stroke="var(--amber)" stroke-opacity=".45" stroke-dasharray="4 4"/>
+        <rect x="288" y="40" width="292" height="488" rx="14" fill="none" stroke="var(--amber)" stroke-opacity=".45" stroke-dasharray="4 4"/>
 
         <!-- section labels -->
         <text class="t-sec" x="24" y="60" style="fill:var(--cyan)">Stateful</text>
@@ -759,27 +759,32 @@ footer a{color:var(--text)}
 
   var ROWS=[
     {id:'hm', y:70,  name:'Health Monitoring', sub:'stateful · open / recover', color:'var(--cyan)', key:'Cloud ALM alert ID', stateful:true,
-     alert:'ALT0007311', inc:'INC0052001', title:'PRD HANA memory above 90%', team:'SAP Basis'},
-    {id:'im', y:186, name:'Integration Monitoring', sub:'stateless · repeats ~5 min', color:'var(--amber)', key:'Orders → WMS',
-     alert:'ALT0007312', inc:'INC0052002', title:'Order interface to WMS failing', team:'Integration team'},
-    {id:'id', y:286, name:'IDoc Monitoring', sub:'stateless · repeats', color:'var(--violet)', key:'ORDERS05 · WMS01',
-     alert:'ALT0007313', inc:'INC0052003', title:'IDoc ORDERS05 errors, partner WMS01', team:'Integration team'},
-    {id:'is', y:386, name:'Integration Suite', sub:'stateless · repeats', color:'var(--pink)', key:'iFlow Billing_Out',
-     alert:'ALT0007314', inc:'INC0052004', title:'Billing iFlow message failures', team:'Integration team'}
+     inc:'INC0052001', title:'PRD HANA memory above 90%', team:'SAP Basis'},
+    {id:'im', y:180, name:'Integration Monitoring', sub:'stateless · repeats ~5 min', color:'var(--amber)', key:'Orders → WMS',
+     inc:'INC0052002', title:'Order interface to WMS failing', team:'Integration team'},
+    {id:'id', y:270, name:'IDoc Monitoring', sub:'stateless · repeats', color:'var(--violet)', key:'ORDERS05 · WMS01', srcH:138,
+     inc:'INC0052003', title:'IDoc ORDERS05 errors, partner WMS01', team:'Integration team'},
+    {id:'id2', y:346, src:'id', color:'var(--violet)', key:'INVOIC02 · FIN01',
+     inc:'INC0052005', title:'IDoc INVOIC02 errors, partner FIN01', team:'Finance support'},
+    {id:'is', y:440, name:'Integration Suite', sub:'stateless · repeats', color:'var(--pink)', key:'iFlow Billing_Out',
+     inc:'INC0052004', title:'Billing iFlow message failures', team:'Integration team'}
   ];
-  var EV=[[0.6,'hm'],[0.9,'im'],[1.5,'im'],[1.9,'id'],[2.4,'im'],[2.8,'is'],[3.4,'id'],[3.9,'im'],[4.4,'im'],[4.9,'id'],[5.3,'is'],[5.8,'im'],[6.4,'id'],[6.9,'im'],[7.4,'is'],[7.9,'im']];
-  var RECOVER=9.8, END=16;
+  var EV=[[0.6,'hm'],[0.9,'im'],[1.5,'im'],[1.9,'id'],[2.4,'im'],[2.8,'is'],[3.4,'id'],[3.9,'im'],[4.4,'im'],[4.9,'id'],[5.3,'is'],[5.8,'im'],[6.1,'id2'],[6.6,'id'],[6.9,'im'],[7.2,'id2'],[7.6,'is'],[8.0,'im'],[8.4,'id2']];
+  var RECOVER=10.2, END=17;
   var H=62;
 
   var gR=document.getElementById('dfa-rows'),gD=document.getElementById('dfa-dots');
   var R={};
   ROWS.forEach(function(r){
     var y=r.y, g=el('g',{},gR), o={r:r,cy:y+H/2};
-    // source
-    el('rect',{x:20,y:y,width:240,height:H,rx:10,fill:'var(--ink)',stroke:'var(--line)'},g);
-    el('circle',{cx:40,cy:y+H/2,r:6,fill:r.color},g);
-    txt(g,56,y+27,'t-src',r.name); txt(g,56,y+44,'t-sub',r.sub);
-    o.srcPulse=el('rect',{x:20,y:y,width:240,height:H,rx:10,fill:'none',stroke:r.color,'stroke-opacity':0},g);
+    // source (one card per source; a source can feed several keys)
+    if(r.src){o.srcPulse=R[r.src].srcPulse}else{
+      o.srcRect=el('rect',{x:20,y:y,width:240,height:H,rx:10,fill:'var(--ink)',stroke:'var(--line)'},g);
+      o.srcIn=el('g',{},g);
+      el('circle',{cx:40,cy:y+H/2,r:6,fill:r.color},o.srcIn);
+      txt(o.srcIn,56,y+27,'t-src',r.name); txt(o.srcIn,56,y+44,'t-sub',r.sub);
+      o.srcPulse=el('rect',{x:20,y:y,width:240,height:H,rx:10,fill:'none',stroke:r.color,'stroke-opacity':0},g);
+    }
     // adapter cell: key on top, events accumulate in the row below
     o.adg=el('g',{opacity:0,style:'transition:opacity .45s'},g);
     o.ad=el('rect',{x:300,y:y,width:268,height:H,rx:9,fill:'var(--ink)',stroke:'var(--line)'},o.adg);
@@ -797,7 +802,7 @@ footer a{color:var(--text)}
     o.ist=txt(o.ig,962,y+20,'t-sub','—','text-anchor:end');
     txt(o.ig,666,y+37,'t-inc2',r.title);
     o.iup=txt(o.ig,666,y+52,'t-sub','');
-    R[r.id]=o;
+    o.g=g;o.off=0;R[r.id]=o;
   });
 
   var S={ev:document.getElementById('dfa-s-events'),inc:document.getElementById('dfa-s-inc'),wo:document.getElementById('dfa-s-without')};
@@ -811,16 +816,26 @@ footer a{color:var(--text)}
   function flash(node,attr,on,off,ms){node.setAttribute(attr,on);setTimeout(function(){node.setAttribute(attr,off)},ms||300)}
   function stat(k,v){n[k]=v;S[k].textContent=v}
 
+  var exp=0,expanding=false,SHIFT=94;
+  var svgEl=gR.ownerSVGElement, frames=[].slice.call(svgEl.querySelectorAll('rect[height="488"]'));
+  function layout(e){
+    var o=R.is; o.off=-SHIFT*(1-e); o.g.setAttribute('transform','translate(0,'+o.off+')'); o.cy=o.r.y+H/2+o.off;
+    frames.forEach(function(fr){fr.setAttribute('height',488-SHIFT*(1-e))});
+    svgEl.setAttribute('viewBox','0 0 1000 '+(540-SHIFT*(1-e)));
+  }
   function reset(){
-    gD.innerHTML='';dots=[];fired=0;recovered=false;['ev','inc','wo'].forEach(function(k){stat(k,0)});
+    gD.innerHTML='';dots=[];exp=0;expanding=false;layout(0);fired=0;recovered=false;['ev','inc','wo'].forEach(function(k){stat(k,0)});
     ROWS.forEach(function(r){var o=R[r.id];o.c=0;o.next=0;if(o.bk){o.bk.setAttribute('stroke-opacity',.25)}o.ae=0;o.alerted=false;o.incd=false;o.cnt.textContent='';if(o.stack)o.stack.innerHTML='';
       o.ie=0;o.ig.setAttribute('opacity',0);o.adg.setAttribute('opacity',0);o.ist.textContent='—';o.ist.setAttribute('style','text-anchor:end');o.iup.textContent='';o.ad.setAttribute('stroke','var(--line)')});
   }
   function slotXY(o,i){return [322+(i%12)*12,o.r.y+44]}
   function spawn(id,kind){
     var o=R[id];
-    var d=el('circle',{r:6,cx:262,cy:o.cy,fill:kind==='recover'?'var(--ok)':o.r.color,filter:'url(#dfa-glow)'},gD);
-    var dd={el:d,id:id,kind:kind,leg:0,t:0};
+    var so=o.r.src?R[o.r.src]:o;
+    var d=el('circle',{r:6,cx:262,cy:so.cy,fill:kind==='recover'?'var(--ok)':o.r.color,filter:'url(#dfa-glow)'},gD);
+    if(id==='id2'&&!expanding)expanding=true;
+    var dd={el:d,id:id,kind:kind,leg:0,t:0,sy:so.cy};
+    if(id==='id'||id==='id2'){dd.lbl=txt(gD,270,so.cy-10,'t-sub',o.r.key.split(' ')[0],'fill:'+o.r.color+';font-size:9.5px')}
     o.next=(o.next||0)+1;dd.slot=slotXY(o,o.next-1);
     dots.push(dd);
     flash(o.srcPulse,'stroke-opacity',1,0,260);
@@ -853,10 +868,10 @@ footer a{color:var(--text)}
     dots=dots.filter(function(d){
       d.t+=dt/DUR[d.leg];
       var u=ease(Math.min(d.t,1)),L=LEG[d.leg],o=R[d.id];
-      if(d.leg===0&&d.slot){d.el.setAttribute('cx',lerp(262,d.slot[0],u));d.el.setAttribute('cy',lerp(o.cy,d.slot[1],u))}
+      if(d.leg===0&&d.slot){d.el.setAttribute('cx',lerp(262,d.slot[0],u));d.el.setAttribute('cy',lerp(d.sy,d.slot[1]+o.off,u));if(d.lbl){d.lbl.setAttribute('x',+d.el.getAttribute('cx')+8);d.lbl.setAttribute('y',+d.el.getAttribute('cy')-9)}}
       else{d.el.setAttribute('cx',lerp(L[0],L[1],u));d.el.setAttribute('cy',o.cy)}
       if(d.t<1)return true;
-      if(d.leg===0){atAdapter(d);d.leg=1;d.t=0;d.el.setAttribute('r',4);if(d.slot)d.el.setAttribute('opacity',.8);return true}
+      if(d.leg===0){if(d.lbl){d.lbl.remove();d.lbl=null}atAdapter(d);d.leg=1;d.t=0;d.el.setAttribute('r',4);if(d.slot)d.el.setAttribute('opacity',.8);return true}
       atSN(d);d.el.remove();return false;
     });
   }
@@ -870,19 +885,21 @@ footer a{color:var(--text)}
     if(!recovered&&t>=RECOVER){recovered=true;spawn('hm','recover')}
     if(t<2.6)say('Cloud ALM sends events. <b>Stateful</b> Health Monitoring sends one when a metric breaks and one when it recovers. <b>Stateless</b> monitoring repeats every few minutes.');
     else if(t<5.6)say('The DIFF Adapter gives each <b>stateless</b> event a stable key, so repeats of the same problem group together. Stateful alerts pass through with their own alert ID.');
-    else if(t<9.6)say('The adapter sends <b>events</b> to ServiceNow, not incidents. A <b>rule</b> in ServiceNow opens one incident per key and adds later events to it.');
+    else if(t<6.1)say('The adapter sends <b>events</b> to ServiceNow, not incidents. A <b>rule</b> in ServiceNow opens one incident per key and adds later events to it.');
+    else if(t<10)say('A <b>different IDoc type</b> fails. It gets a new key, so the adapter creates a new entry and ServiceNow opens a separate incident, routed to Finance.');
     else if(t<END-2)say('When the HANA metric recovers, the incident closes on its own. For stateful alerts the SAP standard already does this; the adapter can add routing, severity or CMDB rules.');
-    else say('16 events, 4 incidents. A direct integration would open 16 tickets.');
+    else say('19 events, 5 incidents. A direct integration would open 19 tickets.');
+    if(expanding&&exp<1){exp=Math.min(1,exp+dt/1.4);layout(ease(exp))}
     step(dt);
     if(t>=END){t0=now;reset()}
     requestAnimationFrame(frame);
   }
 
   function staticView(){
-    reset();
+    reset();layout(1);
     EV.forEach(function(e){var o=R[e[1]];o.next=(o.next||0)+1;var d={id:e[1],kind:'event',slot:slotXY(o,o.next-1)};atAdapter(d);atSN(d)});
     var rv={id:'hm',kind:'recover',slot:slotXY(R.hm,1)};atAdapter(rv);atSN(rv);
-    say('16 events from Cloud ALM reach ServiceNow, and a rule opens 4 incidents, one per key. A direct integration would open 16 tickets.');
+    say('19 events from Cloud ALM reach ServiceNow, and a rule opens 5 incidents, one per key. A direct integration would open 19 tickets.');
   }
 
   var pb=document.getElementById('dfa-pause');
