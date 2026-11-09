@@ -925,8 +925,15 @@ section{scroll-margin-top:130px}
   window.addEventListener('hashchange',function(){showView(location.hash,true)});
   showView(location.hash,!!location.hash);
   var end=new Date('2027-12-31T23:59:59');
-  var d=Math.max(0,Math.ceil((end-new Date())/864e5));
-  document.getElementById('d-days').textContent=d.toLocaleString('en-US');
+  var days=Math.ceil((end-new Date())/864e5);
+  var daysEl=document.getElementById('d-days');
+  if(days>0){
+    daysEl.textContent=days.toLocaleString('en-US');
+  }else{
+    daysEl.textContent='—';
+    var daysLabel=daysEl.nextElementSibling;
+    if(daysLabel){daysLabel.textContent='mainstream maintenance ended'}
+  }
   document.getElementById('yr').textContent=new Date().getFullYear();
   /* Contact form.
      With FORM_ENDPOINT set to a form service URL (Formspree, Brevo, a Worker...),
