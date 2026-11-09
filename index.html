@@ -276,6 +276,9 @@ textarea{min-height:96px;resize:vertical}
 
 footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);font-size:13px}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer .legal-row{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:12px}
+footer .legal-row a{color:var(--muted);text-decoration:none}
+footer .legal-row a:hover{color:var(--text)}
 /* Hybrid V2 */
 .solutions{background:linear-gradient(180deg,#111c30,#0a0f1c)}.solutions-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.solution-card{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:32px;text-decoration:none;display:grid;gap:16px;transition:transform .2s,border-color .2s}.solution-card:hover{transform:translateY(-3px);border-color:var(--cyan)}.solution-card span{font:500 11px var(--mono);color:var(--cyan)}.solution-card p{color:var(--muted)}.solution-card b{font-size:14px;color:var(--amber)}.mobile-menu-toggle{display:none;background:var(--panel);color:var(--text);font:600 14px var(--body);border:1px solid var(--line);border-radius:8px;padding:8px 12px}@media(max-width:860px){header.nav .wrap{height:auto;min-height:64px;flex-wrap:wrap;padding-block:8px}.mobile-menu-toggle{display:block;margin-left:auto}.nav>.wrap>.btn{display:none}.nav ul{display:none;width:100%;order:3;flex-direction:column;gap:0;padding:8px 0}.nav ul.is-open{display:flex}.nav ul>li{padding:12px;border-bottom:1px solid var(--line)}.dd-menu{position:static;min-width:0;margin-top:10px}.solutions-grid{grid-template-columns:1fr}}@media(max-width:520px){section{padding-block:64px}.solution-card{padding:24px}}
 
@@ -321,9 +324,8 @@ section{scroll-margin-top:130px}
  header.nav .mobile-menu-toggle{display:block!important;min-height:44px;cursor:pointer}
  .brand{font-size:16px;gap:6px}.brand svg{width:22px}
  .nav-actions{gap:7px}.nav .btn{padding:10px 12px;white-space:nowrap}
- .view-tabs{top:64px;max-height:calc(100dvh - 64px);overflow:auto}
- body.view-mode .view-tabs:not(.is-open){display:none}
- .view-tabs-inner{display:grid;grid-template-columns:1fr 1fr;white-space:normal;overflow:visible;padding-block:12px}
+ .view-tabs{top:64px;max-height:none;overflow-x:auto}
+ .view-tabs-inner{display:flex;white-space:nowrap;overflow-x:auto;padding-block:0;scrollbar-width:thin}
  .view-tabs a{min-height:44px;box-sizing:border-box;display:flex;align-items:center}
  .hero{padding-top:40px}.hero h1{font-size:clamp(36px,9vw,56px)}
  .hero .lead{font-size:17px}
@@ -335,6 +337,17 @@ section{scroll-margin-top:130px}
 .office-list article{padding:24px 28px;background:var(--panel);border:1px solid var(--line);border-radius:14px;display:grid;gap:8px}
 .office-list h3{font-size:28px}
 .office-list p{color:var(--muted);font-size:17px}
+
+/* Evidence */
+.evidence-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.ev-card{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:30px;display:grid;gap:12px;align-content:start}
+.ev-kpi{font-family:var(--display);font-size:44px;font-weight:800;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.ev-kpi i{font-style:normal;color:var(--amber)}
+.ev-card p{color:var(--muted);font-size:15px;line-height:1.55;margin:0}
+.ev-src{font:500 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:14px;border-top:1px solid var(--line)}
+.ev-missing{margin-top:24px;font-size:13px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:baseline}
+.ev-missing b{color:var(--text);font-weight:600}
+@media(max-width:900px){.evidence-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -350,23 +363,25 @@ section{scroll-margin-top:130px}
 </header>
 
 <nav id="main-navigation" class="view-tabs" aria-label="Main sections"><div class="wrap view-tabs-inner">
-<a href="#top" data-view-tab="home">Overview</a><a href="#products" data-view-tab="products">Products</a><a href="#estimate" data-view-tab="transition">Transition & ChaRM</a><a href="#ai" data-view-tab="ai">AI & Automation</a><a href="#services" data-view-tab="services">Services</a><a href="#about" data-view-tab="about">About</a><a href="#contact" data-view-tab="contact">Contact</a>
+<a href="#top">Overview</a><a href="#estimate">Transition & ChaRM</a><a href="#products">Products</a><a href="#ai">AI & Automation</a><a href="#services">Services</a><a href="#evidence">Evidence</a><a href="#about">About</a><a href="#contact">Contact</a>
 </div></nav>
-<main id="top">
-<section class="hero">
+<main>
+<section class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow">SAP Solution Manager → SAP Cloud ALM</div>
-      <h1>Transform your SAP ALM. <em>Keep control</em> of what matters.</h1>
-      <p class="lead">Move from Solution Manager to SAP Cloud ALM with a clear plan. Preserve the change controls, history and integrations your business relies on.</p>
+      <h1>SAP's path covers the core. <em>We cover what it leaves behind.</em></h1>
+      <p class="lead">Only two of the eight SolMan capabilities we see in every landscape move into Cloud ALM cleanly. The other six — ITSM, ChaRM history, custom Z-flows, BPCA, job monitoring — are where transitions stall. We map them from your own Readiness Check export and close the ones that matter.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="#contact">Discuss your transition</a>
-        <a class="btn btn-ghost" href="#packages">See the packages</a>
+        <a class="btn btn-primary" href="#contact">Send us your Readiness Check</a>
+        <a class="btn btn-ghost" href="#products">See the DIFF Adapter</a>
       </div>
       <div class="deadline" aria-label="SolMan 7.2 maintenance end">
-        <div><b id="d-days">—</b><small>days left</small></div>
+        <div><b id="d-days">—</b><small>days to 31.12.2027</small></div>
         <div><b>31.12.2027</b><small>SolMan 7.2 mainstream maintenance ends</small></div>
+        <div><b style="color:var(--muted)">31.12.2030</b><small>extended option, if you buy it</small></div>
       </div>
+      <p class="lead" style="margin-top:18px;font-size:14px">The real constraint isn't 2027. It's the budget cycle that has to land before it — and the change freeze around your S/4 cutover.</p>
     </div>
 
     <div class="console" role="img" aria-label="Example mapping of Solution Manager capabilities to Cloud ALM">
@@ -782,6 +797,34 @@ section{scroll-margin-top:130px}
   </div>
 </section>
 
+<section id="evidence">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Evidence</div>
+      <h2>What we can prove, and what we can't yet.</h2>
+      <p class="lead">The numbers below come from delivered work. Anything still missing is marked — we would rather show a gap than invent a logo.</p>
+    </div>
+    <div class="evidence-grid">
+      <article class="ev-card">
+        <div class="ev-kpi">1<i> : 1</i></div>
+        <p>One SAP problem, one ServiceNow incident. The DIFF Adapter runs in production at a European manufacturer, deduplicating Health, Integration, IDoc, SuccessFactors and Integration Suite alerts into a single incident stream.</p>
+        <div class="ev-src">Product · in production</div>
+      </article>
+      <article class="ev-card">
+        <div class="ev-kpi">20<i>+</i></div>
+        <p>Years of Solution Manager, ChaRM, Focused Build and SAP Cloud ALM. Teams in Málaga, Santiago, Buenos Aires, Mexico City and Austin through Diff Consulting.</p>
+        <div class="ev-src">Company · SAP ALM practice</div>
+      </article>
+      <article class="ev-card">
+        <div class="ev-kpi">2</div>
+        <p>Customers who will take a 30-minute reference call about the transition and the adapter. Ask for them before you shortlist us.</p>
+        <div class="ev-src">On request · under NDA</div>
+      </article>
+    </div>
+    <p class="ev-missing"><b>Still to add:</b> SAP PartnerEdge status · certifications · two named references</p>
+  </div>
+</section>
+
 <section id="about">
   <div class="wrap about">
     <div class="sec-head" style="margin:0">
@@ -828,8 +871,15 @@ section{scroll-margin-top:130px}
 
 <footer>
   <div class="wrap">
-    <span>© <span id="yr">2026</span> ALM365 Cloud</span>
+    <span>© <span id="yr">2026</span> ALM365 Cloud · SOLMAN365 SL · Málaga, Spain</span>
     <span>SAP, SAP Cloud ALM and SAP Solution Manager are trademarks of SAP SE. Roadmap items may change; scope is confirmed per project.</span>
+  </div>
+  <!-- TODO before publish: create the three legal pages and add CIF + registered address. -->
+  <div class="wrap legal-row">
+    <a href="aviso-legal.html">Aviso legal</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="cookies.html">Cookies</a>
+    <a href="mailto:info@alm365cloud.com">info@alm365cloud.com</a>
   </div>
 </footer>
 
@@ -837,31 +887,20 @@ section{scroll-margin-top:130px}
 (function(){
   var toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('main-navigation');toggle.addEventListener('click',function(){var on=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',on?'true':'false')});menu.addEventListener('click',function(e){if(e.target.closest('a')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false')}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('is-open')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.focus()}});
-  var views={home:['top','solutions'],transition:['estimate','packages','bundles'],ai:['ai'],products:['products','signavio','sharepoint'],services:['services'],about:['about'],contact:['contact']};
-  var routes={top:'home',solutions:'home',estimate:'transition',packages:'transition',bundles:'transition',ai:'ai',products:'products',signavio:'products',sharepoint:'products',services:'services',about:'about',contact:'contact'};
-  var sections=Array.from(document.querySelectorAll('main > section'));
-  var navTabs=Array.from(document.querySelectorAll('[data-view-tab]'));
-  function showView(hash,scroll){
-    var key=(hash||'#top').replace(/^#/,'')||'top',view=routes[key]||'home';
-    sections.forEach(function(section){var id=section.id||(section.classList.contains('hero')?'top':'');section.hidden=views[view].indexOf(id)===-1});
-    navTabs.forEach(function(a){if(a.getAttribute('data-view-tab')===view){a.setAttribute('aria-current','page')}else{a.removeAttribute('aria-current')}});
-    document.body.classList.add('view-mode');
-    if(scroll){
-      var target=document.getElementById(key);
-      if(target && key!=='top'){target.scrollIntoView({block:'start',behavior:'instant'})}
-      else{window.scrollTo({top:0,behavior:'instant'})}
-      var heading=target&&target.querySelector('h1,h2');
-      if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true})}
-    }
+  /* Single-scroll page: every section stays visible; the tab bar only tracks position. */
+  var navTabs=Array.from(document.querySelectorAll('#main-navigation a[href^=\"#\"]'));
+  var sections=Array.from(document.querySelectorAll('main > section[id]'));
+  var tabFor={};
+  navTabs.forEach(function(a){tabFor[a.getAttribute('href').slice(1)]=a});
+  function setActive(id){navTabs.forEach(function(a){if(a===tabFor[id]){a.setAttribute('aria-current','page')}else{a.removeAttribute('aria-current')}})}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){if(entry.isIntersecting&&tabFor[entry.target.id]){setActive(entry.target.id)}});
+    },{rootMargin:'-40% 0px -55% 0px',threshold:0});
+    sections.forEach(function(s){s.hidden=false;io.observe(s)});
   }
-  document.addEventListener('click',function(event){
-    var a=event.target.closest('a[href^="#"]');if(!a)return;
-    var hash=a.getAttribute('href');if(!hash||hash==='#')return;
-    event.preventDefault();if(location.hash!==hash)history.pushState(null,'',hash);showView(hash,true);
-  });
-  window.addEventListener('popstate',function(){showView(location.hash,true)});
-  window.addEventListener('hashchange',function(){showView(location.hash,true)});
-  showView(location.hash,!!location.hash);
+  setActive((location.hash||'#top').slice(1));
+  window.addEventListener('hashchange',function(){setActive((location.hash||'#top').slice(1))});
   var end=new Date('2027-12-31T23:59:59');
   var d=Math.max(0,Math.ceil((end-new Date())/864e5));
   document.getElementById('d-days').textContent=d.toLocaleString('en-US');
