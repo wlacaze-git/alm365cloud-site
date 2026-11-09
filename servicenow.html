@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>DIFF Adapter for ServiceNow â€” SAP Cloud ALM alerts | ALM365 Cloud</title>
+<title>DIFF Adapter for ServiceNow — SAP Cloud ALM alerts | ALM365 Cloud</title>
 <meta name="description" content="DIFF Adapter: SAP Cloud ALM monitoring alerts delivered to ServiceNow as one deduplicated, correctly routed incident per problem.">
 <link rel="canonical" href="https://alm365cloud.com/servicenow.html">
 <meta name="theme-color" content="#0A0F1C">
@@ -14,15 +14,15 @@
 <meta property="og:site_name" content="ALM365 Cloud">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://alm365cloud.com/servicenow.html">
-<meta property="og:title" content="DIFF Adapter for ServiceNow â€” SAP Cloud ALM alerts | ALM365 Cloud">
+<meta property="og:title" content="DIFF Adapter for ServiceNow — SAP Cloud ALM alerts | ALM365 Cloud">
 <meta property="og:description" content="DIFF Adapter: SAP Cloud ALM alerts in ServiceNow as one incident per problem.">
 <meta property="og:image" content="https://alm365cloud.com/og-diff-adapter.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="DIFF Adapter â€” SAP Cloud ALM alerts to ServiceNow, one incident per problem">
+<meta property="og:image:alt" content="DIFF Adapter — SAP Cloud ALM alerts to ServiceNow, one incident per problem">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="DIFF Adapter for ServiceNow â€” SAP Cloud ALM alerts | ALM365 Cloud">
+<meta name="twitter:title" content="DIFF Adapter for ServiceNow — SAP Cloud ALM alerts | ALM365 Cloud">
 <meta name="twitter:description" content="DIFF Adapter: SAP Cloud ALM alerts in ServiceNow as one incident per problem.">
 <meta name="twitter:image" content="https://alm365cloud.com/og-diff-adapter.png">
 <script type="application/ld+json">
@@ -327,14 +327,6 @@ body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1
 
 /* Accessible mobile navigation and contact flow */
 .nav-actions{display:flex;align-items:center;gap:10px}
-.consent{grid-template-columns:auto 1fr;align-items:start;gap:10px;font-size:13.5px;color:var(--muted)}
-.consent input[type=checkbox]{width:18px;height:18px;min-width:18px;margin:3px 0 0;padding:0;accent-color:var(--amber)}
-.consent span{line-height:1.5}
-.consent a{color:var(--cyan)}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.form-status{font-size:14px;margin:0;line-height:1.5}
-.form-status.ok{color:var(--ok)}
-.form-status.err{color:var(--gap)}
 #contact-draft{display:grid;gap:14px}
 #contact-draft .cta-row{margin-top:0}
 #draft-text{min-height:190px}
@@ -470,7 +462,7 @@ footer a{color:var(--text)}
       <div class="deadline">
         <div><b>1</b><small>problem â†’ 1 incident</small></div>
         <div><b>5</b><small>monitoring sources supported</small></div>
-        <div><b>4â€“6 wks</b><small>typical rollout</small></div>
+        <div><b>4–6 wks</b><small>typical rollout</small></div>
       </div>
     </div>
 
@@ -740,27 +732,25 @@ footer a{color:var(--text)}
       <p class="lead">We run a walkthrough or a rules workshop against your landscape. Write to us and we reply within two working days.</p>
       <div class="mail"><a href="mailto:info@alm365cloud.com" style="text-decoration:none"><code id="mail">info@alm365cloud.com</code></a><button type="button" id="copy">Copy</button></div>
     </div>
-    <form class="mailcard" id="contact-form" novalidate>
-      <h3>Book a walkthrough</h3>
-      <p class="form-note" style="margin-bottom:4px">Useful to know: which Cloud ALM monitoring you use today, your ServiceNow release and whether Event Management is licensed, and roughly how many SAP alerts reach ServiceNow per week.</p>
-      <label for="contact-name">Your name<input id="contact-name" name="name" autocomplete="name" maxlength="100" required></label>
-      <label for="contact-email">Work email<input id="contact-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="160" required></label>
-      <label for="contact-company">Company<input id="contact-company" name="company" autocomplete="organization" maxlength="120"></label>
-      <label for="contact-message">Your current setup (optional)<textarea id="contact-message" name="message" maxlength="1500" placeholder="Monitoring sources, ServiceNow release, alert volume."></textarea></label>
-      <input type="hidden" id="contact-topic" name="topic" value="DIFF Adapter for ServiceNow">
-      <label class="consent" for="contact-consent"><input id="contact-consent" name="consent" type="checkbox" required><span>I agree that ALM365 Cloud may use these details to answer my enquiry, as described in the <a href="privacidad.html">privacy policy</a>.</span></label>
-      <div class="hp" aria-hidden="true"><label for="contact-hp">Leave this field empty<input id="contact-hp" name="company_website" tabindex="-1" autocomplete="off"></label></div>
-      <button class="btn btn-primary" type="submit">Send enquiry</button>
-      <p class="form-note">We reply within two working days. Your details are not shared with anyone else.</p>
-      <p class="form-status" id="contact-status" role="status" aria-live="polite"></p>
-    </form>
+    <div class="mailcard">
+      <h3>Book a 30-min fit call</h3>
+      <p class="form-note" style="font-size:15px;color:var(--text)">Thirty minutes on your landscape. No deck and no discovery script needed.</p>
+      <ul>
+        <li>Which Cloud ALM monitoring you use today</li>
+        <li>Your ServiceNow release and whether Event Management is licensed</li>
+        <li>Roughly how many SAP alerts reach ServiceNow per week</li>
+        <li>Which teams receive SAP incidents</li>
+      </ul>
+      <a class="btn btn-primary" href="mailto:info@alm365cloud.com?subject=Book%20a%2030-min%20fit%20call">Open my email app &rarr;</a>
+      <p class="form-note">The button opens your own email app with the subject already written. We reply within two working days.</p>
+    </div>
   </div>
 </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <span>Â© <span id="yr">2026</span> ALM365 Cloud &middot; SOLMAN365, S.L. &middot; NIF B10839165 &middot; <a href="index.html">Home</a></span>
+    <span>© <span id="yr">2026</span> ALM365 Cloud &middot; SOLMAN365, S.L. &middot; NIF B10839165 &middot; <a href="index.html">Home</a></span>
     <span class="legal-links"><a href="aviso-legal.html">Aviso legal</a> &middot; <a href="privacidad.html">Privacidad</a> &middot; <a href="cookies.html">Cookies</a></span>
     <span>SAP and SAP Cloud ALM are trademarks of SAP SE. ServiceNow is a trademark of ServiceNow, Inc.</span>
   </div>
@@ -774,47 +764,6 @@ footer a{color:var(--text)}
     var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)};
     try{navigator.clipboard.writeText(t).then(done,function(){sel()})}catch(e){sel()}
     function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
-  });
-  /* Contact form. Same contract as the home page: with FORM_ENDPOINT set it posts
-     with AJAX; while it is empty it falls back to a prefilled email draft. */
-  var FORM_ENDPOINT='';
-  var CONTACT_EMAIL='info@alm365cloud.com';
-  var form=document.getElementById('contact-form');
-  var statusEl=document.getElementById('contact-status');
-  function setStatus(msg,kind){statusEl.textContent=msg;statusEl.className='form-status'+(kind?' '+kind:'')}
-  if(!FORM_ENDPOINT){form.querySelector('button[type=submit]').textContent='Send by email'}
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    var name=document.getElementById('contact-name').value.trim();
-    var email=document.getElementById('contact-email').value.trim();
-    var company=document.getElementById('contact-company').value.trim();
-    var topic=document.getElementById('contact-topic').value;
-    var message=document.getElementById('contact-message').value.trim();
-    var consent=document.getElementById('contact-consent').checked;
-    if(document.getElementById('contact-hp').value){setStatus('Thank you â€” your enquiry is with us. We reply within two working days.','ok');return}
-    if(!name||!email||!consent||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
-      setStatus('Please add your name, a valid work email and tick the consent box.','err');
-      (!name?document.getElementById('contact-name'):!email?document.getElementById('contact-email'):document.getElementById('contact-consent')).focus();
-      return;
-    }
-    if(!FORM_ENDPOINT){
-      var body='Hello ALM365 Cloud,\n\nName: '+name+'\nEmail: '+email+(company?'\nCompany: '+company:'')+'\nTopic: '+topic+'\n\n'+(message||'(no message)')+'\n';
-      window.location.href='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent('Website enquiry: '+topic)+'&body='+encodeURIComponent(body);
-      setStatus('Your email app should open with the message ready. If it does not, write to '+CONTACT_EMAIL+'.');
-      return;
-    }
-    var btn=form.querySelector('button[type=submit]');
-    btn.disabled=true;
-    setStatus('Sendingâ€¦');
-    var data=new URLSearchParams();
-    data.append('name',name);data.append('email',email);data.append('company',company);
-    data.append('topic',topic);data.append('message',message);data.append('consent','yes');
-    data.append('_subject','Website enquiry: '+topic);
-    fetch(FORM_ENDPOINT,{method:'POST',body:data,headers:{'Accept':'application/json'}})
-      .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r})
-      .then(function(){form.reset();setStatus('Thank you â€” your enquiry is with us. We reply within two working days.','ok')})
-      .catch(function(){setStatus('The form could not be sent. Please write to '+CONTACT_EMAIL+' instead.','err')})
-      .then(function(){btn.disabled=false});
   });
   document.body.classList.add('view-mode');
   var toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('main-navigation');
@@ -870,7 +819,7 @@ footer a{color:var(--text)}
     o.ig=el('g',{opacity:0,style:'transition:opacity .45s'},g);
     o.ir=el('rect',{x:652,y:y,width:324,height:H,rx:9,fill:'var(--ink)',stroke:'var(--ok)','stroke-opacity':.45},o.ig);
     txt(o.ig,666,y+20,'t-inc',r.inc);
-    o.ist=txt(o.ig,962,y+20,'t-sub','â€”','text-anchor:end');
+    o.ist=txt(o.ig,962,y+20,'t-sub','—','text-anchor:end');
     txt(o.ig,666,y+37,'t-inc2',r.title);
     o.iup=txt(o.ig,666,y+52,'t-sub','');
     o.g=g;o.off=0;R[r.id]=o;
@@ -897,7 +846,7 @@ footer a{color:var(--text)}
   function reset(){
     gD.innerHTML='';dots=[];exp=0;expanding=false;layout(0);fired=0;recovered=false;['ev','inc','wo'].forEach(function(k){stat(k,0)});
     ROWS.forEach(function(r){var o=R[r.id];o.c=0;o.next=0;if(o.bk){o.bk.setAttribute('stroke-opacity',.25)}o.ae=0;o.alerted=false;o.incd=false;o.cnt.textContent='';if(o.stack)o.stack.innerHTML='';
-      o.ie=0;o.ig.setAttribute('opacity',0);o.adg.setAttribute('opacity',0);o.ist.textContent='â€”';o.ist.setAttribute('style','text-anchor:end');o.iup.textContent='';o.ad.setAttribute('stroke','var(--line)')});
+      o.ie=0;o.ig.setAttribute('opacity',0);o.adg.setAttribute('opacity',0);o.ist.textContent='—';o.ist.setAttribute('style','text-anchor:end');o.iup.textContent='';o.ad.setAttribute('stroke','var(--line)')});
   }
   function slotXY(o,i){return [322+(i%12)*12,o.r.y+44]}
   function spawn(id,kind){
