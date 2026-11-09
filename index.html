@@ -261,6 +261,7 @@ textarea{min-height:96px;resize:vertical}
 .prod-card{display:grid;gap:14px;align-content:start;padding:32px;border:1px solid var(--line);border-radius:16px;background:var(--panel);text-decoration:none;color:var(--text);transition:border-color .2s}
 .prod-card:hover{border-color:var(--cyan)}
 .prod-card .badge{justify-self:start}
+.badge.badge-prod{background:var(--ok);border-color:var(--ok);color:#06210f;font-weight:600}
 .prod-card .flowline{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;color:var(--muted)}
 .prod-card .flowline b{color:var(--text);font-weight:500;border:1px solid var(--line);border-radius:6px;padding:4px 8px}
 .prod-card p{color:var(--muted)}
@@ -349,7 +350,7 @@ section{scroll-margin-top:130px}
 </header>
 
 <nav id="main-navigation" class="view-tabs" aria-label="Main sections"><div class="wrap view-tabs-inner">
-<a href="#top" data-view-tab="home">Overview</a><a href="#estimate" data-view-tab="transition">Transition & ChaRM</a><a href="#ai" data-view-tab="ai">AI & Automation</a><a href="#products" data-view-tab="products">Products</a><a href="#services" data-view-tab="services">Services</a><a href="#about" data-view-tab="about">About</a><a href="#contact" data-view-tab="contact">Contact</a>
+<a href="#top" data-view-tab="home">Overview</a><a href="#products" data-view-tab="products">Products</a><a href="#estimate" data-view-tab="transition">Transition & ChaRM</a><a href="#ai" data-view-tab="ai">AI & Automation</a><a href="#services" data-view-tab="services">Services</a><a href="#about" data-view-tab="about">About</a><a href="#contact" data-view-tab="contact">Contact</a>
 </div></nav>
 <main id="top">
 <section class="hero">
@@ -685,6 +686,13 @@ section{scroll-margin-top:130px}
       <p class="lead">Specialized integration offerings for SAP Cloud ALM. Delivery and supported capabilities are confirmed through technical discovery.</p>
     </div>
     <div class="prod-cards">
+      <a class="prod-card" href="servicenow.html">
+        <span class="badge badge-prod">Productive</span>
+        <h3>DIFF Adapter for ServiceNow</h3>
+        <div class="flowline"><b>SAP Cloud ALM</b><span>→</span><b>ServiceNow</b></div>
+        <p>Cloud ALM monitoring alerts become one ServiceNow incident per problem, routed to the right team and closed when the problem recovers.</p>
+        <span class="more-link">Product page →</span>
+      </a>
       <a class="prod-card" href="#signavio">
         <span class="badge">Scope validated in discovery</span>
         <h3>CALM2Signavio</h3>
@@ -699,13 +707,6 @@ section{scroll-margin-top:130px}
         <p>Explore supported links, metadata and document governance between Cloud ALM and SharePoint.</p>
         <span class="more-link">How it works ↓</span>
       </a>
-      <a class="prod-card" href="servicenow.html">
-        <span class="badge">New · In production</span>
-        <h3>DIFF Adapter for ServiceNow</h3>
-        <div class="flowline"><b>SAP Cloud ALM</b><span>→</span><b>ServiceNow</b></div>
-        <p>Cloud ALM monitoring alerts become one ServiceNow incident per problem, routed to the right team and closed when the problem recovers.</p>
-        <span class="more-link">Product page →</span>
-      </a>
     </div>
   </div>
 </section>
@@ -714,7 +715,7 @@ section{scroll-margin-top:130px}
 <section id="signavio" class="prod-sub product-detail">
 <div class="wrap">
  <div class="sec-head">
-  <div class="eyebrow">Product 01 · CALM2Signavio</div>
+  <div class="eyebrow">Product 02 · CALM2Signavio</div>
   <h2>From SAP Cloud ALM to Signavio: bring your process content into your design hub.</h2>
   <p class="lead">SAP's standard BPMN integration synchronizes process diagrams from Signavio to Cloud ALM. CALM2Signavio addresses the complementary direction: inventory, map and transfer eligible process hierarchies and custom diagrams from Cloud ALM into Signavio, with controlled synchronization and process ownership. Exact coverage is validated against the APIs and BPMN data available in your tenant.</p>
  </div>
@@ -742,7 +743,7 @@ section{scroll-margin-top:130px}
 <section id="sharepoint" class="prod-sub product-detail">
 <div class="wrap">
  <div class="sec-head">
-  <div class="eyebrow">Product 02 · SharePoint DMS for Cloud ALM</div>
+  <div class="eyebrow">Product 03 · SharePoint DMS for Cloud ALM</div>
   <h2>Link your Cloud ALM documentation with the Microsoft 365 ecosystem.</h2>
   <p class="lead">A governed integration approach for keeping documents in SharePoint while making them discoverable and traceable from SAP Cloud ALM. The supported architecture uses SAP Cloud ALM Document API references and mappings; it does not replace the SAP-managed BTP Document Management Service repository.</p>
  </div>
@@ -787,12 +788,14 @@ section{scroll-margin-top:130px}
       <div class="eyebrow">Who we are</div>
       <h2>International presence. Specialized SAP ALM expertise.</h2>
       <p class="lead">We help enterprises plan, implement and operate their SAP application lifecycle management. With more than 20 years of SAP ALM experience, we bring expertise in Solution Manager, ChaRM, Focused Build and SAP Cloud ALM.</p>
-      <p class="lead">Our offices in Málaga and Chile, together with our presence in Austin through Diff Consulting, support customers across Europe, Latin America and North America. We work in English, Spanish and Italian.</p>
+      <p class="lead">Our offices in Málaga and Chile, our teams in Argentina and Mexico, and our presence in Austin through Diff Consulting support customers across Europe, Latin America and North America. We work in English, Spanish and Italian.</p>
       <p><a class="btn btn-primary" href="#contact">Talk to our team</a></p>
     </div>
     <div class="office-list" aria-label="Our offices">
       <article><div class="eyebrow">Spain</div><h3>Málaga</h3><p>SOLMAN365 SL</p></article>
       <article><div class="eyebrow">Latin America</div><h3>Chile</h3><p>SOLMAN365 SpA</p></article>
+      <article><div class="eyebrow">Latin America</div><h3>Argentina</h3><p>Regional delivery</p></article>
+      <article><div class="eyebrow">Latin America</div><h3>Mexico</h3><p>Regional delivery</p></article>
       <article><div class="eyebrow">United States</div><h3>Austin</h3><p>With Diff Consulting</p></article>
     </div>
   </div>

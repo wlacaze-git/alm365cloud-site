@@ -335,6 +335,8 @@ section{scroll-margin-top:130px}
 .office-list h3{font-size:28px}
 .office-list p{color:var(--muted);font-size:17px}
 /* ServiceNow product page */
+.badge.badge-prod{background:var(--ok);border-color:var(--ok);color:#06210f;font-weight:600}
+.sn-badges{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
 .sn-hero h1{font-size:clamp(40px,5.6vw,70px)}
 .sn-compare{display:grid;grid-template-columns:1fr 1fr}
 .sn-col{padding:18px 16px;display:grid;gap:12px;align-content:start;border-right:1px solid var(--line)}
@@ -400,14 +402,14 @@ footer a{color:var(--text)}
 </header>
 
 <nav id="main-navigation" class="view-tabs" aria-label="Main sections"><div class="wrap view-tabs-inner">
-<a href="index.html#top">Overview</a><a href="index.html#estimate">Transition & ChaRM</a><a href="index.html#ai">AI & Automation</a><a href="index.html#products" aria-current="page">Products</a><a href="index.html#services">Services</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a>
+<a href="index.html#top">Overview</a><a href="index.html#products" aria-current="page">Products</a><a href="index.html#estimate">Transition & ChaRM</a><a href="index.html#ai">AI & Automation</a><a href="index.html#services">Services</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a>
 </div></nav>
 
 <main id="top" class="sn-main">
 <section class="hero sn-hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow">Product 03 · DIFF Adapter for ServiceNow</div>
+      <div class="sn-badges"><span class="badge badge-prod">Productive</span><div class="eyebrow">Product 01 · DIFF Adapter for ServiceNow</div></div>
       <h1>Cloud ALM alerts in ServiceNow, <em>without the ticket flood.</em></h1>
       <p class="lead">The DIFF Adapter connects SAP Cloud ALM monitoring to ServiceNow so that one problem becomes one incident. Repeated alerts update the ticket that is already open, each alert goes to the right team, and tickets close when the problem is gone.</p>
       <div class="cta-row">
