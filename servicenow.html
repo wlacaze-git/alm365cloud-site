@@ -15,6 +15,9 @@
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0}img{max-width:100%}[hidden]{display:none!important}
 
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
 /* Layout: dark single-theme product site. Wide hero with a live "transition console", then a stacked catalogue of packages on a 12-col grid. */
 :root{
   --ink:#0A0F1C;          /* page ground, blue-biased near black */
@@ -254,7 +257,7 @@ textarea{min-height:96px;resize:vertical}
 .sgv-foot ol,.sgv-foot ul{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px}
 @media (max-width:900px){.sgv-head,.sgv-foot{grid-template-columns:1fr}.feat,.modes{grid-template-columns:1fr}}
 .products-intro{background:linear-gradient(180deg,rgba(63,182,232,.06),transparent 70%),var(--ink)}
-.prod-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.prod-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .prod-card{display:grid;gap:14px;align-content:start;padding:32px;border:1px solid var(--line);border-radius:16px;background:var(--panel);text-decoration:none;color:var(--text);transition:border-color .2s}
 .prod-card:hover{border-color:var(--cyan)}
 .prod-card .badge{justify-self:start}
@@ -267,10 +270,70 @@ textarea{min-height:96px;resize:vertical}
 .lanes-in.two > div{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .lanes-in.two > div:nth-child(3n){border-right:0}
 .lanes-in.two > div:nth-last-child(-n+3){border-bottom:0}
-@media (max-width:860px){.prod-cards{grid-template-columns:1fr}}
+@media (max-width:1060px){.prod-cards{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){.prod-cards{grid-template-columns:1fr}}
 
 footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);font-size:13px}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* Hybrid V2 */
+.solutions{background:linear-gradient(180deg,#111c30,#0a0f1c)}.solutions-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.solution-card{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:32px;text-decoration:none;display:grid;gap:16px;transition:transform .2s,border-color .2s}.solution-card:hover{transform:translateY(-3px);border-color:var(--cyan)}.solution-card span{font:500 11px var(--mono);color:var(--cyan)}.solution-card p{color:var(--muted)}.solution-card b{font-size:14px;color:var(--amber)}.mobile-menu-toggle{display:none;background:var(--panel);color:var(--text);font:600 14px var(--body);border:1px solid var(--line);border-radius:8px;padding:8px 12px}@media(max-width:860px){header.nav .wrap{height:auto;min-height:64px;flex-wrap:wrap;padding-block:8px}.mobile-menu-toggle{display:block;margin-left:auto}.nav>.wrap>.btn{display:none}.nav ul{display:none;width:100%;order:3;flex-direction:column;gap:0;padding:8px 0}.nav ul.is-open{display:flex}.nav ul>li{padding:12px;border-bottom:1px solid var(--line)}.dd-menu{position:static;min-width:0;margin-top:10px}.solutions-grid{grid-template-columns:1fr}}@media(max-width:520px){section{padding-block:64px}.solution-card{padding:24px}}
+
+/* Keep one clear navigation row: category tabs replace the old anchor menu. */
+header.nav ul,header.nav .mobile-menu-toggle{display:none!important}
+/* Hybrid V2: discrete views instead of long vertical anchor scrolling */
+.view-tabs{position:sticky;top:64px;z-index:8;background:var(--ink);border-bottom:1px solid var(--line)}
+.view-tabs-inner{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;white-space:nowrap}
+.view-tabs a{padding:12px 14px;color:var(--muted);text-decoration:none;font-weight:600;font-size:13px;border-bottom:2px solid transparent}
+.view-tabs a[aria-current="page"]{color:var(--amber);border-bottom-color:var(--amber);background:rgba(246,162,58,.05)}
+.view-tabs a:hover{color:var(--text)}
+body.view-mode main > section[hidden]{display:none!important}
+body.view-mode main > section:not([hidden]){border-top:0}
+body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1px solid var(--line)}
+
+/* Expanded product explanation */
+.product-flow{display:grid;grid-template-columns:minmax(0,1fr) 220px minmax(0,1fr);align-items:stretch;gap:14px;margin:36px 0 10px}
+.flow-node{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;display:grid;gap:9px}
+.flow-node span,.product-steps article>span{font:500 11px var(--mono);letter-spacing:.1em;color:var(--cyan)}
+.flow-node strong{font-family:var(--display);font-size:24px}.flow-node small{color:var(--muted);font-size:14px}
+.flow-link{display:grid;align-content:center;text-align:center;gap:5px;color:var(--muted);font-size:13px}.flow-link strong{font:700 40px var(--display);color:var(--amber)}.flow-link small{line-height:1.5}
+.flow-note{text-align:center;font:500 12px var(--mono);color:var(--muted);margin-bottom:48px}
+.product-subtitle{margin:40px 0 22px;font-size:30px}
+.product-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.product-steps article{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;align-content:start;gap:12px}
+.product-steps article h3{font-size:19px}.product-steps article p{color:var(--muted);font-size:14px;line-height:1.55}
+.product-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:26px 0}
+.product-panels>div{border:1px solid var(--line);border-radius:14px;padding:26px}
+.product-panels h3{font-size:22px}.product-panels ul{color:var(--muted);padding-left:19px;display:grid;gap:10px}
+.product-caveat{padding:18px 20px;border-left:3px solid var(--amber);background:rgba(246,162,58,.055);font-size:14px;color:var(--muted);border-radius:5px}
+.product-detail .cta-row{margin-top:24px}
+@media(max-width:960px){.product-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.product-flow{grid-template-columns:1fr}.flow-link{padding:8px}.flow-link strong{font-size:28px}}
+@media(max-width:600px){.product-steps,.product-panels{grid-template-columns:1fr}.flow-node{padding:20px}.product-subtitle{font-size:26px}}
+
+/* Accessible mobile navigation and contact flow */
+.nav-actions{display:flex;align-items:center;gap:10px}
+#contact-draft{display:grid;gap:14px}
+#contact-draft .cta-row{margin-top:0}
+#draft-text{min-height:190px}
+section{scroll-margin-top:130px}
+@media(max-width:860px){
+ header.nav .wrap{height:64px;min-height:64px;box-sizing:border-box;flex-wrap:nowrap;gap:8px}
+ header.nav .mobile-menu-toggle{display:block!important;min-height:44px;cursor:pointer}
+ .brand{font-size:16px;gap:6px}.brand svg{width:22px}
+ .nav-actions{gap:7px}.nav .btn{padding:10px 12px;white-space:nowrap}
+ .view-tabs{top:64px;max-height:calc(100dvh - 64px);overflow:auto}
+ body.view-mode .view-tabs:not(.is-open){display:none}
+ .view-tabs-inner{display:grid;grid-template-columns:1fr 1fr;white-space:normal;overflow:visible;padding-block:12px}
+ .view-tabs a{min-height:44px;box-sizing:border-box;display:flex;align-items:center}
+ .hero{padding-top:40px}.hero h1{font-size:clamp(36px,9vw,56px)}
+ .hero .lead{font-size:17px}
+ section{scroll-margin-top:80px}
+ .mailcard{padding:22px}
+}
+@media(max-width:360px){.brand span{display:none}}
+.office-list{display:grid;gap:14px}
+.office-list article{padding:24px 28px;background:var(--panel);border:1px solid var(--line);border-radius:14px;display:grid;gap:8px}
+.office-list h3{font-size:28px}
+.office-list p{color:var(--muted);font-size:17px}
 /* ServiceNow product page */
 .sn-hero h1{font-size:clamp(40px,5.6vw,70px)}
 .sn-compare{display:grid;grid-template-columns:1fr 1fr}
@@ -321,6 +384,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq details p{padding:0 0 20px;color:var(--muted);max-width:68ch}
 footer a{color:var(--text)}
+
 </style>
 </head>
 <body>
@@ -331,27 +395,15 @@ footer a{color:var(--text)}
       <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><polygon points="13,1 25,8 25,20 13,27 1,20 1,8" fill="none" stroke="#F6A23A" stroke-width="3"/><polygon points="13,7 19,10.5 19,17.5 13,21 7,17.5 7,10.5" fill="#3FB6E8"/></svg>
       ALM365 <span>Cloud</span>
     </a>
-    <ul>
-      <li><a href="index.html#estimate">Estimate</a></li>
-      <li><a href="index.html#packages">Packages</a></li>
-      <li><a href="index.html#ai">AI-assisted</a></li>
-      <li class="dd">
-        <button type="button" class="dd-btn" id="dd-btn" aria-expanded="false" aria-controls="dd-menu">Products <span aria-hidden="true">▾</span></button>
-        <div class="dd-menu" id="dd-menu" hidden>
-          <a href="index.html#signavio"><b>CALM2Signavio</b><small>Cloud ALM ⇄ SAP Signavio process sync</small></a>
-          <a href="index.html#sharepoint"><b>SharePoint DMS for Cloud ALM</b><small>Cloud ALM documents stored in SharePoint</small></a>
-          <a href="servicenow.html"><b>DIFF Adapter for ServiceNow</b><small>Cloud ALM alerts as clean ServiceNow incidents</small></a>
-          <a href="index.html#products" class="dd-all">All products</a>
-        </div>
-      </li>
-      <li><a href="index.html#services">Cloud ALM services</a></li>
-      <li><a href="index.html#about">About</a></li>
-    </ul>
-    <a class="btn btn-primary" href="#contact">Talk to us</a>
+    <div class="nav-actions"><a class="btn btn-primary" href="#contact">Let's talk</a><button id="mobile-toggle" class="mobile-menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false">Menu</button></div>
   </div>
 </header>
 
-<main id="top">
+<nav id="main-navigation" class="view-tabs" aria-label="Main sections"><div class="wrap view-tabs-inner">
+<a href="index.html#top">Overview</a><a href="index.html#estimate">Transition & ChaRM</a><a href="index.html#ai">AI & Automation</a><a href="index.html#products" aria-current="page">Products</a><a href="index.html#services">Services</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a>
+</div></nav>
+
+<main id="top" class="sn-main">
 <section class="hero sn-hero">
   <div class="wrap hero-grid">
     <div>
@@ -626,12 +678,10 @@ footer a{color:var(--text)}
     try{navigator.clipboard.writeText(t).then(done,function(){sel()})}catch(e){sel()}
     function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
   });
-  var ddb=document.getElementById('dd-btn'),ddm=document.getElementById('dd-menu');
-  function ddSet(o){ddm.hidden=!o;ddb.setAttribute('aria-expanded',o?'true':'false')}
-  ddb.addEventListener('click',function(e){e.stopPropagation();ddSet(ddm.hidden)});
-  ddm.addEventListener('click',function(e){if(e.target.closest('a'))ddSet(false)});
-  document.addEventListener('click',function(e){if(!e.target.closest('.dd'))ddSet(false)});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ddm.hidden){ddSet(false);ddb.focus()}});
+  document.body.classList.add('view-mode');
+  var toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('main-navigation');
+  toggle.addEventListener('click',function(){var on=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',on?'true':'false')});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('is-open')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.focus()}});
 })();
 </script>
 
