@@ -535,6 +535,8 @@ footer a{color:var(--text)}
 
         <!-- ServiceNow frame spanning both SN columns -->
         <rect x="640" y="40" width="348" height="448" rx="14" fill="none" stroke="var(--ok)" stroke-opacity=".3" stroke-dasharray="4 4"/>
+        <!-- Cloud ALM frame -->
+        <rect x="10" y="40" width="262" height="448" rx="14" fill="none" stroke="var(--cyan)" stroke-opacity=".4" stroke-dasharray="4 4"/>
         <!-- adapter frame -->
         <rect x="288" y="40" width="292" height="448" rx="14" fill="none" stroke="var(--amber)" stroke-opacity=".45" stroke-dasharray="4 4"/>
 
@@ -779,16 +781,17 @@ footer a{color:var(--text)}
     txt(g,56,y+27,'t-src',r.name); txt(g,56,y+44,'t-sub',r.sub);
     o.srcPulse=el('rect',{x:20,y:y,width:240,height:H,rx:10,fill:'none',stroke:r.color,'stroke-opacity':0},g);
     // adapter cell: key on top, events accumulate in the row below
-    o.ad=el('rect',{x:300,y:y,width:268,height:H,rx:9,fill:'var(--ink)',stroke:'var(--line)'},g);
-    txt(g,314,y+23,'t-sub',r.stateful?'alert ID':'key');
-    el('rect',{x:372,y:y+9,width:182,height:20,rx:6,fill:'none',stroke:r.color,'stroke-opacity':.7},g);
-    txt(g,380,y+23,'t-key',r.key);
-    o.bk=el('rect',{x:310,y:y+34,width:248,height:20,rx:6,fill:'rgba(255,255,255,.02)',stroke:r.color,'stroke-opacity':.25,'stroke-dasharray':'3 3'},g);
-    o.stack=el('g',{},g);
-    o.cnt=txt(g,550,y+48,'t-cnt','','fill:'+r.color+';text-anchor:end;font-size:10.5px');
+    o.adg=el('g',{opacity:0,style:'transition:opacity .45s'},g);
+    o.ad=el('rect',{x:300,y:y,width:268,height:H,rx:9,fill:'var(--ink)',stroke:'var(--line)'},o.adg);
+    txt(o.adg,314,y+23,'t-sub',r.stateful?'alert ID':'key');
+    el('rect',{x:372,y:y+9,width:182,height:20,rx:6,fill:'none',stroke:r.color,'stroke-opacity':.7},o.adg);
+    txt(o.adg,380,y+23,'t-key',r.key);
+    o.bk=el('rect',{x:310,y:y+34,width:248,height:20,rx:6,fill:'rgba(255,255,255,.02)',stroke:r.color,'stroke-opacity':.25,'stroke-dasharray':'3 3'},o.adg);
+    o.stack=el('g',{},o.adg);
+    o.cnt=txt(o.adg,550,y+48,'t-cnt','','fill:'+r.color+';text-anchor:end;font-size:10.5px');
     if(r.stateful) txt(g,300,y-6,'t-sub','SAP standard covers it · DIFF can extend','fill:var(--cyan);font-size:9.5px');
     // ServiceNow: events arrive, a rule opens one incident per key
-    o.ig=el('g',{opacity:.18},g);
+    o.ig=el('g',{opacity:0,style:'transition:opacity .45s'},g);
     o.ir=el('rect',{x:652,y:y,width:324,height:H,rx:9,fill:'var(--ink)',stroke:'var(--ok)','stroke-opacity':.45},o.ig);
     txt(o.ig,666,y+20,'t-inc',r.inc);
     o.ist=txt(o.ig,962,y+20,'t-sub','—','text-anchor:end');
@@ -811,7 +814,7 @@ footer a{color:var(--text)}
   function reset(){
     gD.innerHTML='';dots=[];fired=0;recovered=false;['ev','inc','wo'].forEach(function(k){stat(k,0)});
     ROWS.forEach(function(r){var o=R[r.id];o.c=0;o.next=0;if(o.bk){o.bk.setAttribute('stroke-opacity',.25)}o.ae=0;o.alerted=false;o.incd=false;o.cnt.textContent='';if(o.stack)o.stack.innerHTML='';
-      o.ie=0;o.ig.setAttribute('opacity',.18);o.ist.textContent='—';o.ist.setAttribute('style','text-anchor:end');o.iup.textContent='';o.ad.setAttribute('stroke','var(--line)')});
+      o.ie=0;o.ig.setAttribute('opacity',0);o.adg.setAttribute('opacity',0);o.ist.textContent='—';o.ist.setAttribute('style','text-anchor:end');o.iup.textContent='';o.ad.setAttribute('stroke','var(--line)')});
   }
   function slotXY(o,i){return [322+(i%12)*12,o.r.y+44]}
   function spawn(id,kind){
@@ -826,6 +829,7 @@ footer a{color:var(--text)}
   var LEG=[[262,420],[560,652]], DUR=[0.8,0.65];
   function atAdapter(d){
     var o=R[d.id],rec=d.kind==='recover',xy=d.slot;
+    o.adg.setAttribute('opacity',1);
     el('circle',{cx:xy[0],cy:xy[1],r:4.5,fill:rec?'var(--ok)':o.r.color,opacity:.95},o.stack);
     o.bk.setAttribute('stroke-opacity',.9);setTimeout(function(){o.bk.setAttribute('stroke-opacity',.45)},350);
     flash(o.ad,'stroke',rec?'var(--ok)':o.r.color,'var(--line)');
