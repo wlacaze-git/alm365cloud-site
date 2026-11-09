@@ -831,7 +831,7 @@ footer a{color:var(--text)}
     flash(o.ad,'stroke',rec?'var(--ok)':o.r.color,'var(--line)');
     if(rec){o.cnt.textContent='open + recovery';return}
     o.c++;
-    o.cnt.textContent=o.r.stateful?'1 event · passed through':(o.c+(o.c===1?' event':' events')+' → 1 key');
+    o.cnt.textContent=o.r.stateful?'1 event · passed through':(o.c+(o.c===1?' event':' events'));
     stat('wo',n.wo+1);
   }
   function atSN(d){
