@@ -778,24 +778,15 @@ footer a{color:var(--text)}
     el('circle',{cx:40,cy:y+H/2,r:6,fill:r.color},g);
     txt(g,56,y+27,'t-src',r.name); txt(g,56,y+44,'t-sub',r.sub);
     o.srcPulse=el('rect',{x:20,y:y,width:240,height:H,rx:10,fill:'none',stroke:r.color,'stroke-opacity':0},g);
-    // adapter cell
+    // adapter cell: key on top, events accumulate in the row below
     o.ad=el('rect',{x:300,y:y,width:268,height:H,rx:9,fill:'var(--ink)',stroke:'var(--line)'},g);
-    if(r.stateful){
-      txt(g,314,y+19,'t-sub','pass-through · key');
-      txt(g,314,y+35,'t-key',r.key);
-      el('rect',{x:314,y:y+42,width:240,height:15,rx:4,fill:'rgba(63,182,232,.1)'},g);
-      txt(g,320,y+53,'t-sub','SAP standard covers it · we can extend','fill:var(--cyan)');
-      o.cnt=txt(g,554,y+35,'t-cnt','','fill:'+r.color+';text-anchor:end');
-    }else{
-      txt(g,314,y+20,'t-sub','correlation key');
-      el('rect',{x:312,y:y+28,width:118,height:22,rx:6,fill:'none',stroke:r.color,'stroke-opacity':.7},g);
-      txt(g,320,y+43,'t-key',r.key);
-      // bucket: where repeats of the same key collect
-      o.bk=el('rect',{x:440,y:y+8,width:118,height:46,rx:8,fill:'rgba(255,255,255,.02)',stroke:r.color,'stroke-opacity':.35,'stroke-dasharray':'3 3'},g);
-      o.stack=el('g',{},g);
-      o.cnt=txt(g,499,y+48,'t-cnt','','fill:'+r.color+';text-anchor:middle;font-size:10.5px');
-      el('line',{x1:430,y1:y+39,x2:440,y2:y+31,stroke:r.color,'stroke-opacity':.5},g);
-    }
+    txt(g,314,y+23,'t-sub',r.stateful?'alert ID':'key');
+    el('rect',{x:372,y:y+9,width:182,height:20,rx:6,fill:'none',stroke:r.color,'stroke-opacity':.7},g);
+    txt(g,380,y+23,'t-key',r.key);
+    o.bk=el('rect',{x:310,y:y+34,width:248,height:20,rx:6,fill:'rgba(255,255,255,.02)',stroke:r.color,'stroke-opacity':.25,'stroke-dasharray':'3 3'},g);
+    o.stack=el('g',{},g);
+    o.cnt=txt(g,550,y+48,'t-cnt','','fill:'+r.color+';text-anchor:end;font-size:10.5px');
+    if(r.stateful) txt(g,300,y-6,'t-sub','SAP standard covers it · DIFF can extend','fill:var(--cyan);font-size:9.5px');
     // ServiceNow: events arrive, a rule opens one incident per key
     o.ig=el('g',{opacity:.18},g);
     o.ir=el('rect',{x:652,y:y,width:324,height:H,rx:9,fill:'var(--ink)',stroke:'var(--ok)','stroke-opacity':.45},o.ig);
@@ -819,32 +810,28 @@ footer a{color:var(--text)}
 
   function reset(){
     gD.innerHTML='';dots=[];fired=0;recovered=false;['ev','inc','wo'].forEach(function(k){stat(k,0)});
-    ROWS.forEach(function(r){var o=R[r.id];o.c=0;o.next=0;if(o.bk){o.bk.setAttribute('stroke-opacity',.35)}o.ae=0;o.alerted=false;o.incd=false;o.cnt.textContent='';if(o.stack)o.stack.innerHTML='';
+    ROWS.forEach(function(r){var o=R[r.id];o.c=0;o.next=0;if(o.bk){o.bk.setAttribute('stroke-opacity',.25)}o.ae=0;o.alerted=false;o.incd=false;o.cnt.textContent='';if(o.stack)o.stack.innerHTML='';
       o.ie=0;o.ig.setAttribute('opacity',.18);o.ist.textContent='—';o.ist.setAttribute('style','text-anchor:end');o.iup.textContent='';o.ad.setAttribute('stroke','var(--line)')});
   }
-  function slotXY(o,i){var c=i%8,rw=Math.floor(i/8)%2;return [454+c*13,o.r.y+20+rw*11]}
+  function slotXY(o,i){return [322+(i%12)*12,o.r.y+44]}
   function spawn(id,kind){
     var o=R[id];
     var d=el('circle',{r:6,cx:262,cy:o.cy,fill:kind==='recover'?'var(--ok)':o.r.color,filter:'url(#dfa-glow)'},gD);
     var dd={el:d,id:id,kind:kind,leg:0,t:0};
-    if(o.stack&&kind==='event'){o.next=(o.next||0)+1;dd.slot=slotXY(o,o.next-1)}
+    o.next=(o.next||0)+1;dd.slot=slotXY(o,o.next-1);
     dots.push(dd);
     flash(o.srcPulse,'stroke-opacity',1,0,260);
   }
   // leg 0: source → adapter ; leg 1: adapter → EM alert ; leg 2: alert → incident (rule)
   var LEG=[[262,420],[560,652]], DUR=[0.8,0.65];
   function atAdapter(d){
-    var o=R[d.id];
-    if(d.kind==='recover'){flash(o.ad,'stroke','var(--ok)','var(--line)',600);return}
-    o.c++; if(!o.stack)o.cnt.textContent='';
-    if(o.stack){
-      var xy=d.slot||slotXY(o,o.c-1);
-      if(o.c<=24) el('circle',{cx:xy[0],cy:xy[1],r:4.5,fill:o.r.color,opacity:.9},o.stack);
-      o.bk.setAttribute('stroke-opacity',1);o.bk.setAttribute('fill','rgba(255,255,255,.05)');
-      setTimeout(function(){o.bk.setAttribute('stroke-opacity',.6);o.bk.setAttribute('fill','rgba(255,255,255,.02)')},350);
-      o.cnt.textContent=o.c+(o.c===1?' event':' events')+' → 1 key';
-    }
-    flash(o.ad,'stroke',o.r.color,'var(--line)');
+    var o=R[d.id],rec=d.kind==='recover',xy=d.slot;
+    el('circle',{cx:xy[0],cy:xy[1],r:4.5,fill:rec?'var(--ok)':o.r.color,opacity:.95},o.stack);
+    o.bk.setAttribute('stroke-opacity',.9);setTimeout(function(){o.bk.setAttribute('stroke-opacity',.45)},350);
+    flash(o.ad,'stroke',rec?'var(--ok)':o.r.color,'var(--line)');
+    if(rec){o.cnt.textContent='open + recovery';return}
+    o.c++;
+    o.cnt.textContent=o.r.stateful?'1 event · passed through':(o.c+(o.c===1?' event':' events')+' → 1 key');
     stat('wo',n.wo+1);
   }
   function atSN(d){
@@ -889,8 +876,8 @@ footer a{color:var(--text)}
 
   function staticView(){
     reset();
-    EV.forEach(function(e){var d={id:e[1],kind:'event'};atAdapter(d);atSN(d)});
-    atSN({id:'hm',kind:'recover'});
+    EV.forEach(function(e){var o=R[e[1]];o.next=(o.next||0)+1;var d={id:e[1],kind:'event',slot:slotXY(o,o.next-1)};atAdapter(d);atSN(d)});
+    var rv={id:'hm',kind:'recover',slot:slotXY(R.hm,1)};atAdapter(rv);atSN(rv);
     say('16 events from Cloud ALM reach ServiceNow, and a rule opens 4 incidents, one per key. A direct integration would open 16 tickets.');
   }
 
