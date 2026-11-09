@@ -11,8 +11,8 @@
    Either way: no cookies, no fingerprinting, no personal data. Remember to add the
    provider to the processor list in privacidad.html before enabling it. */
 (function () {
-  var PROVIDER = '';
-  var SITE_ID = '';
+  var PROVIDER = 'umami';
+  var SITE_ID = 'bbfbaad4-18c5-4961-9a28-20cf2c63dba0';
 
   if (!PROVIDER || !SITE_ID) return;
 
