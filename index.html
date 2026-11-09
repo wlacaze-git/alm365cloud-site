@@ -95,16 +95,16 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;g
 /* hero */
 .hero{padding-block:80px 96px;border-top:0;position:relative;overflow:hidden}
 .hero::after{content:"";position:absolute;inset:-20% -10% auto auto;width:640px;height:640px;background:radial-gradient(closest-side,rgba(63,182,232,.16),transparent);pointer-events:none}
-.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
+.hero-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
 .hero-grid > *{min-width:0}
-.hero h1{font-size:clamp(42px,6.4vw,80px);font-weight:800;margin-top:18px}
+.hero h1{font-size:clamp(38px,4.7vw,64px);font-weight:800;margin-top:18px}
 .hero h1 em{font-style:normal;color:var(--amber)}
 .hero .lead{margin-top:24px}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
-.deadline{display:flex;gap:28px;flex-wrap:wrap;margin-top:44px;padding-top:24px;border-top:1px solid var(--line)}
+.deadline{display:flex;gap:22px;flex-wrap:wrap;margin-top:44px;padding-top:24px;border-top:1px solid var(--line)}
 .deadline div{display:grid;gap:2px}
 .deadline b{font-family:var(--display);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
-.deadline small{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.deadline small{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
 @media (max-width:960px){.hero-grid{grid-template-columns:1fr}}
 
 /* console */
@@ -202,6 +202,15 @@ td:first-child{color:var(--text)}
 .chip{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(246,162,58,.1);color:var(--amber);border:1px solid rgba(246,162,58,.35)}
 .chip.ai{background:rgba(63,182,232,.1);color:var(--cyan);border-color:rgba(63,182,232,.35)}
 @media (max-width:700px){.bundle{grid-template-columns:1fr;gap:10px}}
+
+/* deadline note + evidence */
+.deadline-note{margin-top:22px;max-width:52ch;color:var(--muted);font-size:15px;line-height:1.55}
+.evidence-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.evidence-grid article{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:28px;display:grid;gap:14px;align-content:start}
+.evidence-grid b{font-family:var(--display);font-size:40px;font-weight:800;line-height:1;letter-spacing:-.02em;color:var(--amber)}
+.evidence-grid p{color:var(--muted);font-size:15px;line-height:1.55}
+.evidence-grid .tag{justify-self:start}
+@media (max-width:860px){.evidence-grid{grid-template-columns:1fr}}
 
 /* services */
 .svc{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
@@ -380,10 +389,12 @@ section{scroll-margin-top:130px}
         <a class="btn btn-primary" href="#contact">Discuss your transition</a>
         <a class="btn btn-ghost" href="#packages">See the packages</a>
       </div>
-      <div class="deadline" aria-label="SolMan 7.2 maintenance end">
-        <div><b id="d-days">—</b><small>days left</small></div>
-        <div><b>31.12.2027</b><small>SolMan 7.2 mainstream maintenance ends</small></div>
+      <div class="deadline" aria-label="SolMan 7.2 maintenance dates">
+        <div><b id="d-days">—</b><small>days to 31.12.2027</small></div>
+        <div><b>31.12.2027</b><small>SolMan 7.2 mainstream ends</small></div>
+        <div><b>31.12.2030</b><small>extended, optional and paid</small></div>
       </div>
+      <p class="deadline-note">The real constraint isn't 2027. It's the budget cycle that has to land before it, and the change freeze around your S/4 cutover.</p>
     </div>
 
     <div class="console" role="img" aria-label="Example mapping of Solution Manager capabilities to Cloud ALM">
@@ -412,7 +423,34 @@ section{scroll-margin-top:130px}
 <a class="solution-card" href="#products"><span>02 / PRODUCTS</span><h3>Connected ALM ecosystem</h3><p>Process, document and ServiceNow integration offerings.</p><b>Explore products →</b></a>
 <a class="solution-card" href="#ai"><span>03 / AUTOMATION</span><h3>AI-assisted delivery</h3><p>Practical acceleration with consultant oversight.</p><b>Explore AI →</b></a>
 <a class="solution-card" href="#services"><span>04 / SERVICES</span><h3>Implementation & Operations</h3><p>Monitoring, integration, support and advisory.</p><b>Explore services →</b></a>
-</div></div></section><section id="estimate">
+</div></div></section>
+<section id="evidence">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Evidence</div>
+      <h2>What we can prove, and what we'd rather you verify.</h2>
+      <p class="lead">No logo wall and no adjectives. Three things you can check before you believe anything else on this page.</p>
+    </div>
+    <div class="evidence-grid">
+      <article>
+        <b>1 : 1</b>
+        <p>One SAP problem becomes one ServiceNow incident, deduplicated, routed to the right team and closed when the problem recovers. In production at a large enterprise customer.</p>
+        <span class="tag">DIFF Adapter &middot; in production</span>
+      </article>
+      <article>
+        <b>20+</b>
+        <p>Years of Solution Manager, ChaRM, Focused Build and SAP Cloud ALM, delivered by consultants in M&aacute;laga, Chile, Argentina and Mexico.</p>
+        <span class="tag">Practice &middot; SAP ALM</span>
+      </article>
+      <article>
+        <b>On request</b>
+        <p>A 30-minute call with a customer who already runs this, before you shortlist anyone. Ask and we connect you.</p>
+        <span class="tag">References &middot; under NDA</span>
+      </article>
+    </div>
+  </div>
+</section>
+<section id="estimate">
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Start here</div>
@@ -854,8 +892,8 @@ section{scroll-margin-top:130px}
 (function(){
   var toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('main-navigation');toggle.addEventListener('click',function(){var on=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',on?'true':'false')});menu.addEventListener('click',function(e){if(e.target.closest('a')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false')}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('is-open')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.focus()}});
-  var views={home:['top','solutions'],transition:['estimate','packages','bundles'],ai:['ai'],products:['products','signavio','sharepoint'],services:['services'],about:['about'],contact:['contact']};
-  var routes={top:'home',solutions:'home',estimate:'transition',packages:'transition',bundles:'transition',ai:'ai',products:'products',signavio:'products',sharepoint:'products',services:'services',about:'about',contact:'contact'};
+  var views={home:['top','solutions','evidence'],transition:['estimate','packages','bundles'],ai:['ai'],products:['products','signavio','sharepoint'],services:['services'],about:['about'],contact:['contact']};
+  var routes={top:'home',solutions:'home',evidence:'home',estimate:'transition',packages:'transition',bundles:'transition',ai:'ai',products:'products',signavio:'products',sharepoint:'products',services:'services',about:'about',contact:'contact'};
   var sections=Array.from(document.querySelectorAll('main > section'));
   var navTabs=Array.from(document.querySelectorAll('[data-view-tab]'));
   function showView(hash,scroll){
