@@ -4,22 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Integration products for SAP Cloud ALM | ALM365 Cloud</title>
-<meta name="description" content="DIFF Adapter for ServiceNow, CALM2Signavio and SharePoint DMS: integration offerings for SAP Cloud ALM, with scope confirmed through technical discovery.">
+<meta name="description" content="DIFF Adapter for ServiceNow and SharePoint DMS: integration offerings for SAP Cloud ALM, with scope confirmed through technical discovery.">
 <link rel="canonical" href="https://alm365cloud.com/products.html">
 <meta name="theme-color" content="#0A0F1C">
 <meta property="og:site_name" content="ALM365 Cloud">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://alm365cloud.com/products.html">
 <meta property="og:title" content="Integration products for SAP Cloud ALM | ALM365 Cloud">
-<meta property="og:description" content="DIFF Adapter for ServiceNow, CALM2Signavio and SharePoint DMS: integration offerings for SAP Cloud ALM, with scope confirmed through technical discovery.">
+<meta property="og:description" content="DIFF Adapter for ServiceNow and SharePoint DMS: integration offerings for SAP Cloud ALM, with scope confirmed through technical discovery.">
 <meta property="og:image" content="https://alm365cloud.com/og-image.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="DIFF Adapter for ServiceNow, CALM2Signavio and SharePoint DMS">
+<meta property="og:image:alt" content="DIFF Adapter for ServiceNow and SharePoint DMS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Integration products for SAP Cloud ALM | ALM365 Cloud">
-<meta name="twitter:description" content="DIFF Adapter for ServiceNow, CALM2Signavio and SharePoint DMS: integration offerings for SAP Cloud ALM, with scope confirmed through technical discovery.">
+<meta name="twitter:description" content="DIFF Adapter for ServiceNow and SharePoint DMS: integration offerings for SAP Cloud ALM, with scope confirmed through technical discovery.">
 <meta name="twitter:image" content="https://alm365cloud.com/og-image.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -57,13 +57,6 @@
         <p>Cloud ALM monitoring alerts become one ServiceNow incident per problem, routed to the right team and closed when the problem recovers.</p>
         <span class="more-link">Product page →</span>
       </a>
-      <a class="prod-card" href="products.html#signavio">
-        <span class="badge">Scope validated in discovery</span>
-        <h3>CALM2Signavio</h3>
-        <div class="flowline"><b>SAP Cloud ALM</b><span>⇄</span><b>SAP Signavio</b></div>
-        <p>Additional process onboarding, hierarchy reconciliation and governance requirements beyond SAP standard integration.</p>
-        <span class="more-link">How it works ↓</span>
-      </a>
       <a class="prod-card" href="products.html#sharepoint">
         <span class="badge">Scope validated in discovery</span>
         <h3>SharePoint DMS for Cloud ALM</h3>
@@ -77,39 +70,10 @@
 
 
 
-<section id="signavio" class="prod-sub product-detail">
-<div class="wrap">
- <div class="sec-head">
-  <div class="eyebrow">Product 02 · CALM2Signavio</div>
-  <h2>From SAP Cloud ALM to Signavio: bring your process content into your design hub.</h2>
-  <p class="lead">SAP's standard BPMN integration synchronizes process diagrams from Signavio to Cloud ALM. CALM2Signavio addresses the complementary direction: inventory, map and transfer eligible process hierarchies and custom diagrams from Cloud ALM into Signavio, with controlled synchronization and process ownership. Exact coverage is validated against the APIs and BPMN data available in your tenant.</p>
- </div>
- <div class="product-flow" aria-label="CALM2Signavio architecture">
-  <div class="flow-node"><span>SOURCE</span><strong>SAP Cloud ALM</strong><small>Hierarchy · custom processes · BPMN · metadata</small></div>
-  <div class="flow-link"><strong>→</strong><small>CALM2Signavio<br>Mapping · diff · validation</small></div>
-  <div class="flow-node"><span>TARGET</span><strong>SAP Signavio</strong><small>Folders · diagrams · attributes · governance</small></div>
- </div>
- <div class="flow-note">SAP standard: Signavio → Cloud ALM (BPMN)   |   CALM2Signavio offering: Cloud ALM → Signavio (assessed scope)</div>
- <h3 class="product-subtitle">How it works</h3>
- <div class="product-steps">
-  <article><span>01 · Discover</span><h3>Inventory &amp; coverage</h3><p>Read Cloud ALM process hierarchy, custom processes, diagram availability and external references. Flag missing BPMN, duplicate IDs and unsupported content before any change.</p></article>
-  <article><span>02 · Map</span><h3>Preview target structure</h3><p>Translate eligible hierarchy and process metadata into Signavio folders, attributes and diagrams. Produce a dry-run mapping for review.</p></article>
-  <article><span>03 · Transfer</span><h3>Controlled initial load</h3><p>Create approved target content through the supported Signavio interfaces, preserving traceability with source references and import logs.</p></article>
-  <article><span>04 · Reconcile</span><h3>Delta &amp; governance</h3><p>Detect changes, respect the designated owner and flag conflicts. No automatic overwriting of independently edited diagrams; changes require explicit approval.</p></article>
- </div>
- <div class="product-panels">
-  <div><h3>Operating modes</h3><ul><li><b>Migration:</b> one-time bulk onboarding from Cloud ALM to Signavio</li><li><b>Transition:</b> periodic delta review during handover of process authorship</li><li><b>Signavio-led:</b> after handover, SAP standard Signavio → Cloud ALM sync remains the primary diagram flow</li></ul></div>
-  <div><h3>Technical scope &amp; prerequisites</h3><ul><li>Cloud ALM API service access and permission to read the process model</li><li>Signavio API access and target workspace/folder design</li><li>BPMN availability check: legacy or SVG-only content may require remediation</li><li>Dry run, ownership rules, reconciliation report and scoped deployment</li></ul></div>
- </div>
- <p class="product-caveat"><b>Delivery note:</b> This describes the intended solution workflow, not a claim that all use cases are already deployed. API coverage, BPMN portability, Signavio licensing and conflict handling are validated during discovery.</p>
- <div class="cta-row"><a class="btn btn-primary" href="contact.html">Discuss CALM2Signavio coverage</a><a class="btn btn-ghost" href="https://help.sap.com/docs/erp-transformation-with-itc/buildable-map/sap-signavio-and-sap-cloud-alm-integration" target="_blank" rel="noopener">SAP standard integration</a></div>
-</div>
-</section>
-
 <section id="sharepoint" class="prod-sub product-detail">
 <div class="wrap">
  <div class="sec-head">
-  <div class="eyebrow">Product 03 · SharePoint DMS for Cloud ALM</div>
+  <div class="eyebrow">Product 02 · SharePoint DMS for Cloud ALM</div>
   <h2>Link your Cloud ALM documentation with the Microsoft 365 ecosystem.</h2>
   <p class="lead">A governed integration approach for keeping documents in SharePoint while making them discoverable and traceable from SAP Cloud ALM. The supported architecture uses SAP Cloud ALM Document API references and mappings; it does not replace the SAP-managed BTP Document Management Service repository.</p>
  </div>

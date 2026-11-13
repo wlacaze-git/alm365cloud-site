@@ -252,7 +252,7 @@ textarea{min-height:96px;resize:vertical}
 .sgv-foot ol,.sgv-foot ul{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px}
 @media (max-width:900px){.sgv-head,.sgv-foot{grid-template-columns:1fr}.feat,.modes{grid-template-columns:1fr}}
 .products-intro{background:linear-gradient(180deg,rgba(63,182,232,.06),transparent 70%),var(--ink)}
-.prod-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.prod-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 .prod-card{display:grid;gap:14px;align-content:start;padding:32px;border:1px solid var(--line);border-radius:16px;background:var(--panel);text-decoration:none;color:var(--text);transition:border-color .2s}
 .prod-card:hover{border-color:var(--cyan)}
 .prod-card .badge{justify-self:start}
