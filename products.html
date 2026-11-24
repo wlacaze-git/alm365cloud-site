@@ -4,22 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Integration products for SAP Cloud ALM | ALM365 Cloud</title>
-<meta name="description" content="DIFF Adapter for ServiceNow and SharePoint DMS: integration offerings for SAP Cloud ALM, with scope confirmed through technical discovery.">
+<meta name="description" content="DIFF Adapter for ServiceNow and Calm2MS (SAP Cloud ALM documents in SharePoint): integration offerings for SAP Cloud ALM.">
 <link rel="canonical" href="https://alm365cloud.com/products.html">
 <meta name="theme-color" content="#0A0F1C">
 <meta property="og:site_name" content="ALM365 Cloud">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://alm365cloud.com/products.html">
 <meta property="og:title" content="Integration products for SAP Cloud ALM | ALM365 Cloud">
-<meta property="og:description" content="DIFF Adapter for ServiceNow and SharePoint DMS: integration offerings for SAP Cloud ALM, with scope confirmed through technical discovery.">
+<meta property="og:description" content="DIFF Adapter for ServiceNow and Calm2MS (SAP Cloud ALM documents in SharePoint): integration offerings for SAP Cloud ALM.">
 <meta property="og:image" content="https://alm365cloud.com/og-image.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="DIFF Adapter for ServiceNow and SharePoint DMS">
+<meta property="og:image:alt" content="DIFF Adapter for ServiceNow and Calm2MS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Integration products for SAP Cloud ALM | ALM365 Cloud">
-<meta name="twitter:description" content="DIFF Adapter for ServiceNow and SharePoint DMS: integration offerings for SAP Cloud ALM, with scope confirmed through technical discovery.">
+<meta name="twitter:description" content="DIFF Adapter for ServiceNow and Calm2MS (SAP Cloud ALM documents in SharePoint): integration offerings for SAP Cloud ALM.">
 <meta name="twitter:image" content="https://alm365cloud.com/og-image.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -57,12 +57,12 @@
         <p>Cloud ALM monitoring alerts become one ServiceNow incident per problem, routed to the right team and closed when the problem recovers.</p>
         <span class="more-link">Product page →</span>
       </a>
-      <a class="prod-card" href="products.html#sharepoint">
-        <span class="badge">Scope validated in discovery</span>
-        <h3>SharePoint DMS for Cloud ALM</h3>
+      <a class="prod-card" href="https://calm2ms.com/" target="_blank" rel="noopener">
+        <span class="badge">Available</span>
+        <h3>Calm2MS · Cloud ALM documents in SharePoint</h3>
         <div class="flowline"><b>SAP Cloud ALM</b><span>⇄</span><b>Microsoft SharePoint</b></div>
-        <p>Explore supported links, metadata and document governance between Cloud ALM and SharePoint.</p>
-        <span class="more-link">How it works ↓</span>
+        <p>Cloud ALM stores its documents in your own SharePoint library: one file, version history in SharePoint, columns people can filter, two-way.</p>
+        <span class="more-link">calm2ms.com ↗</span>
       </a>
     </div>
   </div>
@@ -73,28 +73,11 @@
 <section id="sharepoint" class="prod-sub product-detail">
 <div class="wrap">
  <div class="sec-head">
-  <div class="eyebrow">Product 02 · SharePoint DMS for Cloud ALM</div>
-  <h2>Link your Cloud ALM documentation with the Microsoft 365 ecosystem.</h2>
-  <p class="lead">A governed integration approach for keeping documents in SharePoint while making them discoverable and traceable from SAP Cloud ALM. The supported architecture uses SAP Cloud ALM Document API references and mappings; it does not replace the SAP-managed BTP Document Management Service repository.</p>
+  <div class="eyebrow">Product 02 · Calm2MS</div>
+  <h2>Cloud ALM documents, stored in your SharePoint.</h2>
+  <p class="lead">Calm2MS connects SAP Cloud ALM to a SharePoint library you already own: the files, their version history and everyday work stay in SharePoint, and every document stays linked to Cloud ALM. Calm2MS Migration moves your SAP Solution Manager documentation to Cloud ALM, with the files in SharePoint. Both are a spin-off of ALM365 Cloud and DIFF Consulting, with their own website.</p>
  </div>
- <div class="product-flow" aria-label="SharePoint document integration architecture">
-  <div class="flow-node"><span>SAP SIDE</span><strong>SAP Cloud ALM</strong><small>Document records · URL references · project &amp; process assignments</small></div>
-  <div class="flow-link"><strong>↔</strong><small>Integration service<br>Microsoft Graph + Cloud ALM Document API</small></div>
-  <div class="flow-node"><span>MICROSOFT SIDE</span><strong>SharePoint Online</strong><small>Files · folders · versions · Microsoft 365 permissions</small></div>
- </div>
- <h3 class="product-subtitle">How it works</h3>
- <div class="product-steps">
-  <article><span>01 · Connect</span><h3>Configure access</h3><p>Authorize a SharePoint site through Microsoft Entra ID and connect the integration service to Cloud ALM APIs using least-privilege credentials.</p></article>
-  <article><span>02 · Map</span><h3>Define document rules</h3><p>Map SharePoint folder structure and file metadata to Cloud ALM projects, process hierarchy and document types. Validate the rules in a dry run.</p></article>
-  <article><span>03 · Reference</span><h3>Publish linked records</h3><p>For eligible SharePoint files, create Cloud ALM document records with URL references and process/project assignments, without relocating the original binary.</p></article>
-  <article><span>04 · Reconcile</span><h3>Keep links current</h3><p>Scheduled checks identify renamed, moved or deleted files. Handle link changes and deletions according to agreed rules and supported API operations.</p></article>
- </div>
- <div class="product-panels">
-  <div><h3>Flow A · SharePoint → Cloud ALM</h3><ul><li>Files remain in Microsoft 365 under existing permissions and retention policies</li><li>Cloud ALM receives document entries and SharePoint URL references</li><li>Mapping and reconciliation preserve traceability to the source file</li></ul></div>
-  <div><h3>Flow B · Cloud ALM → SharePoint</h3><ul><li>Review Cloud ALM metadata and document references for reporting or linked-document workflows</li><li>Any binary extraction or file synchronization requires separate API and licensing validation</li><li>Cloud ALM native uploads continue using its SAP-managed DMS repository</li></ul></div>
- </div>
- <p class="product-caveat"><b>Important boundary:</b> SAP currently does not support using an arbitrary external SharePoint repository as a direct replacement for Cloud ALM's automatically created SAP BTP DMS repository. This offering targets supported document linking and integration patterns. Scope is subject to technical discovery.</p>
- <div class="cta-row"><a class="btn btn-primary" href="contact.html">Request a SharePoint integration walkthrough</a><a class="btn btn-ghost" href="https://help.sap.com/docs/cloud-alm/apis/document-api" target="_blank" rel="noopener">SAP Document API</a></div>
+ <div class="cta-row"><a class="btn btn-primary" href="https://calm2ms.com/" target="_blank" rel="noopener">Visit calm2ms.com ↗</a><a class="btn btn-ghost" href="https://calm2ms.com/migration" target="_blank" rel="noopener">Calm2MS Migration ↗</a></div>
 </div>
 </section>
 
