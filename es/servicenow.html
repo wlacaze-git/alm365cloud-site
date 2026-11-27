@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DIFF Adapter for ServiceNow — alertas de SAP Cloud ALM | ALM365 Cloud</title>
+<meta name="description" content="DIFF Adapter: las alertas de monitorización de SAP Cloud ALM llegan a ServiceNow como una sola incidencia por problema, sin duplicados y bien enrutada.">
+<link rel="canonical" href="https://alm365cloud.com/es/servicenow">
+<link rel="alternate" hreflang="en" href="https://alm365cloud.com/servicenow">
+<link rel="alternate" hreflang="es" href="https://alm365cloud.com/es/servicenow">
+<link rel="alternate" hreflang="x-default" href="https://alm365cloud.com/servicenow">
+<meta name="theme-color" content="#0A0F1C">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="preload" href="/assets/fonts/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:site_name" content="ALM365 Cloud">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://alm365cloud.com/es/servicenow">
+<meta property="og:title" content="DIFF Adapter for ServiceNow — alertas de SAP Cloud ALM | ALM365 Cloud">
+<meta property="og:description" content="DIFF Adapter: alertas de SAP Cloud ALM en ServiceNow como una incidencia por problema.">
+<meta property="og:image" content="https://alm365cloud.com/og-diff-adapter.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DIFF Adapter — alertas de SAP Cloud ALM a ServiceNow, una incidencia por problema">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DIFF Adapter for ServiceNow — alertas de SAP Cloud ALM | ALM365 Cloud">
+<meta name="twitter:description" content="DIFF Adapter: alertas de SAP Cloud ALM en ServiceNow como una incidencia por problema.">
+<meta name="twitter:image" content="https://alm365cloud.com/og-diff-adapter.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"DIFF Adapter for ServiceNow","applicationCategory":"BusinessApplication","operatingSystem":"SAP BTP, Cloud Foundry","description":"Lleva las alertas de monitorización de SAP Cloud ALM a ServiceNow como una sola incidencia por problema, sin duplicados y bien enrutada, y cierra la incidencia cuando el problema se recupera.","url":"https://alm365cloud.com/es/servicenow","publisher":{"@type":"Organization","name":"ALM365 Cloud","legalName":"SOLMAN365 SL"}}
+</script>
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+/* Layout: dark single-theme product site. Wide hero with a live "transition console", then a stacked catalogue of packages on a 12-col grid. */
+:root{
+  --ink:#0A0F1C;          /* page ground, blue-biased near black */
+  --panel:#111829;        /* raised surfaces */
+  --line:#222C44;         /* hairlines */
+  --text:#E7ECF6;
+  --muted:#93A0BA;
+  --amber:#F6A23A;        /* primary accent, from the hexagon mark */
+  --cyan:#3FB6E8;         /* secondary, from the hexagon mark */
+  --ok:#4CC38A; --warn:#E8B341; --gap:#EF6C5A;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --wrap:1180px;
+  color-scheme:dark;
+}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--ink);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.02em}
+h2{font-size:clamp(30px,4.2vw,48px);font-weight:700}
+h3{font-size:22px;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.lead{color:var(--muted);font-size:18px;max-width:62ch}
+section{padding-block:96px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:16px;margin-bottom:48px}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+/* nav */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--ink) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.02em}
+.brand span{color:var(--muted);font-weight:500}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-size:14px;color:var(--muted)}
+.nav ul a{text-decoration:none}.nav ul a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--body)}
+.btn-primary{background:var(--amber);color:#1A1205}
+.btn-primary:hover{background:#FFB653}
+.btn-ghost{border-color:var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--muted)}
+.nav .btn{padding:9px 16px;font-size:14px}
+.dd{position:relative}
+.dd-btn{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.dd-btn:hover,.dd-btn[aria-expanded="true"]{color:var(--text)}
+.dd-btn span{font-size:11px}
+.dd-menu{position:absolute;top:calc(100% + 14px);left:-16px;min-width:300px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px;display:grid;gap:2px;box-shadow:0 20px 50px -20px rgba(0,0,0,.8);z-index:20}
+.dd-menu a{display:grid;gap:2px;padding:10px 12px;border-radius:8px;color:var(--text)}
+.dd-menu a:hover,.dd-menu a:focus-visible{background:rgba(255,255,255,.05)}
+.dd-menu b{font-weight:600;font-size:14px}
+.dd-menu small{color:var(--muted);font-size:12.5px}
+.dd-menu .dd-all{border-top:1px solid var(--line);border-radius:0 0 8px 8px;margin-top:4px;color:var(--cyan);font-size:13px;font-weight:600}
+@media (max-width:860px){.nav ul{display:none}}
+
+/* hero */
+.hero{padding-block:80px 96px;border-top:0;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:-20% -10% auto auto;width:640px;height:640px;background:radial-gradient(closest-side,rgba(63,182,232,.16),transparent);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
+.hero-grid > *{min-width:0}
+.hero h1{font-size:clamp(42px,6.4vw,80px);font-weight:800;margin-top:18px}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero .lead{margin-top:24px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.deadline{display:flex;gap:28px;flex-wrap:wrap;margin-top:44px;padding-top:24px;border-top:1px solid var(--line)}
+.deadline div{display:grid;gap:2px}
+.deadline b{font-family:var(--display);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+.deadline small{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr}}
+
+/* console */
+.console{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 80px -30px rgba(0,0,0,.7);font-family:var(--mono);font-size:13px;overflow:hidden}
+.console-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
+.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+.map{display:grid}
+.map-row{display:grid;grid-template-columns:1fr 18px 1fr auto;gap:10px;align-items:center;padding:11px 16px;border-bottom:1px solid var(--line)}
+.map-row:last-child{border-bottom:0}
+.map-row .from{color:var(--muted)}
+.map-row .arrow{color:var(--line)}
+.map-row .to{color:var(--text)}
+.pill{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.pill.ok{color:var(--ok)}.pill.warn{color:var(--warn)}.pill.gap{color:var(--gap)}
+.console-foot{display:flex;flex-wrap:wrap;gap:14px;padding:12px 16px;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px}
+.console-foot span{display:flex;align-items:center;gap:6px}
+.console-foot i{width:8px;height:8px;border-radius:50%;display:block}
+@media (max-width:520px){.map-row{grid-template-columns:1fr auto;row-gap:2px}.map-row .arrow{display:none}.map-row .to{grid-column:1}.map-row .pill{grid-column:2;grid-row:1 / span 2}}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.step{background:var(--ink);padding:32px 28px;display:grid;gap:12px;align-content:start}
+.step .n{font-family:var(--mono);font-size:12px;color:var(--cyan)}
+.step p{color:var(--muted)}
+.step ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px;display:grid;gap:4px}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+
+/* path */
+.path{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:40px;font-family:var(--mono);font-size:12.5px}
+.path span{padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.path span.core{border-color:var(--amber);color:var(--amber)}
+.path b{color:var(--line);font-weight:400}
+
+/* packages */
+.pkgs{display:grid;gap:20px}
+.pkg{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
+.pkg-top{display:grid;grid-template-columns:120px 1fr auto;gap:28px;padding:32px;align-items:start}
+.pkg-top > *{min-width:0}
+.pkg-num{font-family:var(--display);font-size:64px;font-weight:800;line-height:.9;color:transparent;-webkit-text-stroke:1px var(--muted)}
+.pkg.core .pkg-num{-webkit-text-stroke:1px var(--amber)}
+.pkg-kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+.pkg.core .pkg-kicker{color:var(--amber)}
+.pkg-top h3{font-size:clamp(24px,2.6vw,30px)}
+.pkg-top p{color:var(--muted);margin-top:10px;max-width:64ch}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:5px 9px;white-space:nowrap}
+details.more{border-top:1px solid var(--line)}
+details.more summary{list-style:none;cursor:pointer;padding:16px 32px;font-size:14px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+";font-family:var(--mono);font-size:18px;color:var(--amber);transition:transform .2s}
+details.more[open] summary::after{transform:rotate(45deg)}
+details.more summary:hover{background:rgba(255,255,255,.02)}
+.more-body{padding:4px 32px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.more-body > div{min-width:0}
+.more-body h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:500}
+.more-body ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:15px}
+.more-body li{padding-left:18px;position:relative}
+.more-body li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--amber)}
+.more-body li.no::before{background:var(--gap)}
+.more-body li small{display:block;color:var(--muted);font-size:13.5px}
+.phases{grid-column:1 / -1;display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.phase{border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:4px}
+.phase b{font-family:var(--mono);font-size:11px;color:var(--amber);font-weight:500}
+.phase span{font-weight:600;font-size:14px}
+.phase small{color:var(--muted);font-size:12.5px;line-height:1.4}
+@media (max-width:860px){.phases{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:700px){.pkg-top{grid-template-columns:1fr;gap:12px;padding:24px}.pkg-num{font-size:44px}details.more summary{padding:16px 24px}.more-body{padding:4px 24px 24px}}
+
+.tbl-wrap{overflow-x:auto;grid-column:1 / -1}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+td.c{text-align:center;color:var(--ok);font-family:var(--mono);font-size:13px}
+td.c.o{color:var(--muted)}
+td:first-child{color:var(--text)}
+
+/* AI track */
+.ai{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.ai > *{min-width:0}
+.ai-card{border:1px solid var(--cyan);border-radius:16px;padding:32px;background:linear-gradient(180deg,rgba(63,182,232,.08),transparent 60%);display:grid;gap:20px}
+.ai-card h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin:0;font-weight:500}
+.ai-card ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--text);font-size:15px}
+.ai-cmp{display:grid;grid-template-columns:auto 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;margin-top:28px}
+.ai-cmp div{padding:10px 14px;border-bottom:1px solid var(--line)}
+.ai-cmp .h{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ai-cmp .k{color:var(--muted)}
+.ai-cmp .hl{color:var(--cyan)}
+@media (max-width:900px){.ai{grid-template-columns:1fr}}
+
+/* bundles */
+.bundles{display:grid;gap:0;border-top:1px solid var(--line)}
+.bundle{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--line);align-items:center}
+.bundle > *{min-width:0}
+.bundle p{color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(246,162,58,.1);color:var(--amber);border:1px solid rgba(246,162,58,.35)}
+.chip.ai{background:rgba(63,182,232,.1);color:var(--cyan);border-color:rgba(63,182,232,.35)}
+@media (max-width:700px){.bundle{grid-template-columns:1fr;gap:10px}}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.svc article{border-top:2px solid var(--line);padding-top:20px;display:grid;gap:10px;align-content:start}
+.svc article:hover{border-top-color:var(--amber)}
+.svc p{color:var(--muted);font-size:15px}
+@media (max-width:960px){.svc{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.svc{grid-template-columns:1fr}}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.about > *{min-width:0}
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.creds div{background:var(--ink);padding:24px;display:grid;gap:6px}
+.creds b{font-family:var(--display);font-size:34px;font-weight:700;line-height:1}
+.creds span{color:var(--muted);font-size:14px}
+@media (max-width:900px){.about{grid-template-columns:1fr}}
+
+/* contact */
+.contact{background:radial-gradient(800px 300px at 20% 0%,rgba(246,162,58,.12),transparent),var(--ink)}
+.contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start}
+.contact-grid > *{min-width:0}
+.mailcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;display:grid;gap:14px}
+.mailcard h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:500}
+.mailcard ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:15px}
+label{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:15px;color:var(--text);background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;box-sizing:border-box}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--amber)}
+textarea{min-height:96px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-note{font-size:13px;color:var(--muted)}
+.form-ok{color:var(--ok);font-size:14px}
+.mail{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:28px;font-family:var(--mono);font-size:15px}
+.mail code{padding:8px 12px;border:1px solid var(--line);border-radius:8px;user-select:all}
+.mail button{font:inherit;font-size:12px;background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:8px 10px;cursor:pointer}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.row2{grid-template-columns:1fr}}
+
+/* CALM2Signavio */
+.sgv-head{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:end;margin-bottom:48px}
+.sgv-head > *{min-width:0}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(246,162,58,.4);border-radius:999px;padding:5px 12px}
+.coverage{border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14px}
+.coverage div{display:grid;grid-template-columns:1fr auto;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);align-items:center}
+.coverage div:last-child{border-bottom:0}
+.coverage .h{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lanes{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow-x:auto;margin-bottom:40px}
+.lanes-in{min-width:760px;display:grid;grid-template-columns:130px repeat(3,1fr)}
+.lanes-in > div{padding:16px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-size:14px;display:grid;gap:6px;align-content:start}
+.lanes-in > div:nth-child(4n){border-right:0}
+.lanes-in > div:nth-last-child(-n+4){border-bottom:0}
+.lanes-in .ph{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lanes-in .ph b{display:block;font-family:var(--display);font-size:18px;letter-spacing:-.01em;text-transform:none;color:var(--text);margin-top:4px}
+.lanes-in .ln{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center}
+.lanes-in .ln.s{color:var(--cyan)}.lanes-in .ln.e{color:var(--amber)}.lanes-in .ln.c{color:var(--ok)}
+.lanes-in .w{color:var(--text)}
+.lanes-in .r{color:var(--muted)}
+.lanes-in .g{color:var(--warn)}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px}
+.feat article{border-top:2px solid var(--cyan);padding-top:18px;display:grid;gap:8px;align-content:start}
+.feat p{color:var(--muted);font-size:15px}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.modes div{background:var(--ink);padding:22px;display:grid;gap:6px;align-content:start}
+.modes b{font-family:var(--mono);font-size:12px;color:var(--amber);font-weight:500}
+.modes span{font-weight:600}
+.modes p{color:var(--muted);font-size:14px}
+.sgv-foot{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:40px}
+.sgv-foot > div{min-width:0}
+.sgv-foot h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:500}
+.sgv-foot ol,.sgv-foot ul{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px}
+@media (max-width:900px){.sgv-head,.sgv-foot{grid-template-columns:1fr}.feat,.modes{grid-template-columns:1fr}}
+.products-intro{background:linear-gradient(180deg,rgba(63,182,232,.06),transparent 70%),var(--ink)}
+.prod-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.prod-card{display:grid;gap:14px;align-content:start;padding:32px;border:1px solid var(--line);border-radius:16px;background:var(--panel);text-decoration:none;color:var(--text);transition:border-color .2s}
+.prod-card:hover{border-color:var(--cyan)}
+.prod-card .badge{justify-self:start}
+.prod-card .flowline{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.prod-card .flowline b{color:var(--text);font-weight:500;border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+.prod-card p{color:var(--muted)}
+.prod-card .more-link{font-size:14px;font-weight:600;color:var(--cyan)}
+.prod-sub{border-top:0;padding-top:24px}
+.lanes-in.two{grid-template-columns:130px repeat(2,1fr)}
+.lanes-in.two > div{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lanes-in.two > div:nth-child(3n){border-right:0}
+.lanes-in.two > div:nth-last-child(-n+3){border-bottom:0}
+@media (max-width:1060px){.prod-cards{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){.prod-cards{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--text)}
+/* Hybrid V2 */
+.solutions{background:linear-gradient(180deg,#111c30,#0a0f1c)}.solutions-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.solution-card{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:32px;text-decoration:none;display:grid;gap:16px;transition:transform .2s,border-color .2s}.solution-card:hover{transform:translateY(-3px);border-color:var(--cyan)}.solution-card span{font:500 11px var(--mono);color:var(--cyan)}.solution-card p{color:var(--muted)}.solution-card b{font-size:14px;color:var(--amber)}.mobile-menu-toggle{display:none;background:var(--panel);color:var(--text);font:600 14px var(--body);border:1px solid var(--line);border-radius:8px;padding:8px 12px}@media(max-width:860px){header.nav .wrap{height:auto;min-height:64px;flex-wrap:wrap;padding-block:8px}.mobile-menu-toggle{display:block;margin-left:auto}.nav>.wrap>.btn{display:none}.nav ul{display:none;width:100%;order:3;flex-direction:column;gap:0;padding:8px 0}.nav ul.is-open{display:flex}.nav ul>li{padding:12px;border-bottom:1px solid var(--line)}.dd-menu{position:static;min-width:0;margin-top:10px}.solutions-grid{grid-template-columns:1fr}}@media(max-width:520px){section{padding-block:64px}.solution-card{padding:24px}}
+
+/* Keep one clear navigation row: category tabs replace the old anchor menu. */
+header.nav ul,header.nav .mobile-menu-toggle{display:none!important}
+/* Hybrid V2: discrete views instead of long vertical anchor scrolling */
+.view-tabs{position:sticky;top:64px;z-index:8;background:var(--ink);border-bottom:1px solid var(--line)}
+.view-tabs-inner{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;white-space:nowrap}
+.view-tabs a{padding:12px 14px;color:var(--muted);text-decoration:none;font-weight:600;font-size:13px;border-bottom:2px solid transparent}
+.view-tabs a[aria-current="page"]{color:var(--amber);border-bottom-color:var(--amber);background:rgba(246,162,58,.05)}
+.view-tabs a:hover{color:var(--text)}
+body.view-mode main > section[hidden]{display:none!important}
+body.view-mode main > section:not([hidden]){border-top:0}
+body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1px solid var(--line)}
+
+/* Expanded product explanation */
+.product-flow{display:grid;grid-template-columns:minmax(0,1fr) 220px minmax(0,1fr);align-items:stretch;gap:14px;margin:36px 0 10px}
+.flow-node{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;display:grid;gap:9px}
+.flow-node span,.product-steps article>span{font:500 11px var(--mono);letter-spacing:.1em;color:var(--cyan)}
+.flow-node strong{font-family:var(--display);font-size:24px}.flow-node small{color:var(--muted);font-size:14px}
+.flow-link{display:grid;align-content:center;text-align:center;gap:5px;color:var(--muted);font-size:13px}.flow-link strong{font:700 40px var(--display);color:var(--amber)}.flow-link small{line-height:1.5}
+.flow-note{text-align:center;font:500 12px var(--mono);color:var(--muted);margin-bottom:48px}
+.product-subtitle{margin:40px 0 22px;font-size:30px}
+.product-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.product-steps article{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;align-content:start;gap:12px}
+.product-steps article h3{font-size:19px}.product-steps article p{color:var(--muted);font-size:14px;line-height:1.55}
+.product-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:26px 0}
+.product-panels>div{border:1px solid var(--line);border-radius:14px;padding:26px}
+.product-panels h3{font-size:22px}.product-panels ul{color:var(--muted);padding-left:19px;display:grid;gap:10px}
+.product-caveat{padding:18px 20px;border-left:3px solid var(--amber);background:rgba(246,162,58,.055);font-size:14px;color:var(--muted);border-radius:5px}
+.product-detail .cta-row{margin-top:24px}
+@media(max-width:960px){.product-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.product-flow{grid-template-columns:1fr}.flow-link{padding:8px}.flow-link strong{font-size:28px}}
+@media(max-width:600px){.product-steps,.product-panels{grid-template-columns:1fr}.flow-node{padding:20px}.product-subtitle{font-size:26px}}
+
+/* Accessible mobile navigation and contact flow */
+.nav-actions{display:flex;align-items:center;gap:10px}
+#contact-draft{display:grid;gap:14px}
+#contact-draft .cta-row{margin-top:0}
+#draft-text{min-height:190px}
+section{scroll-margin-top:130px}
+@media(max-width:860px){
+ header.nav .wrap{height:64px;min-height:64px;box-sizing:border-box;flex-wrap:nowrap;gap:8px}
+ header.nav .mobile-menu-toggle{display:block!important;min-height:44px;cursor:pointer}
+ .brand{font-size:16px;gap:6px}.brand svg{width:22px}
+ .nav-actions{gap:7px}.nav .btn{padding:10px 12px;white-space:nowrap}
+ .view-tabs{top:64px;max-height:calc(100dvh - 64px);overflow:auto}
+ body.view-mode .view-tabs:not(.is-open){display:none}
+ .view-tabs-inner{display:grid;grid-template-columns:1fr 1fr;white-space:normal;overflow:visible;padding-block:12px}
+ .view-tabs a{min-height:44px;box-sizing:border-box;display:flex;align-items:center}
+ .hero{padding-top:40px}.hero h1{font-size:clamp(36px,9vw,56px)}
+ .hero .lead{font-size:17px}
+ section{scroll-margin-top:80px}
+ .mailcard{padding:22px}
+}
+@media(max-width:360px){.brand span{display:none}}
+.office-list{display:grid;gap:14px}
+.office-list article{padding:24px 28px;background:var(--panel);border:1px solid var(--line);border-radius:14px;display:grid;gap:8px}
+.office-list h3{font-size:28px}
+.office-list p{color:var(--muted);font-size:17px}
+/* ServiceNow product page */
+.badge.badge-prod{background:var(--ok);border-color:var(--ok);color:#06210f;font-weight:600}
+.sn-badges{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.sn-hero h1{font-size:clamp(40px,5.6vw,70px)}
+.sn-compare{display:grid;grid-template-columns:1fr 1fr}
+.sn-col{padding:18px 16px;display:grid;gap:12px;align-content:start;border-right:1px solid var(--line)}
+.sn-col:last-child{border-right:0}
+.sn-col p{font-family:var(--body);font-size:13px;color:var(--muted);line-height:1.5}
+.sn-h{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gap)}
+.sn-col.good .sn-h{color:var(--ok)}
+.sn-tix{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.sn-tix span{font-size:11px;padding:4px 6px;border:1px solid rgba(239,108,90,.35);color:var(--gap);border-radius:5px;text-align:center}
+.sn-one{display:grid;gap:4px;padding:12px;border:1px solid rgba(76,195,138,.45);border-radius:8px;background:rgba(76,195,138,.07)}
+.sn-one b{color:var(--ok);font-weight:500}
+.sn-one small{font-size:11.5px;color:var(--text)}
+.sn-one small+small{color:var(--muted)}
+@media (max-width:520px){.sn-compare{grid-template-columns:1fr}.sn-col{border-right:0;border-bottom:1px solid var(--line)}.sn-col:last-child{border-bottom:0}}
+.sn-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.sn-steps li{background:var(--ink);padding:28px 24px;display:grid;gap:10px;align-content:start}
+.sn-steps .n{font-family:var(--mono);font-size:12px;color:var(--cyan)}
+.sn-steps p{color:var(--muted);font-size:15px}
+@media (max-width:960px){.sn-steps{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.sn-steps{grid-template-columns:1fr}}
+.sn-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:28px;font-family:var(--mono);font-size:12.5px}
+.sn-flow span{padding:7px 12px;border-radius:999px;border:1px solid var(--line)}
+.sn-flow .calm{color:var(--cyan);border-color:rgba(63,182,232,.5)}
+.sn-flow .mid{color:var(--amber);border-color:rgba(246,162,58,.5)}
+.sn-flow .snow{color:var(--ok);border-color:rgba(76,195,138,.5)}
+.sn-flow b{color:var(--muted);font-weight:400}
+.sn-roles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sn-roles article{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:28px;display:grid;gap:12px;align-content:start}
+.sn-roles .tag{justify-self:start}
+.sn-roles ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--muted);font-size:15px}
+@media (max-width:900px){.sn-roles{grid-template-columns:1fr}}
+.sn-tbl{border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.sn-tbl td:first-child{font-weight:600;white-space:nowrap}
+.sn-tbl .hl{color:var(--cyan)}
+.sn-tbl tr:last-child td{border-bottom:0}
+.sn-ol{margin:0;padding-left:20px;display:grid;gap:10px;font-size:16px}
+.sn-need{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px;font-size:15px;color:var(--muted)}
+.sn-need b{color:var(--text);font-weight:600}
+.sn-note{margin-top:24px;border:1px solid rgba(76,195,138,.45);background:rgba(76,195,138,.07);border-radius:12px;padding:18px;display:grid;gap:6px}
+.sn-note b{color:var(--ok);font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.sn-note p{font-size:15px}
+.faq{display:grid;border-top:1px solid var(--line);max-width:860px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 0;font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--amber);font-size:20px;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 20px;color:var(--muted);max-width:68ch}
+footer a{color:var(--text)}
+
+:root{--violet:#A88BFA;--pink:#E879A6}
+#dfa .stage{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:28px}
+#dfa .stage-scroll{overflow-x:auto}
+#dfa svg{display:block;width:100%;min-width:760px;height:auto}
+#dfa .bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;padding:14px 18px;border-top:1px solid var(--line)}
+#dfa .narr{font-size:15px;min-height:3.2em;flex:1 1 360px}
+#dfa .narr b{color:var(--amber);font-weight:600}
+#dfa .ctrls{display:flex;gap:8px}
+#dfa button{font:600 13px var(--body);color:var(--text);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+#dfa button:hover{border-color:var(--muted)}
+#dfa button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+#dfa button:disabled{opacity:.4;cursor:default}
+#dfa .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line)}
+#dfa .stats div{background:var(--ink);padding:14px 18px;display:grid;gap:2px}
+#dfa .stats b{font-family:var(--display);font-size:28px;font-variant-numeric:tabular-nums;line-height:1}
+#dfa .stats small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#dfa .stats .bad b{color:var(--gap)} #dfa .stats .good b{color:var(--ok)}
+@media (max-width:420px){#dfa .stats{grid-template-columns:1fr}}
+#dfa .t-col{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;fill:var(--muted)}
+#dfa .t-sec{font:600 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+#dfa .t-src{font:600 13px var(--body);fill:var(--text)}
+#dfa .t-sub{font:400 10.5px var(--mono);fill:var(--muted)}
+#dfa .t-key{font:500 10.5px var(--mono);fill:var(--text)}
+#dfa .t-cnt{font:600 13px var(--mono)}
+#dfa .t-inc{font:500 11.5px var(--mono);fill:var(--text)}
+#dfa .t-inc2{font:400 10.5px var(--body);fill:var(--muted)}
+#dfa .t-rule{font:500 10px var(--mono);fill:var(--ok)}
+.lang-switch{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:40px;padding:0 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);text-decoration:none;font:600 13px/1 var(--mono);letter-spacing:.08em}.lang-switch:hover{color:var(--text);border-color:var(--muted)}@media (max-width:440px){header.nav .wrap{gap:8px}.brand{font-size:17px;gap:8px}.lang-switch{min-width:0;min-height:38px;padding:0 9px}.nav-actions{gap:6px}.nav .btn{padding:9px 10px;font-size:13px}}@media (max-width:440px){header.nav .brand{white-space:nowrap}header.nav .brand span{display:none}}@media (max-width:370px){header.nav .brand{font-size:0;gap:0}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/es/" aria-label="Inicio de ALM365 Cloud">
+      <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><polygon points="13,1 25,8 25,20 13,27 1,20 1,8" fill="none" stroke="#F6A23A" stroke-width="3"/><polygon points="13,7 19,10.5 19,17.5 13,21 7,17.5 7,10.5" fill="#3FB6E8"/></svg>
+      ALM365 <span>Cloud</span>
+    </a>
+    <div class="nav-actions"><a class="lang-switch" href="/servicenow" hreflang="en" lang="en" aria-label="English version">EN</a><a class="btn btn-primary" href="mailto:info@alm365cloud.com">Escríbenos &rarr;</a><button id="mobile-toggle" class="mobile-menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false">Menú</button></div>
+  </div>
+</header>
+
+<nav id="main-navigation" class="view-tabs" aria-label="Secciones principales"><div class="wrap view-tabs-inner">
+<a href="/es/">Inicio</a><a href="/es/products" aria-current="page">Productos</a><a href="/es/transition">Transición y ChaRM</a><a href="/es/ai">IA y automatización</a><a href="/es/services">Servicios</a><a href="/es/about">Quiénes somos</a><a href="/es/contact">Contacto</a>
+</div></nav>
+
+<main id="top" class="sn-main">
+<section class="hero sn-hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="sn-badges"><span class="badge badge-prod">En producción</span><div class="eyebrow">Producto 01 · DIFF Adapter for ServiceNow</div></div>
+      <h1>Alertas de Cloud ALM en ServiceNow, <em>sin avalancha de tickets.</em></h1>
+      <p class="lead">El DIFF Adapter conecta la monitorización de SAP Cloud ALM con ServiceNow para que un problema sea una sola incidencia. Las alertas repetidas actualizan el ticket que ya está abierto, cada alerta va al equipo correcto y los tickets se cierran cuando el problema desaparece.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:info@alm365cloud.com?subject=DIFF%20Adapter%20for%20ServiceNow">Pide una demostración &rarr;</a>
+        <a class="btn btn-ghost" href="#how">Mira cómo funciona</a>
+      </div>
+      <div class="deadline">
+        <div><b>1</b><small>problema → 1 incidencia</small></div>
+        <div><b>5</b><small>fuentes de monitorización soportadas</small></div>
+        <div><b>4–6 sem.</b><small>despliegue habitual</small></div>
+      </div>
+    </div>
+
+    <div class="console" role="img" aria-label="Ejemplo: doce eventos de Cloud ALM de la misma interfaz se convierten en una incidencia de ServiceNow">
+      <div class="console-bar"><div class="dots"><i></i><i></i><i></i></div><span>una mañana · ejemplo</span><span>12 eventos</span></div>
+      <div class="sn-compare">
+        <div class="sn-col">
+          <div class="sn-h">Sin el adaptador</div>
+          <div class="sn-tix">
+            <span>INC0041201</span><span>INC0041202</span><span>INC0041203</span><span>INC0041204</span>
+            <span>INC0041205</span><span>INC0041206</span><span>INC0041207</span><span>INC0041208</span>
+            <span>INC0041209</span><span>INC0041210</span><span>INC0041211</span><span>INC0041212</span>
+          </div>
+          <p>12 tickets por la misma interfaz que falla. La mayoría se cierran a mano.</p>
+        </div>
+        <div class="sn-col good">
+          <div class="sn-h">Con el DIFF Adapter</div>
+          <div class="sn-one">
+            <b>INC0041201</b>
+            <small>Falla la interfaz de pedidos a WMS</small>
+            <small>Actualizada 11 veces · Equipo de integración</small>
+          </div>
+          <p>Un solo ticket, siempre al día, enviado al equipo responsable de la interfaz.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Por qué lo necesitan los equipos</div>
+      <h2>La conexión estándar convierte cada alerta en un ticket nuevo.</h2>
+      <p class="lead">SAP Cloud ALM puede crear incidencias en ServiceNow de serie, una llamada por evento. En un landscape pequeño funciona. En uno real, el service desk pronto deja de fiarse de lo que le llega.</p>
+    </div>
+    <div class="svc">
+      <article><h3>Duplicados</h3><p>Un problema de negocio dispara muchos eventos de monitorización y cada uno abre su propia incidencia.</p></article>
+      <article><h3>Tickets que nunca se cierran</h3><p>La monitorización de interfaces e IDocs informa de errores pero nunca envía un "todo correcto", así que las incidencias siguen abiertas hasta que alguien las cierra a mano.</p></article>
+      <article><h3>Equipo y prioridad equivocados</h3><p>Se usa la misma plantilla para una alerta de base de datos, un IDoc fallido y un mensaje de integración atascado, así que el enrutamiento y la severidad se corrigen a posteriori.</p></article>
+      <article><h3>Frágil ante los cambios</h3><p>Un tenant nuevo, el paso a RISE o un nuevo caso de uso de monitorización obligan a reconfigurar la integración.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Cómo funciona</div>
+      <h2>Cuatro pasos de una alerta de Cloud ALM al ticket correcto en ServiceNow.</h2>
+      <p class="lead">El adaptador se sitúa entre las dos herramientas. Cloud ALM sigue haciendo la monitorización y ServiceNow sigue gestionando la incidencia. El adaptador se asegura de que lo que llega a ServiceNow llegue limpio.</p>
+    </div>
+    <ol class="sn-steps">
+      <li>
+        <span class="n">01</span>
+        <h3>Cloud ALM detecta algo</h3>
+        <p>Una métrica del sistema supera un umbral, falla una interfaz, un IDoc pasa a error o un job se rompe. Cloud ALM envía el evento al adaptador.</p>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <h3>El adaptador lo reconoce</h3>
+        <p>Lee a qué sistema y componente se refiere el evento y le da una identidad fija. El décimo evento sobre la misma interfaz recibe la misma identidad que el primero.</p>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <h3>Aplica tus reglas</h3>
+        <p>Cada tipo de alerta tiene sus propias reglas: qué grupo de asignación, qué categoría, qué prioridad. Una alerta de base de datos va a Basis; un IDoc fallido, al equipo de integración.</p>
+      </li>
+      <li>
+        <span class="n">04</span>
+        <h3>ServiceNow gestiona el ticket</h3>
+        <p>ServiceNow Event Management agrupa los eventos, abre una incidencia y la mantiene actualizada. Cuando el problema se recupera, la incidencia se cierra sola.</p>
+      </li>
+    </ol>
+    <div id="dfa">
+  <div class="stage">
+    <div class="stage-scroll">
+      <svg id="dfa-stage" viewBox="0 0 1000 540" role="img" aria-label="Animación: los eventos de Cloud ALM pasan por el DIFF Adapter; los eventos sin estado se agrupan por clave; ServiceNow recibe los eventos y una regla abre una incidencia por clave">
+        <defs>
+          <filter id="dfa-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- column headers -->
+        <text class="t-col" x="24" y="30">SAP Cloud ALM</text>
+        <text class="t-col" x="300" y="30" style="fill:var(--amber)">DIFF Adapter</text>
+        <text class="t-col" x="652" y="30" style="fill:var(--ok)">ServiceNow</text>
+
+        <!-- ServiceNow frame spanning both SN columns -->
+        <rect x="640" y="40" width="348" height="488" rx="14" fill="none" stroke="var(--ok)" stroke-opacity=".3" stroke-dasharray="4 4"/>
+        <!-- Cloud ALM frame -->
+        <rect x="10" y="40" width="262" height="488" rx="14" fill="none" stroke="var(--cyan)" stroke-opacity=".4" stroke-dasharray="4 4"/>
+        <!-- adapter frame -->
+        <rect x="288" y="40" width="292" height="488" rx="14" fill="none" stroke="var(--amber)" stroke-opacity=".45" stroke-dasharray="4 4"/>
+
+        <!-- section labels -->
+        <text class="t-sec" x="24" y="60" style="fill:var(--cyan)">Con estado</text>
+        <text class="t-sec" x="24" y="172" style="fill:var(--amber)">Sin estado</text>
+        <line x1="20" y1="150" x2="980" y2="150" stroke="var(--line)"/>
+
+
+        <g id="dfa-rows"></g>
+        <g id="dfa-dots"></g>
+      </svg>
+    </div>
+    <div class="bar">
+      <div class="narr" id="dfa-narr" aria-live="polite">Cloud ALM detecta problemas y envía eventos.</div>
+      <div class="ctrls"><button type="button" id="dfa-pause">Pausa</button><button type="button" id="dfa-replay">Repetir</button></div>
+    </div>
+    <div class="stats">
+      <div><b id="dfa-s-events">0</b><small>eventos a ServiceNow</small></div>
+      <div class="good"><b id="dfa-s-inc">0</b><small>incidencias en ServiceNow</small></div>
+      <div class="bad"><b id="dfa-s-without">0</b><small>tickets con integración directa</small></div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Qué cambia para cada equipo</div>
+      <h2>Cada uno sigue trabajando en su herramienta.</h2>
+    </div>
+    <div class="sn-roles">
+      <article>
+        <span class="tag">Service desk</span>
+        <h3>Una cola de la que fiarse</h3>
+        <ul>
+          <li>Una incidencia por problema, con un contador de repeticiones</li>
+          <li>Los tickets llegan ya asignados y priorizados</li>
+          <li>Menos tickets que cerrar a mano</li>
+        </ul>
+      </article>
+      <article>
+        <span class="tag">SAP Basis y soporte</span>
+        <h3>Cloud ALM sigue siendo el origen</h3>
+        <ul>
+          <li>La monitorización se sigue configurando y consultando en Cloud ALM</li>
+          <li>Cada incidencia incluye el sistema, el componente y los detalles de la alerta</li>
+          <li>Los sistemas o tenants nuevos se añaden cambiando una regla</li>
+        </ul>
+      </article>
+      <article>
+        <span class="tag">Dirección de IT</span>
+        <h3>Responsables claros y trazabilidad</h3>
+        <ul>
+          <li>Cada evento queda registrado con la regla aplicada y el resultado</li>
+          <li>Un ticket que falta o está duplicado se rastrea en minutos</li>
+          <li>Funciona en tu propia cuenta de SAP BTP, solo con APIs públicas</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Qué cubre</div>
+      <h2>Fuentes de monitorización de Cloud ALM soportadas.</h2>
+      <p class="lead">Cada fuente tiene sus propias reglas, así que sus tickets se comportan como espera ese equipo.</p>
+    </div>
+    <div class="tbl-wrap sn-tbl">
+      <table>
+        <thead><tr><th>Fuente</th><th>Alerta típica</th><th>Qué obtienes en ServiceNow</th></tr></thead>
+        <tbody>
+          <tr><td>Health Monitoring</td><td>Umbral de CPU, memoria o disco superado</td><td>Una incidencia por alerta, que se cierra automáticamente cuando la métrica vuelve a la normalidad</td></tr>
+          <tr><td>Integration Monitoring</td><td>Error de interfaz o de mensaje</td><td>Una incidencia por interfaz que falla; las repeticiones se añaden como actualizaciones</td></tr>
+          <tr><td>IDoc Monitoring</td><td>IDoc en estado de error</td><td>Una incidencia por tipo de IDoc y partner, con un contador de fallos</td></tr>
+          <tr><td>SuccessFactors / HCM</td><td>Fallo de job o de integración</td><td>Enrutada al grupo de soporte de HCM</td></tr>
+          <tr><td>Integration Suite</td><td>Fallo en el procesamiento de mensajes</td><td>Enrutada al equipo de integración, con la prioridad según lo crítico que sea el flujo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Frente al estándar de SAP</div>
+      <h2>Las mismas dos herramientas, otro resultado.</h2>
+    </div>
+    <div class="tbl-wrap sn-tbl">
+      <table>
+        <thead><tr><th></th><th>Integración estándar de SAP</th><th class="hl">DIFF Adapter</th></tr></thead>
+        <tbody>
+          <tr><td>Tickets por problema</td><td>Uno por evento</td><td class="hl">Uno por problema</td></tr>
+          <tr><td>Alertas repetidas</td><td>Un ticket nuevo cada vez</td><td class="hl">Se añaden al ticket abierto</td></tr>
+          <tr><td>Cierre de tickets</td><td>A mano o con scripts a medida</td><td class="hl">Automático al recuperarse; por tiempo en errores de interfaz</td></tr>
+          <tr><td>Enrutamiento y prioridad</td><td>Una plantilla para todo</td><td class="hl">Reglas por fuente de monitorización</td></tr>
+          <tr><td>Cambios en el landscape</td><td>Reconfigurar la integración</td><td class="hl">Editar un fichero de reglas</td></tr>
+          <tr><td>Trazabilidad</td><td>Log de salida de Cloud ALM</td><td class="hl">Log por evento, con regla y resultado</td></tr>
+          <tr><td>Qué hay que operar de más</td><td>Nada</td><td>Una pequeña aplicación en tu cuenta de SAP BTP</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap sgv-foot" style="margin-top:0">
+    <div>
+      <div class="eyebrow">Cómo empezar</div>
+      <h2 style="margin:16px 0 24px">En marcha en cuatro a seis semanas.</h2>
+      <ol class="sn-ol">
+        <li>Taller con tu service desk para acordar las reglas de enrutamiento y prioridad</li>
+        <li>Despliegue del adaptador en tu cuenta de SAP BTP</li>
+        <li>Arranque con Health Monitoring y pruebas en un tenant que no es de producción</li>
+        <li>Reglas de interfaces, IDoc, SuccessFactors e Integration Suite, añadidas una a una</li>
+      </ol>
+      <p class="lead" style="margin-top:20px;font-size:16px">La mayor parte del tiempo se va en acordar las reglas con el equipo de ITSM, no en el trabajo técnico.</p>
+    </div>
+    <div>
+      <div class="eyebrow">Qué necesitas</div>
+      <ul class="sn-need">
+        <li><b>SAP Cloud ALM</b> con Health, Integration, IDoc o Business Service Monitoring en uso</li>
+        <li><b>ServiceNow</b> ITSM con Event Management (ITOM)</li>
+        <li>Subcuenta de <b>SAP BTP</b> con Cloud Foundry, una instancia pequeña</li>
+        <li><b>Acceso por API</b> a Cloud ALM y ServiceNow, que configuramos juntos durante el despliegue</li>
+      </ul>
+      <div class="sn-note">
+        <b>Ya en producción</b>
+        <p>El adaptador funciona en un gran cliente empresarial y reúne las alertas de Health, Integration, IDoc, SuccessFactors e Integration Suite en un único flujo de incidencias sin duplicados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="next">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Próximamente</div>
+      <h2>En el roadmap.</h2>
+    </div>
+    <div class="svc">
+      <article><h3>Cierre desde ServiceNow</h3><p>Cuando la incidencia se cierra en ServiceNow, la alerta de Cloud ALM también se cierra.</p></article>
+      <article><h3>Cierres en RISE</h3><p>Las alertas que SAP resuelve en sistemas gestionados con RISE cierran el ticket de ServiceNow.</p></article>
+      <article><h3>Tickets más completos</h3><p>El histórico de métricas de Cloud ALM, adjunto a la incidencia.</p></article>
+      <article><h3>Gestión de cambios</h3><p>El mismo adaptador para los flujos de cambios y releases hacia ServiceNow.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Preguntas</div>
+      <h2>Preguntas frecuentes.</h2>
+    </div>
+    <div class="faq">
+      <details><summary>¿Necesitamos ServiceNow Event Management?</summary><p>Sí. Event Management se encarga de agrupar, eliminar duplicados y cerrar automáticamente. Si solo tienes ITSM, habla con nosotros sobre las opciones.</p></details>
+      <details><summary>¿Sustituye a la integración estándar de SAP?</summary><p>Sustituye la conexión directa de alerta a incidencia para las fuentes de monitorización incluidas en el alcance. Cloud ALM y ServiceNow siguen configurados como ya los conoces.</p></details>
+      <details><summary>¿Dónde se ejecuta y de quién es?</summary><p>En tu propia cuenta de SAP BTP, sobre Cloud Foundry. Usa solo APIs públicas de Cloud ALM y ServiceNow y no guarda datos propios.</p></details>
+      <details><summary>¿Qué pasa si añadimos un sistema o pasamos a RISE?</summary><p>Añades o ajustas una regla para ese sistema. Sin cambios de código y sin un nuevo proyecto de integración.</p></details>
+      <details><summary>¿Podemos probarlo antes?</summary><p>Sí. Empezamos en un tenant que no es de producción con Health Monitoring y te enseñamos el resultado en tu ServiceNow antes de pasar nada a producción.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap contact-grid">
+    <div class="sec-head" style="margin:0">
+      <div class="eyebrow">Contacto</div>
+      <h2>Míralo con tus propias alertas.</h2>
+      <p class="lead">Hacemos una demostración o un taller de reglas sobre tu landscape. Escríbenos y respondemos en dos días laborables.</p>
+      <div class="mail"><a href="mailto:info@alm365cloud.com" style="text-decoration:none"><code id="mail">info@alm365cloud.com</code></a><button type="button" id="copy">Copiar</button></div>
+    </div>
+    <div class="mailcard">
+      <h3>Pide una demostración</h3>
+      <p class="form-note" style="font-size:15px;color:var(--text)">Cuéntanos tu landscape por email. Sin presentaciones ni guiones de descubrimiento.</p>
+      <ul>
+        <li>Qué monitorización de Cloud ALM usas hoy</li>
+        <li>Tu release de ServiceNow y si tienes licencia de Event Management</li>
+        <li>Cuántas alertas de SAP llegan a ServiceNow por semana, aproximadamente</li>
+        <li>Qué equipos reciben las incidencias de SAP</li>
+      </ul>
+      <a class="btn btn-primary" href="mailto:info@alm365cloud.com?subject=DIFF%20Adapter%20for%20ServiceNow">Escríbenos &rarr;</a>
+      <p class="form-note">El botón abre tu aplicación de correo con el asunto ya escrito. Respondemos en dos días laborables.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> ALM365 Cloud &middot; SOLMAN365, S.L. &middot; NIF B10839165 &middot; <a href="/es/">Inicio</a></span>
+    <span class="legal-links"><a href="/aviso-legal">Aviso legal</a> &middot; <a href="/privacidad">Privacidad</a> &middot; <a href="/cookies">Cookies</a></span>
+    <span>SAP y SAP Cloud ALM son marcas de SAP SE. ServiceNow es una marca de ServiceNow, Inc.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.getElementById('copy').addEventListener('click',function(){
+    var t=document.getElementById('mail').textContent,b=this;
+    var done=function(){b.textContent='Copiado';setTimeout(function(){b.textContent='Copiar'},1500)};
+    try{navigator.clipboard.writeText(t).then(done,function(){sel()})}catch(e){sel()}
+    function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  });
+  document.body.classList.add('view-mode');
+  var toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('main-navigation');
+  toggle.addEventListener('click',function(){var on=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',on?'true':'false')});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('is-open')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.focus()}});
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+  function txt(p,x,y,cls,s,style){var t=el('text',{x:x,y:y,'class':cls},p);if(style)t.setAttribute('style',style);t.textContent=s;return t}
+
+  var ROWS=[
+    {id:'hm', y:70,  name:'Health Monitoring', sub:'con estado · abre / recupera', color:'var(--cyan)', key:'ID de alerta Cloud ALM', stateful:true,
+     inc:'INC0052001', title:'Memoria de HANA en PRD por encima del 90%', team:'SAP Basis'},
+    {id:'im', y:180, name:'Integration Monitoring', sub:'sin estado · se repite ~5 min', color:'var(--amber)', key:'Pedidos → WMS',
+     inc:'INC0052002', title:'Falla la interfaz de pedidos a WMS', team:'Equipo de integración'},
+    {id:'id', y:270, name:'IDoc Monitoring', sub:'sin estado · se repite', color:'var(--violet)', key:'ORDERS05 · WMS01', srcH:138,
+     inc:'INC0052003', title:'Errores en IDoc ORDERS05, partner WMS01', team:'Equipo de integración'},
+    {id:'id2', y:346, src:'id', color:'var(--violet)', key:'INVOIC02 · FIN01',
+     inc:'INC0052005', title:'Errores en IDoc INVOIC02, partner FIN01', team:'Soporte de finanzas'},
+    {id:'is', y:440, name:'Integration Suite', sub:'sin estado · se repite', color:'var(--pink)', key:'iFlow Billing_Out',
+     inc:'INC0052004', title:'Fallos de mensajes en el iFlow de facturación', team:'Equipo de integración'}
+  ];
+  var EV=[[0.6,'hm'],[0.9,'im'],[1.5,'im'],[1.9,'id'],[2.4,'im'],[2.8,'is'],[3.4,'id'],[3.9,'im'],[4.4,'im'],[4.9,'id'],[5.3,'is'],[5.8,'im'],[6.1,'id2'],[6.6,'id'],[6.9,'im'],[7.2,'id2'],[7.6,'is'],[8.0,'im'],[8.4,'id2']];
+  var RECOVER=10.2, END=17;
+  var H=62;
+
+  var gR=document.getElementById('dfa-rows'),gD=document.getElementById('dfa-dots');
+  var R={};
+  ROWS.forEach(function(r){
+    var y=r.y, g=el('g',{},gR), o={r:r,cy:y+H/2};
+    // source (one card per source; a source can feed several keys)
+    if(r.src){o.srcPulse=R[r.src].srcPulse}else{
+      o.srcRect=el('rect',{x:20,y:y,width:240,height:H,rx:10,fill:'var(--ink)',stroke:'var(--line)'},g);
+      o.srcIn=el('g',{},g);
+      el('circle',{cx:40,cy:y+H/2,r:6,fill:r.color},o.srcIn);
+      txt(o.srcIn,56,y+27,'t-src',r.name); txt(o.srcIn,56,y+44,'t-sub',r.sub);
+      o.srcPulse=el('rect',{x:20,y:y,width:240,height:H,rx:10,fill:'none',stroke:r.color,'stroke-opacity':0},g);
+    }
+    // adapter cell: key on top, events accumulate in the row below
+    o.adg=el('g',{opacity:0,style:'transition:opacity .45s'},g);
+    o.ad=el('rect',{x:300,y:y,width:268,height:H,rx:9,fill:'var(--ink)',stroke:'var(--line)'},o.adg);
+    txt(o.adg,314,y+23,'t-sub',r.stateful?'ID alerta':'clave');
+    el('rect',{x:372,y:y+9,width:182,height:20,rx:6,fill:'none',stroke:r.color,'stroke-opacity':.7},o.adg);
+    txt(o.adg,380,y+23,'t-key',r.key);
+    o.bk=el('rect',{x:310,y:y+34,width:248,height:20,rx:6,fill:'rgba(255,255,255,.02)',stroke:r.color,'stroke-opacity':.25,'stroke-dasharray':'3 3'},o.adg);
+    o.stack=el('g',{},o.adg);
+    o.cnt=txt(o.adg,550,y+48,'t-cnt','','fill:'+r.color+';text-anchor:end;font-size:10.5px');
+    if(r.stateful) txt(g,300,y-6,'t-sub','El estándar SAP lo cubre · DIFF puede ampliarlo','fill:var(--cyan);font-size:9.5px');
+    // ServiceNow: events arrive, a rule opens one incident per key
+    o.ig=el('g',{opacity:0,style:'transition:opacity .45s'},g);
+    o.ir=el('rect',{x:652,y:y,width:324,height:H,rx:9,fill:'var(--ink)',stroke:'var(--ok)','stroke-opacity':.45},o.ig);
+    txt(o.ig,666,y+20,'t-inc',r.inc);
+    o.ist=txt(o.ig,962,y+20,'t-sub','—','text-anchor:end');
+    txt(o.ig,666,y+37,'t-inc2',r.title);
+    o.iup=txt(o.ig,666,y+52,'t-sub','');
+    o.g=g;o.off=0;R[r.id]=o;
+  });
+
+  var S={ev:document.getElementById('dfa-s-events'),inc:document.getElementById('dfa-s-inc'),wo:document.getElementById('dfa-s-without')};
+  var narr=document.getElementById('dfa-narr');
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var t0=null,paused=false,pausedAt=0,last=null,dots=[],fired=0,recovered=false,n={ev:0,inc:0,wo:0};
+
+  function lerp(a,b,u){return a+(b-a)*u}
+  function ease(u){return u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2}
+  function say(h){if(narr.innerHTML!==h)narr.innerHTML=h}
+  function flash(node,attr,on,off,ms){node.setAttribute(attr,on);setTimeout(function(){node.setAttribute(attr,off)},ms||300)}
+  function stat(k,v){n[k]=v;S[k].textContent=v}
+
+  var exp=0,expanding=false,SHIFT=94;
+  var svgEl=gR.ownerSVGElement, frames=[].slice.call(svgEl.querySelectorAll('rect[height="488"]'));
+  function layout(e){
+    var o=R.is; o.off=-SHIFT*(1-e); o.g.setAttribute('transform','translate(0,'+o.off+')'); o.cy=o.r.y+H/2+o.off;
+    frames.forEach(function(fr){fr.setAttribute('height',488-SHIFT*(1-e))});
+    svgEl.setAttribute('viewBox','0 0 1000 '+(540-SHIFT*(1-e)));
+  }
+  function reset(){
+    gD.innerHTML='';dots=[];exp=0;expanding=false;layout(0);fired=0;recovered=false;['ev','inc','wo'].forEach(function(k){stat(k,0)});
+    ROWS.forEach(function(r){var o=R[r.id];o.c=0;o.next=0;if(o.bk){o.bk.setAttribute('stroke-opacity',.25)}o.ae=0;o.alerted=false;o.incd=false;o.cnt.textContent='';if(o.stack)o.stack.innerHTML='';
+      o.ie=0;o.ig.setAttribute('opacity',0);o.adg.setAttribute('opacity',0);o.ist.textContent='—';o.ist.setAttribute('style','text-anchor:end');o.iup.textContent='';o.ad.setAttribute('stroke','var(--line)')});
+  }
+  function slotXY(o,i){return [322+(i%12)*12,o.r.y+44]}
+  function spawn(id,kind){
+    var o=R[id];
+    var so=o.r.src?R[o.r.src]:o;
+    var d=el('circle',{r:6,cx:262,cy:so.cy,fill:kind==='recover'?'var(--ok)':o.r.color,filter:'url(#dfa-glow)'},gD);
+    if(id==='id2'&&!expanding)expanding=true;
+    var dd={el:d,id:id,kind:kind,leg:0,t:0,sy:so.cy};
+    if(id==='id'||id==='id2'){dd.lbl=txt(gD,270,so.cy-10,'t-sub',o.r.key.split(' ')[0],'fill:'+o.r.color+';font-size:9.5px')}
+    o.next=(o.next||0)+1;dd.slot=slotXY(o,o.next-1);
+    dots.push(dd);
+    flash(o.srcPulse,'stroke-opacity',1,0,260);
+  }
+  // leg 0: source → adapter ; leg 1: adapter → EM alert ; leg 2: alert → incident (rule)
+  var LEG=[[262,420],[560,652]], DUR=[0.8,0.65];
+  function atAdapter(d){
+    var o=R[d.id],rec=d.kind==='recover',xy=d.slot;
+    o.adg.setAttribute('opacity',1);
+    el('circle',{cx:xy[0],cy:xy[1],r:4.5,fill:rec?'var(--ok)':o.r.color,opacity:.95},o.stack);
+    o.bk.setAttribute('stroke-opacity',.9);setTimeout(function(){o.bk.setAttribute('stroke-opacity',.45)},350);
+    flash(o.ad,'stroke',rec?'var(--ok)':o.r.color,'var(--line)');
+    if(rec){o.cnt.textContent='apertura + recuperación';return}
+    o.c++;
+    o.cnt.textContent=o.r.stateful?'1 evento · reenviado':(o.c+(o.c===1?' evento':' eventos'));
+    stat('wo',n.wo+1);
+  }
+  function atSN(d){
+    var o=R[d.id],team=o.r.team;
+    if(d.kind==='recover'){o.ist.textContent='Cerrada';o.ist.setAttribute('style','text-anchor:end;fill:var(--ok)');o.iup.textContent='recuperación recibida · cerrada por regla';return}
+    stat('ev',n.ev+1);
+    o.ie++;
+    flash(o.ir,'stroke-opacity',1,.45);
+    if(!o.incd){o.incd=true;o.ig.setAttribute('opacity',1);o.ist.textContent='Nueva';o.ist.setAttribute('style','text-anchor:end;fill:var(--amber)');stat('inc',n.inc+1);o.iup.textContent='abierta por regla · '+team;return}
+    o.ist.textContent='Actualizada';o.ist.setAttribute('style','text-anchor:end;fill:var(--cyan)');
+    o.iup.textContent=o.ie+' eventos, misma clave · '+team;
+  }
+
+  function step(dt){
+    dots=dots.filter(function(d){
+      d.t+=dt/DUR[d.leg];
+      var u=ease(Math.min(d.t,1)),L=LEG[d.leg],o=R[d.id];
+      if(d.leg===0&&d.slot){d.el.setAttribute('cx',lerp(262,d.slot[0],u));d.el.setAttribute('cy',lerp(d.sy,d.slot[1]+o.off,u));if(d.lbl){d.lbl.setAttribute('x',+d.el.getAttribute('cx')+8);d.lbl.setAttribute('y',+d.el.getAttribute('cy')-9)}}
+      else{d.el.setAttribute('cx',lerp(L[0],L[1],u));d.el.setAttribute('cy',o.cy)}
+      if(d.t<1)return true;
+      if(d.leg===0){if(d.lbl){d.lbl.remove();d.lbl=null}atAdapter(d);d.leg=1;d.t=0;d.el.setAttribute('r',4);if(d.slot)d.el.setAttribute('opacity',.8);return true}
+      atSN(d);d.el.remove();return false;
+    });
+  }
+
+  function frame(now){
+    if(paused){last=now;requestAnimationFrame(frame);return}
+    if(t0===null){t0=now;last=now}
+    var dt=Math.min((now-last)/1000,0.05);last=now;
+    var t=(now-t0)/1000;
+    while(fired<EV.length&&EV[fired][0]<=t){spawn(EV[fired][1],'event');fired++}
+    if(!recovered&&t>=RECOVER){recovered=true;spawn('hm','recover')}
+    if(t<2.6)say('Cloud ALM envía eventos. Health Monitoring, <b>con estado</b>, envía uno cuando una métrica se dispara y otro cuando se recupera. La monitorización <b>sin estado</b> se repite cada pocos minutos.');
+    else if(t<5.6)say('El DIFF Adapter da a cada evento <b>sin estado</b> una clave estable, así que las repeticiones del mismo problema se agrupan. Las alertas con estado pasan tal cual con su propio ID de alerta.');
+    else if(t<6.1)say('El adaptador envía <b>eventos</b> a ServiceNow, no incidencias. Una <b>regla</b> en ServiceNow abre una incidencia por clave y le añade los eventos posteriores.');
+    else if(t<10)say('Falla un <b>tipo de IDoc distinto</b>. Recibe una clave nueva, así que el adaptador crea una entrada nueva y ServiceNow abre otra incidencia, enrutada a Finanzas.');
+    else if(t<END-2)say('Cuando la métrica de HANA se recupera, la incidencia se cierra sola. Para las alertas con estado, el estándar de SAP ya lo hace; el adaptador puede añadir reglas de enrutamiento, severidad o CMDB.');
+    else say('19 eventos, 5 incidencias. Una integración directa abriría 19 tickets.');
+    if(expanding&&exp<1){exp=Math.min(1,exp+dt/1.4);layout(ease(exp))}
+    step(dt);
+    if(t>=END){t0=now;reset()}
+    requestAnimationFrame(frame);
+  }
+
+  function staticView(){
+    reset();layout(1);
+    EV.forEach(function(e){var o=R[e[1]];o.next=(o.next||0)+1;var d={id:e[1],kind:'event',slot:slotXY(o,o.next-1)};atAdapter(d);atSN(d)});
+    var rv={id:'hm',kind:'recover',slot:slotXY(R.hm,1)};atAdapter(rv);atSN(rv);
+    say('19 eventos de Cloud ALM llegan a ServiceNow y una regla abre 5 incidencias, una por clave. Una integración directa abriría 19 tickets.');
+  }
+
+  var pb=document.getElementById('dfa-pause');
+  pb.addEventListener('click',function(){paused=!paused;pb.textContent=paused?'Reproducir':'Pausa'});
+  document.getElementById('dfa-replay').addEventListener('click',function(){
+    if(reduce){staticView();return}
+    reset();t0=null;paused=false;pb.textContent='Pausa';
+  });
+  reset();
+  if(reduce){staticView();pb.disabled=true}
+  else if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();requestAnimationFrame(frame)}},{threshold:.35});io.observe(document.getElementById('dfa-stage'))}
+  else{requestAnimationFrame(frame)}
+})();
+</script>
+
+<script src="/assets/analytics.js" defer></script>
+</body>
+</html>

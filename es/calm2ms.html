@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Calm2MS — Documentos de SAP Cloud ALM en tu SharePoint | ALM365 Cloud</title>
+<meta name="description" content="Calm2MS guarda los documentos de SAP Cloud ALM en tu propia biblioteca de SharePoint: un solo archivo, historial de versiones, en los dos sentidos, acceso con Sites.Selected y un precio por tenant. El acceso anticipado abre en enero.">
+<link rel="canonical" href="https://alm365cloud.com/es/calm2ms">
+<link rel="alternate" hreflang="en" href="https://alm365cloud.com/calm2ms">
+<link rel="alternate" hreflang="es" href="https://alm365cloud.com/es/calm2ms">
+<link rel="alternate" hreflang="x-default" href="https://alm365cloud.com/calm2ms">
+<meta name="theme-color" content="#0A0F1C">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="preload" href="/assets/fonts/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:site_name" content="ALM365 Cloud">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://alm365cloud.com/es/calm2ms">
+<meta property="og:title" content="Calm2MS — Documentos de SAP Cloud ALM en tu SharePoint | ALM365 Cloud">
+<meta property="og:description" content="Calm2MS: los documentos de SAP Cloud ALM, guardados en tu propia biblioteca de SharePoint, en los dos sentidos.">
+<meta property="og:image" content="https://calm2ms.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Calm2MS — Documentos de SAP Cloud ALM en tu SharePoint">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calm2MS — Documentos de SAP Cloud ALM en tu SharePoint | ALM365 Cloud">
+<meta name="twitter:description" content="Calm2MS: los documentos de SAP Cloud ALM, guardados en tu propia biblioteca de SharePoint, en los dos sentidos.">
+<meta name="twitter:image" content="https://calm2ms.com/og.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Calm2MS","applicationCategory":"BusinessApplication","description":"Guarda los documentos de SAP Cloud ALM en la biblioteca de SharePoint del propio cliente: un solo archivo, historial de versiones en SharePoint, en los dos sentidos.","url":"https://alm365cloud.com/es/calm2ms","sameAs":"https://calm2ms.com/","publisher":{"@type":"Organization","name":"ALM365 Cloud","legalName":"SOLMAN365 SL"}}
+</script>
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+/* Layout: dark single-theme product site. Wide hero with a live "transition console", then a stacked catalogue of packages on a 12-col grid. */
+:root{
+  --ink:#0A0F1C;          /* page ground, blue-biased near black */
+  --panel:#111829;        /* raised surfaces */
+  --line:#222C44;         /* hairlines */
+  --text:#E7ECF6;
+  --muted:#93A0BA;
+  --amber:#F6A23A;        /* primary accent, from the hexagon mark */
+  --cyan:#3FB6E8;         /* secondary, from the hexagon mark */
+  --ok:#4CC38A; --warn:#E8B341; --gap:#EF6C5A;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --wrap:1180px;
+  color-scheme:dark;
+}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--ink);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.02em}
+h2{font-size:clamp(30px,4.2vw,48px);font-weight:700}
+h3{font-size:22px;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.lead{color:var(--muted);font-size:18px;max-width:62ch}
+section{padding-block:96px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:16px;margin-bottom:48px}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+/* nav */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--ink) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.02em}
+.brand span{color:var(--muted);font-weight:500}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-size:14px;color:var(--muted)}
+.nav ul a{text-decoration:none}.nav ul a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--body)}
+.btn-primary{background:var(--amber);color:#1A1205}
+.btn-primary:hover{background:#FFB653}
+.btn-ghost{border-color:var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--muted)}
+.nav .btn{padding:9px 16px;font-size:14px}
+.dd{position:relative}
+.dd-btn{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.dd-btn:hover,.dd-btn[aria-expanded="true"]{color:var(--text)}
+.dd-btn span{font-size:11px}
+.dd-menu{position:absolute;top:calc(100% + 14px);left:-16px;min-width:300px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px;display:grid;gap:2px;box-shadow:0 20px 50px -20px rgba(0,0,0,.8);z-index:20}
+.dd-menu a{display:grid;gap:2px;padding:10px 12px;border-radius:8px;color:var(--text)}
+.dd-menu a:hover,.dd-menu a:focus-visible{background:rgba(255,255,255,.05)}
+.dd-menu b{font-weight:600;font-size:14px}
+.dd-menu small{color:var(--muted);font-size:12.5px}
+.dd-menu .dd-all{border-top:1px solid var(--line);border-radius:0 0 8px 8px;margin-top:4px;color:var(--cyan);font-size:13px;font-weight:600}
+@media (max-width:860px){.nav ul{display:none}}
+
+/* hero */
+.hero{padding-block:80px 96px;border-top:0;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:-20% -10% auto auto;width:640px;height:640px;background:radial-gradient(closest-side,rgba(63,182,232,.16),transparent);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
+.hero-grid > *{min-width:0}
+.hero h1{font-size:clamp(42px,6.4vw,80px);font-weight:800;margin-top:18px}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero .lead{margin-top:24px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.deadline{display:flex;gap:28px;flex-wrap:wrap;margin-top:44px;padding-top:24px;border-top:1px solid var(--line)}
+.deadline div{display:grid;gap:2px}
+.deadline b{font-family:var(--display);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+.deadline small{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr}}
+
+/* console */
+.console{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 80px -30px rgba(0,0,0,.7);font-family:var(--mono);font-size:13px;overflow:hidden}
+.console-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
+.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+.map{display:grid}
+.map-row{display:grid;grid-template-columns:1fr 18px 1fr auto;gap:10px;align-items:center;padding:11px 16px;border-bottom:1px solid var(--line)}
+.map-row:last-child{border-bottom:0}
+.map-row .from{color:var(--muted)}
+.map-row .arrow{color:var(--line)}
+.map-row .to{color:var(--text)}
+.pill{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.pill.ok{color:var(--ok)}.pill.warn{color:var(--warn)}.pill.gap{color:var(--gap)}
+.console-foot{display:flex;flex-wrap:wrap;gap:14px;padding:12px 16px;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px}
+.console-foot span{display:flex;align-items:center;gap:6px}
+.console-foot i{width:8px;height:8px;border-radius:50%;display:block}
+@media (max-width:520px){.map-row{grid-template-columns:1fr auto;row-gap:2px}.map-row .arrow{display:none}.map-row .to{grid-column:1}.map-row .pill{grid-column:2;grid-row:1 / span 2}}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.step{background:var(--ink);padding:32px 28px;display:grid;gap:12px;align-content:start}
+.step .n{font-family:var(--mono);font-size:12px;color:var(--cyan)}
+.step p{color:var(--muted)}
+.step ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px;display:grid;gap:4px}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+
+/* path */
+.path{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:40px;font-family:var(--mono);font-size:12.5px}
+.path span{padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.path span.core{border-color:var(--amber);color:var(--amber)}
+.path b{color:var(--line);font-weight:400}
+
+/* packages */
+.pkgs{display:grid;gap:20px}
+.pkg{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
+.pkg-top{display:grid;grid-template-columns:120px 1fr auto;gap:28px;padding:32px;align-items:start}
+.pkg-top > *{min-width:0}
+.pkg-num{font-family:var(--display);font-size:64px;font-weight:800;line-height:.9;color:transparent;-webkit-text-stroke:1px var(--muted)}
+.pkg.core .pkg-num{-webkit-text-stroke:1px var(--amber)}
+.pkg-kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+.pkg.core .pkg-kicker{color:var(--amber)}
+.pkg-top h3{font-size:clamp(24px,2.6vw,30px)}
+.pkg-top p{color:var(--muted);margin-top:10px;max-width:64ch}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:5px 9px;white-space:nowrap}
+details.more{border-top:1px solid var(--line)}
+details.more summary{list-style:none;cursor:pointer;padding:16px 32px;font-size:14px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+";font-family:var(--mono);font-size:18px;color:var(--amber);transition:transform .2s}
+details.more[open] summary::after{transform:rotate(45deg)}
+details.more summary:hover{background:rgba(255,255,255,.02)}
+.more-body{padding:4px 32px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.more-body > div{min-width:0}
+.more-body h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:500}
+.more-body ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:15px}
+.more-body li{padding-left:18px;position:relative}
+.more-body li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--amber)}
+.more-body li.no::before{background:var(--gap)}
+.more-body li small{display:block;color:var(--muted);font-size:13.5px}
+.phases{grid-column:1 / -1;display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.phase{border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:4px}
+.phase b{font-family:var(--mono);font-size:11px;color:var(--amber);font-weight:500}
+.phase span{font-weight:600;font-size:14px}
+.phase small{color:var(--muted);font-size:12.5px;line-height:1.4}
+@media (max-width:860px){.phases{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:700px){.pkg-top{grid-template-columns:1fr;gap:12px;padding:24px}.pkg-num{font-size:44px}details.more summary{padding:16px 24px}.more-body{padding:4px 24px 24px}}
+
+.tbl-wrap{overflow-x:auto;grid-column:1 / -1}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+td.c{text-align:center;color:var(--ok);font-family:var(--mono);font-size:13px}
+td.c.o{color:var(--muted)}
+td:first-child{color:var(--text)}
+
+/* AI track */
+.ai{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.ai > *{min-width:0}
+.ai-card{border:1px solid var(--cyan);border-radius:16px;padding:32px;background:linear-gradient(180deg,rgba(63,182,232,.08),transparent 60%);display:grid;gap:20px}
+.ai-card h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin:0;font-weight:500}
+.ai-card ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--text);font-size:15px}
+.ai-cmp{display:grid;grid-template-columns:auto 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;margin-top:28px}
+.ai-cmp div{padding:10px 14px;border-bottom:1px solid var(--line)}
+.ai-cmp .h{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ai-cmp .k{color:var(--muted)}
+.ai-cmp .hl{color:var(--cyan)}
+@media (max-width:900px){.ai{grid-template-columns:1fr}}
+
+/* bundles */
+.bundles{display:grid;gap:0;border-top:1px solid var(--line)}
+.bundle{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--line);align-items:center}
+.bundle > *{min-width:0}
+.bundle p{color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(246,162,58,.1);color:var(--amber);border:1px solid rgba(246,162,58,.35)}
+.chip.ai{background:rgba(63,182,232,.1);color:var(--cyan);border-color:rgba(63,182,232,.35)}
+@media (max-width:700px){.bundle{grid-template-columns:1fr;gap:10px}}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.svc article{border-top:2px solid var(--line);padding-top:20px;display:grid;gap:10px;align-content:start}
+.svc article:hover{border-top-color:var(--amber)}
+.svc p{color:var(--muted);font-size:15px}
+@media (max-width:960px){.svc{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.svc{grid-template-columns:1fr}}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.about > *{min-width:0}
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.creds div{background:var(--ink);padding:24px;display:grid;gap:6px}
+.creds b{font-family:var(--display);font-size:34px;font-weight:700;line-height:1}
+.creds span{color:var(--muted);font-size:14px}
+@media (max-width:900px){.about{grid-template-columns:1fr}}
+
+/* contact */
+.contact{background:radial-gradient(800px 300px at 20% 0%,rgba(246,162,58,.12),transparent),var(--ink)}
+.contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start}
+.contact-grid > *{min-width:0}
+.mailcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;display:grid;gap:14px}
+.mailcard h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:500}
+.mailcard ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:15px}
+label{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:15px;color:var(--text);background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;box-sizing:border-box}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--amber)}
+textarea{min-height:96px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-note{font-size:13px;color:var(--muted)}
+.form-ok{color:var(--ok);font-size:14px}
+.mail{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:28px;font-family:var(--mono);font-size:15px}
+.mail code{padding:8px 12px;border:1px solid var(--line);border-radius:8px;user-select:all}
+.mail button{font:inherit;font-size:12px;background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:8px 10px;cursor:pointer}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.row2{grid-template-columns:1fr}}
+
+/* CALM2Signavio */
+.sgv-head{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:end;margin-bottom:48px}
+.sgv-head > *{min-width:0}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(246,162,58,.4);border-radius:999px;padding:5px 12px}
+.coverage{border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14px}
+.coverage div{display:grid;grid-template-columns:1fr auto;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);align-items:center}
+.coverage div:last-child{border-bottom:0}
+.coverage .h{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lanes{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow-x:auto;margin-bottom:40px}
+.lanes-in{min-width:760px;display:grid;grid-template-columns:130px repeat(3,1fr)}
+.lanes-in > div{padding:16px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-size:14px;display:grid;gap:6px;align-content:start}
+.lanes-in > div:nth-child(4n){border-right:0}
+.lanes-in > div:nth-last-child(-n+4){border-bottom:0}
+.lanes-in .ph{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lanes-in .ph b{display:block;font-family:var(--display);font-size:18px;letter-spacing:-.01em;text-transform:none;color:var(--text);margin-top:4px}
+.lanes-in .ln{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center}
+.lanes-in .ln.s{color:var(--cyan)}.lanes-in .ln.e{color:var(--amber)}.lanes-in .ln.c{color:var(--ok)}
+.lanes-in .w{color:var(--text)}
+.lanes-in .r{color:var(--muted)}
+.lanes-in .g{color:var(--warn)}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px}
+.feat article{border-top:2px solid var(--cyan);padding-top:18px;display:grid;gap:8px;align-content:start}
+.feat p{color:var(--muted);font-size:15px}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.modes div{background:var(--ink);padding:22px;display:grid;gap:6px;align-content:start}
+.modes b{font-family:var(--mono);font-size:12px;color:var(--amber);font-weight:500}
+.modes span{font-weight:600}
+.modes p{color:var(--muted);font-size:14px}
+.sgv-foot{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:40px}
+.sgv-foot > div{min-width:0}
+.sgv-foot h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:500}
+.sgv-foot ol,.sgv-foot ul{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px}
+@media (max-width:900px){.sgv-head,.sgv-foot{grid-template-columns:1fr}.feat,.modes{grid-template-columns:1fr}}
+.products-intro{background:linear-gradient(180deg,rgba(63,182,232,.06),transparent 70%),var(--ink)}
+.prod-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.prod-card{display:grid;gap:14px;align-content:start;padding:32px;border:1px solid var(--line);border-radius:16px;background:var(--panel);text-decoration:none;color:var(--text);transition:border-color .2s}
+.prod-card:hover{border-color:var(--cyan)}
+.prod-card .badge{justify-self:start}
+.prod-card .flowline{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.prod-card .flowline b{color:var(--text);font-weight:500;border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+.prod-card p{color:var(--muted)}
+.prod-card .more-link{font-size:14px;font-weight:600;color:var(--cyan)}
+.prod-sub{border-top:0;padding-top:24px}
+.lanes-in.two{grid-template-columns:130px repeat(2,1fr)}
+.lanes-in.two > div{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lanes-in.two > div:nth-child(3n){border-right:0}
+.lanes-in.two > div:nth-last-child(-n+3){border-bottom:0}
+@media (max-width:1060px){.prod-cards{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){.prod-cards{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--text)}
+/* Hybrid V2 */
+.solutions{background:linear-gradient(180deg,#111c30,#0a0f1c)}.solutions-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.solution-card{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:32px;text-decoration:none;display:grid;gap:16px;transition:transform .2s,border-color .2s}.solution-card:hover{transform:translateY(-3px);border-color:var(--cyan)}.solution-card span{font:500 11px var(--mono);color:var(--cyan)}.solution-card p{color:var(--muted)}.solution-card b{font-size:14px;color:var(--amber)}.mobile-menu-toggle{display:none;background:var(--panel);color:var(--text);font:600 14px var(--body);border:1px solid var(--line);border-radius:8px;padding:8px 12px}@media(max-width:860px){header.nav .wrap{height:auto;min-height:64px;flex-wrap:wrap;padding-block:8px}.mobile-menu-toggle{display:block;margin-left:auto}.nav>.wrap>.btn{display:none}.nav ul{display:none;width:100%;order:3;flex-direction:column;gap:0;padding:8px 0}.nav ul.is-open{display:flex}.nav ul>li{padding:12px;border-bottom:1px solid var(--line)}.dd-menu{position:static;min-width:0;margin-top:10px}.solutions-grid{grid-template-columns:1fr}}@media(max-width:520px){section{padding-block:64px}.solution-card{padding:24px}}
+
+/* Keep one clear navigation row: category tabs replace the old anchor menu. */
+header.nav ul,header.nav .mobile-menu-toggle{display:none!important}
+/* Hybrid V2: discrete views instead of long vertical anchor scrolling */
+.view-tabs{position:sticky;top:64px;z-index:8;background:var(--ink);border-bottom:1px solid var(--line)}
+.view-tabs-inner{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;white-space:nowrap}
+.view-tabs a{padding:12px 14px;color:var(--muted);text-decoration:none;font-weight:600;font-size:13px;border-bottom:2px solid transparent}
+.view-tabs a[aria-current="page"]{color:var(--amber);border-bottom-color:var(--amber);background:rgba(246,162,58,.05)}
+.view-tabs a:hover{color:var(--text)}
+body.view-mode main > section[hidden]{display:none!important}
+body.view-mode main > section:not([hidden]){border-top:0}
+body.view-mode main > section:not([hidden]) + section:not([hidden]){border-top:1px solid var(--line)}
+
+/* Expanded product explanation */
+.product-flow{display:grid;grid-template-columns:minmax(0,1fr) 220px minmax(0,1fr);align-items:stretch;gap:14px;margin:36px 0 10px}
+.flow-node{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;display:grid;gap:9px}
+.flow-node span,.product-steps article>span{font:500 11px var(--mono);letter-spacing:.1em;color:var(--cyan)}
+.flow-node strong{font-family:var(--display);font-size:24px}.flow-node small{color:var(--muted);font-size:14px}
+.flow-link{display:grid;align-content:center;text-align:center;gap:5px;color:var(--muted);font-size:13px}.flow-link strong{font:700 40px var(--display);color:var(--amber)}.flow-link small{line-height:1.5}
+.flow-note{text-align:center;font:500 12px var(--mono);color:var(--muted);margin-bottom:48px}
+.product-subtitle{margin:40px 0 22px;font-size:30px}
+.product-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.product-steps article{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;align-content:start;gap:12px}
+.product-steps article h3{font-size:19px}.product-steps article p{color:var(--muted);font-size:14px;line-height:1.55}
+.product-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:26px 0}
+.product-panels>div{border:1px solid var(--line);border-radius:14px;padding:26px}
+.product-panels h3{font-size:22px}.product-panels ul{color:var(--muted);padding-left:19px;display:grid;gap:10px}
+.product-caveat{padding:18px 20px;border-left:3px solid var(--amber);background:rgba(246,162,58,.055);font-size:14px;color:var(--muted);border-radius:5px}
+.product-detail .cta-row{margin-top:24px}
+@media(max-width:960px){.product-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.product-flow{grid-template-columns:1fr}.flow-link{padding:8px}.flow-link strong{font-size:28px}}
+@media(max-width:600px){.product-steps,.product-panels{grid-template-columns:1fr}.flow-node{padding:20px}.product-subtitle{font-size:26px}}
+
+/* Accessible mobile navigation and contact flow */
+.nav-actions{display:flex;align-items:center;gap:10px}
+#contact-draft{display:grid;gap:14px}
+#contact-draft .cta-row{margin-top:0}
+#draft-text{min-height:190px}
+section{scroll-margin-top:130px}
+@media(max-width:860px){
+ header.nav .wrap{height:64px;min-height:64px;box-sizing:border-box;flex-wrap:nowrap;gap:8px}
+ header.nav .mobile-menu-toggle{display:block!important;min-height:44px;cursor:pointer}
+ .brand{font-size:16px;gap:6px}.brand svg{width:22px}
+ .nav-actions{gap:7px}.nav .btn{padding:10px 12px;white-space:nowrap}
+ .view-tabs{top:64px;max-height:calc(100dvh - 64px);overflow:auto}
+ body.view-mode .view-tabs:not(.is-open){display:none}
+ .view-tabs-inner{display:grid;grid-template-columns:1fr 1fr;white-space:normal;overflow:visible;padding-block:12px}
+ .view-tabs a{min-height:44px;box-sizing:border-box;display:flex;align-items:center}
+ .hero{padding-top:40px}.hero h1{font-size:clamp(36px,9vw,56px)}
+ .hero .lead{font-size:17px}
+ section{scroll-margin-top:80px}
+ .mailcard{padding:22px}
+}
+@media(max-width:360px){.brand span{display:none}}
+.office-list{display:grid;gap:14px}
+.office-list article{padding:24px 28px;background:var(--panel);border:1px solid var(--line);border-radius:14px;display:grid;gap:8px}
+.office-list h3{font-size:28px}
+.office-list p{color:var(--muted);font-size:17px}
+/* ServiceNow product page */
+.badge.badge-prod{background:var(--ok);border-color:var(--ok);color:#06210f;font-weight:600}
+.sn-badges{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.sn-hero h1{font-size:clamp(40px,5.6vw,70px)}
+.sn-compare{display:grid;grid-template-columns:1fr 1fr}
+.sn-col{padding:18px 16px;display:grid;gap:12px;align-content:start;border-right:1px solid var(--line)}
+.sn-col:last-child{border-right:0}
+.sn-col p{font-family:var(--body);font-size:13px;color:var(--muted);line-height:1.5}
+.sn-h{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gap)}
+.sn-col.good .sn-h{color:var(--ok)}
+.sn-tix{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.sn-tix span{font-size:11px;padding:4px 6px;border:1px solid rgba(239,108,90,.35);color:var(--gap);border-radius:5px;text-align:center}
+.sn-one{display:grid;gap:4px;padding:12px;border:1px solid rgba(76,195,138,.45);border-radius:8px;background:rgba(76,195,138,.07)}
+.sn-one b{color:var(--ok);font-weight:500}
+.sn-one small{font-size:11.5px;color:var(--text)}
+.sn-one small+small{color:var(--muted)}
+@media (max-width:520px){.sn-compare{grid-template-columns:1fr}.sn-col{border-right:0;border-bottom:1px solid var(--line)}.sn-col:last-child{border-bottom:0}}
+.sn-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.sn-steps li{background:var(--ink);padding:28px 24px;display:grid;gap:10px;align-content:start}
+.sn-steps .n{font-family:var(--mono);font-size:12px;color:var(--cyan)}
+.sn-steps p{color:var(--muted);font-size:15px}
+@media (max-width:960px){.sn-steps{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.sn-steps{grid-template-columns:1fr}}
+.sn-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:28px;font-family:var(--mono);font-size:12.5px}
+.sn-flow span{padding:7px 12px;border-radius:999px;border:1px solid var(--line)}
+.sn-flow .calm{color:var(--cyan);border-color:rgba(63,182,232,.5)}
+.sn-flow .mid{color:var(--amber);border-color:rgba(246,162,58,.5)}
+.sn-flow .snow{color:var(--ok);border-color:rgba(76,195,138,.5)}
+.sn-flow b{color:var(--muted);font-weight:400}
+.sn-roles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sn-roles article{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:28px;display:grid;gap:12px;align-content:start}
+.sn-roles .tag{justify-self:start}
+.sn-roles ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--muted);font-size:15px}
+@media (max-width:900px){.sn-roles{grid-template-columns:1fr}}
+.sn-tbl{border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.sn-tbl td:first-child{font-weight:600;white-space:nowrap}
+.sn-tbl .hl{color:var(--cyan)}
+.sn-tbl tr:last-child td{border-bottom:0}
+.sn-ol{margin:0;padding-left:20px;display:grid;gap:10px;font-size:16px}
+.sn-need{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px;font-size:15px;color:var(--muted)}
+.sn-need b{color:var(--text);font-weight:600}
+.sn-note{margin-top:24px;border:1px solid rgba(76,195,138,.45);background:rgba(76,195,138,.07);border-radius:12px;padding:18px;display:grid;gap:6px}
+.sn-note b{color:var(--ok);font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.sn-note p{font-size:15px}
+.faq{display:grid;border-top:1px solid var(--line);max-width:860px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 0;font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--amber);font-size:20px;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 20px;color:var(--muted);max-width:68ch}
+footer a{color:var(--text)}
+
+:root{--violet:#A88BFA;--pink:#E879A6}
+#dfa .stage{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:28px}
+#dfa .stage-scroll{overflow-x:auto}
+#dfa svg{display:block;width:100%;min-width:760px;height:auto}
+#dfa .bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;padding:14px 18px;border-top:1px solid var(--line)}
+#dfa .narr{font-size:15px;min-height:3.2em;flex:1 1 360px}
+#dfa .narr b{color:var(--amber);font-weight:600}
+#dfa .ctrls{display:flex;gap:8px}
+#dfa button{font:600 13px var(--body);color:var(--text);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+#dfa button:hover{border-color:var(--muted)}
+#dfa button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+#dfa button:disabled{opacity:.4;cursor:default}
+#dfa .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line)}
+#dfa .stats div{background:var(--ink);padding:14px 18px;display:grid;gap:2px}
+#dfa .stats b{font-family:var(--display);font-size:28px;font-variant-numeric:tabular-nums;line-height:1}
+#dfa .stats small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#dfa .stats .bad b{color:var(--gap)} #dfa .stats .good b{color:var(--ok)}
+@media (max-width:420px){#dfa .stats{grid-template-columns:1fr}}
+#dfa .t-col{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;fill:var(--muted)}
+#dfa .t-sec{font:600 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+#dfa .t-src{font:600 13px var(--body);fill:var(--text)}
+#dfa .t-sub{font:400 10.5px var(--mono);fill:var(--muted)}
+#dfa .t-key{font:500 10.5px var(--mono);fill:var(--text)}
+#dfa .t-cnt{font:600 13px var(--mono)}
+#dfa .t-inc{font:500 11.5px var(--mono);fill:var(--text)}
+#dfa .t-inc2{font:400 10.5px var(--body);fill:var(--muted)}
+#dfa .t-rule{font:500 10px var(--mono);fill:var(--ok)}
+.lang-switch{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:40px;padding:0 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);text-decoration:none;font:600 13px/1 var(--mono);letter-spacing:.08em}.lang-switch:hover{color:var(--text);border-color:var(--muted)}@media (max-width:440px){header.nav .wrap{gap:8px}.brand{font-size:17px;gap:8px}.lang-switch{min-width:0;min-height:38px;padding:0 9px}.nav-actions{gap:6px}.nav .btn{padding:9px 10px;font-size:13px}}@media (max-width:440px){header.nav .brand{white-space:nowrap}header.nav .brand span{display:none}}@media (max-width:370px){header.nav .brand{font-size:0;gap:0}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/es/" aria-label="Inicio de ALM365 Cloud">
+      <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><polygon points="13,1 25,8 25,20 13,27 1,20 1,8" fill="none" stroke="#F6A23A" stroke-width="3"/><polygon points="13,7 19,10.5 19,17.5 13,21 7,17.5 7,10.5" fill="#3FB6E8"/></svg>
+      ALM365 <span>Cloud</span>
+    </a>
+    <div class="nav-actions"><a class="lang-switch" href="/calm2ms" hreflang="en" lang="en" aria-label="English version">EN</a><a class="btn btn-primary" href="mailto:info@alm365cloud.com">Escríbenos &rarr;</a><button id="mobile-toggle" class="mobile-menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false">Menú</button></div>
+  </div>
+</header>
+
+<nav id="main-navigation" class="view-tabs" aria-label="Secciones principales"><div class="wrap view-tabs-inner">
+<a href="/es/">Inicio</a><a href="/es/products" aria-current="page">Productos</a><a href="/es/transition">Transición y ChaRM</a><a href="/es/ai">IA y automatización</a><a href="/es/services">Servicios</a><a href="/es/about">Quiénes somos</a><a href="/es/contact">Contacto</a>
+</div></nav>
+
+<main id="top" class="sn-main">
+<section class="hero sn-hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="sn-badges"><span class="badge">Acceso anticipado</span><div class="eyebrow">Producto 02 · Calm2MS</div></div>
+      <h1>Los documentos de Cloud ALM, <em>guardados en tu SharePoint.</em></h1>
+      <p class="lead">Calm2MS conecta SAP Cloud ALM con una biblioteca de SharePoint que ya es tuya. Los archivos, su historial de versiones y el trabajo del día a día se quedan en SharePoint, y cada documento sigue vinculado a Cloud ALM.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:info@alm365cloud.com?subject=Calm2MS%20acceso%20anticipado">El acceso anticipado abre en enero &rarr;</a>
+        <a class="btn btn-ghost" href="#how">Cómo funciona</a>
+      </div>
+      <div class="deadline">
+        <div><b>1</b><small>archivo, en tu biblioteca</small></div>
+        <div><b>2 sentidos</b><small>sube en cualquiera de las dos herramientas</small></div>
+        <div><b>0</b><small>cuotas por usuario</small></div>
+      </div>
+    </div>
+
+    <div class="console" role="group" aria-label="Ejemplo: dónde acaban un documento de Cloud ALM y su archivo">
+      <div class="console-bar"><div class="dots"><i></i><i></i><i></i></div><span>un documento · ejemplo</span><span>S4 Rollout</span></div>
+      <div class="map">
+        <div class="map-row"><span class="from">Subir en Cloud ALM</span><span class="arrow">→</span><span class="to">Archivo en la carpeta del proyecto</span><span class="pill ok">SharePoint</span></div>
+        <div class="map-row"><span class="from">Asignar a un requisito</span><span class="arrow">→</span><span class="to">El archivo pasa a su carpeta</span><span class="pill ok">SharePoint</span></div>
+        <div class="map-row"><span class="from">Guardar una nueva versión</span><span class="arrow">→</span><span class="to">Cloud ALM abre la nueva</span><span class="pill ok">Versionado</span></div>
+        <div class="map-row"><span class="from">Soltar un archivo en SharePoint</span><span class="arrow">→</span><span class="to">Nuevo documento de Cloud ALM</span><span class="pill ok">Vinculado</span></div>
+        <div class="map-row"><span class="from">Desproteger en SharePoint</span><span class="arrow">→</span><span class="to">Bloqueado también en Cloud ALM</span><span class="pill warn">Bloqueado</span></div>
+      </div>
+      <div class="console-foot">
+        <span><i style="background:var(--ok)"></i>Un archivo, un solo sitio</span>
+        <span><i style="background:var(--cyan)"></i>Columnas: ID, título, tipo, estado, responsable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Por qué lo necesitan los equipos</div>
+      <h2>Los documentos de tu proyecto viven en dos mundos.</h2>
+      <p class="lead">Cloud ALM es donde se sigue el proyecto. SharePoint es donde la gente de verdad escribe, revisa y firma los documentos. Mantener los dos al día a mano no dura.</p>
+    </div>
+    <div class="svc">
+      <article><h3>Un segundo almacén de documentos</h3><p>Sin Calm2MS, los archivos están en un almacén de documentos aparte, el servicio de documentos de SAP en BTP: un servicio más que pagar y mantener.</p></article>
+      <article><h3>Fuera de tu Microsoft 365</h3><p>Los archivos guardados en otro sitio se quedan sin tus permisos de SharePoint, directivas de retención, etiquetas de confidencialidad y búsqueda.</p></article>
+      <article><h3>Copias que se desincronizan</h3><p>El equipo edita en Word o Excel, alguien lo sube a Cloud ALM y pronto nadie sabe qué copia es la vigente.</p></article>
+      <article><h3>Difícil de encontrar</h3><p>Sin carpetas ni columnas que sigan al proyecto, encontrar el documento de un requisito o de un test lleva demasiado tiempo.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Cómo funciona</div>
+      <h2>Sube en cualquiera de las dos herramientas. Calm2MS hace el resto.</h2>
+      <p class="lead">Cloud ALM se conecta a Calm2MS en lugar de a un servicio de documentos aparte. Calm2MS mantiene un solo archivo en tu biblioteca de SharePoint y lo vincula a Cloud ALM.</p>
+    </div>
+    <div class="svc">
+      <article><h3>Un solo archivo</h3><p>El archivo existe una sola vez, en tu biblioteca de SharePoint. Cloud ALM lo lee desde ahí; no hay una segunda copia.</p></article>
+      <article><h3>Historial de versiones</h3><p>Ábrelo en Word o Excel y guarda: SharePoint conserva cada versión y Cloud ALM abre la última.</p></article>
+      <article><h3>En los dos sentidos</h3><p>Suelta un archivo en una carpeta del proyecto en SharePoint y se convierte en un documento de Cloud ALM, con su enlace de vuelta.</p></article>
+      <article><h3>Organizado como el proyecto</h3><p>Una carpeta por proyecto y, dentro, por proceso, requisito, tarea o test, con columnas por las que se puede filtrar.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="access">
+  <div class="wrap sgv-foot" style="margin-top:0">
+    <div>
+      <div class="eyebrow">Acceso</div>
+      <h2 style="margin:16px 0 24px">Solo el sitio que tú elijas.</h2>
+      <p class="lead" style="font-size:16px">Calm2MS usa el permiso <b>Sites.Selected</b> de Microsoft: solo puede acceder al sitio de SharePoint que le des, nunca al resto de tu tenant. Tu administrador de Microsoft 365 aprueba ese acceso una sola vez.</p>
+      <p class="lead" style="margin-top:16px;font-size:16px">En Cloud ALM usa una clave de API con los scopes que necesita, y su consola te avisa de cualquier scope que no necesite.</p>
+    </div>
+    <div>
+      <div class="eyebrow">Qué necesitas</div>
+      <ul class="sn-need">
+        <li>Un tenant de <b>SAP Cloud ALM</b> y una clave de API para él</li>
+        <li>Un sitio de <b>SharePoint Online</b> para los documentos, en tu Microsoft 365</li>
+        <li>Un <b>administrador de Microsoft 365</b> que apruebe el acceso a ese único sitio</li>
+      </ul>
+      <div class="sn-note">
+        <b>Tus archivos siguen siendo tuyos</b>
+        <p>Todo está en tu SharePoint, con tu retención y tus permisos. Microsoft 365 Copilot también puede buscar en los archivos, con tus propias licencias.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Precio</div>
+      <h2>Un precio por tenant. Sin coste por usuario.</h2>
+      <p class="lead">Calm2MS tiene un precio por tenant de Cloud ALM, con todos sus proyectos. Todas las personas que trabajan con los documentos están incluidas. Presupuestamos cada tenant en una propuesta; la migración se presupuesta aparte.</p>
+    </div>
+  </div>
+</section>
+
+<section id="migration">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Calm2MS Migration</div>
+      <h2>¿Vienes de Solution Manager? Trae tus documentos.</h2>
+      <p class="lead">Calm2MS Migration lleva tu documentación de Solution Manager a Cloud ALM, con los archivos en tu biblioteca de SharePoint.</p>
+    </div>
+    <div class="svc" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+      <article><h3>Con el SDT de SAP</h3><p>Selective Data Transfer mueve la estructura y los documentos. Calm2MS pone los archivos en SharePoint y hace que Cloud ALM apunte a ellos.</p></article>
+      <article><h3>Sin SDT</h3><p>A partir de dos listas estándar de Solution Manager, Calm2MS Migration crea la jerarquía, las bibliotecas, los procesos con sus diagramas y los documentos mediante las APIs de Cloud ALM. Una simulación lo muestra todo antes de escribir nada.</p></article>
+    </div>
+    <div class="cta-row"><a class="btn btn-ghost" href="https://calm2ms.com/migration" target="_blank" rel="noopener">Las vías de migración en calm2ms.com ↗</a></div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap contact-grid">
+    <div class="sec-head" style="margin:0">
+      <div class="eyebrow">Acceso anticipado</div>
+      <h2>El acceso anticipado abre en enero.</h2>
+      <p class="lead">Escríbenos y te avisamos cuando se abran las primeras plazas. La web completa del producto, con todos los casos que cubre, está en <a href="https://calm2ms.com/" target="_blank" rel="noopener">calm2ms.com</a>.</p>
+      <div class="mail"><a href="mailto:info@alm365cloud.com" style="text-decoration:none"><code id="mail">info@alm365cloud.com</code></a><button type="button" id="copy">Copiar</button></div>
+    </div>
+    <div class="mailcard">
+      <h3>Únete al acceso anticipado</h3>
+      <p class="form-note" style="font-size:15px;color:var(--text)">El botón abre un correo para nosotros. Cuéntanos un poco sobre tu entorno para que podamos preparar la primera sesión.</p>
+      <ul>
+        <li>Tu tenant de Cloud ALM y cuántos proyectos tiene</li>
+        <li>El sitio de SharePoint que usarías</li>
+        <li>Si vienes de Solution Manager</li>
+      </ul>
+      <a class="btn btn-primary" href="mailto:info@alm365cloud.com?subject=Calm2MS%20acceso%20anticipado">El acceso anticipado abre en enero &rarr;</a>
+      <p class="form-note">¿Prefieres verlo antes? Visita <a href="https://calm2ms.com/" target="_blank" rel="noopener">calm2ms.com</a> o escribe a <a href="mailto:info@alm365cloud.com">info@alm365cloud.com</a>.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> ALM365 Cloud &middot; SOLMAN365, S.L. &middot; NIF B10839165 &middot; <a href="/es/">Inicio</a></span>
+    <span class="legal-links"><a href="/aviso-legal">Aviso legal</a> &middot; <a href="/privacidad">Privacidad</a> &middot; <a href="/cookies">Cookies</a></span>
+    <span>SAP, SAP Cloud ALM y SAP Solution Manager son marcas de SAP SE. SharePoint y Microsoft 365 son marcas de Microsoft Corporation.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.getElementById('copy').addEventListener('click',function(){
+    var t=document.getElementById('mail').textContent,b=this;
+    var done=function(){b.textContent='Copiado';setTimeout(function(){b.textContent='Copiar'},1500)};
+    try{navigator.clipboard.writeText(t).then(done,function(){sel()})}catch(e){sel()}
+    function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  });
+  document.body.classList.add('view-mode');
+  var toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('main-navigation');
+  toggle.addEventListener('click',function(){var on=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',on?'true':'false')});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('is-open')){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.focus()}});
+})();
+</script>
+
+
+<script src="/assets/analytics.js" defer></script>
+</body>
+</html>

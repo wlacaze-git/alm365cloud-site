@@ -1,5 +1,6 @@
 /* ALM365 Cloud — shared behaviour. Safe on every page: each block is guarded. */
 (function () {
+  var es = (document.documentElement.lang || '').slice(0, 2) === 'es';
   var yr = document.getElementById('yr');
   if (yr) yr.textContent = new Date().getFullYear();
 
@@ -33,11 +34,11 @@
     var end = new Date('2027-12-31T23:59:59');
     var days = Math.ceil((end - new Date()) / 864e5);
     if (days > 0) {
-      daysEl.textContent = days.toLocaleString('en-US');
+      daysEl.textContent = days.toLocaleString(es ? 'es-ES' : 'en-US');
     } else {
       daysEl.textContent = '\u2014';
       var label = daysEl.nextElementSibling;
-      if (label) label.textContent = 'mainstream maintenance ended';
+      if (label) label.textContent = es ? 'fin del mantenimiento estándar' : 'mainstream maintenance ended';
     }
   }
 
@@ -50,8 +51,8 @@
       var text = mail.textContent;
       var btn = this;
       function done() {
-        btn.textContent = 'Copied';
-        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+        btn.textContent = es ? 'Copiado' : 'Copied';
+        setTimeout(function () { btn.textContent = es ? 'Copiar' : 'Copy'; }, 1500);
       }
       function select() {
         var r = document.createRange();
