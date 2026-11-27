@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://alm365cloud.com/</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-27</lastmod>
   </url>
   <url>
     <loc>https://alm365cloud.com/transition.html</loc>
@@ -10,15 +10,19 @@
   </url>
   <url>
     <loc>https://alm365cloud.com/packages.html</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-27</lastmod>
   </url>
   <url>
     <loc>https://alm365cloud.com/products.html</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-27</lastmod>
   </url>
   <url>
     <loc>https://alm365cloud.com/servicenow.html</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+  <url>
+    <loc>https://alm365cloud.com/calm2ms.html</loc>
+    <lastmod>2026-11-27</lastmod>
   </url>
   <url>
     <loc>https://alm365cloud.com/ai.html</loc>
