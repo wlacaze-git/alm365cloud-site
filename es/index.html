@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Transición a SAP Cloud ALM e integraciones con ServiceNow y SharePoint | ALM365 Cloud</title>
-<meta name="description" content="Servicios de transición de SAP Solution Manager a SAP Cloud ALM y dos productos: DIFF Adapter for ServiceNow (una incidencia por problema) y Calm2MS (los documentos de Cloud ALM en tu SharePoint).">
+<title>Productos para SAP Cloud ALM: DIFF Adapter for ServiceNow y Calm2MS | ALM365 Cloud</title>
+<meta name="description" content="Dos productos para SAP Cloud ALM: DIFF Adapter for ServiceNow (una incidencia por problema) y Calm2MS (los documentos de Cloud ALM en tu SharePoint). Además, servicios SAP ALM y agentes IA.">
 <link rel="canonical" href="https://alm365cloud.com/es/">
 <link rel="alternate" hreflang="en" href="https://alm365cloud.com/">
 <link rel="alternate" hreflang="es" href="https://alm365cloud.com/es/">
@@ -13,16 +13,16 @@
 <meta property="og:site_name" content="ALM365 Cloud">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://alm365cloud.com/es/">
-<meta property="og:title" content="Transición a SAP Cloud ALM e integraciones con ServiceNow y SharePoint | ALM365 Cloud">
-<meta property="og:description" content="Servicios de transición de SAP Solution Manager a SAP Cloud ALM y dos productos: DIFF Adapter for ServiceNow (una incidencia por problema) y Calm2MS (los documentos de Cloud ALM en tu SharePoint).">
+<meta property="og:title" content="Productos para SAP Cloud ALM: DIFF Adapter for ServiceNow y Calm2MS | ALM365 Cloud">
+<meta property="og:description" content="Dos productos para SAP Cloud ALM: DIFF Adapter for ServiceNow (una incidencia por problema) y Calm2MS (los documentos de Cloud ALM en tu SharePoint). Además, servicios SAP ALM y agentes IA.">
 <meta property="og:image" content="https://alm365cloud.com/og-image.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Servicios de transición a SAP Cloud ALM, DIFF Adapter for ServiceNow y Calm2MS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Transición a SAP Cloud ALM e integraciones con ServiceNow y SharePoint | ALM365 Cloud">
-<meta name="twitter:description" content="Servicios de transición de SAP Solution Manager a SAP Cloud ALM y dos productos: DIFF Adapter for ServiceNow (una incidencia por problema) y Calm2MS (los documentos de Cloud ALM en tu SharePoint).">
+<meta name="twitter:title" content="Productos para SAP Cloud ALM: DIFF Adapter for ServiceNow y Calm2MS | ALM365 Cloud">
+<meta name="twitter:description" content="Dos productos para SAP Cloud ALM: DIFF Adapter for ServiceNow (una incidencia por problema) y Calm2MS (los documentos de Cloud ALM en tu SharePoint). Además, servicios SAP ALM y agentes IA.">
 <meta name="twitter:image" content="https://alm365cloud.com/og-image.png">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -45,77 +45,40 @@
   </div>
 </header>
 
-<nav id="main-navigation" class="view-tabs" aria-label="Principal"><div class="wrap view-tabs-inner"><a href="/es/" aria-current="page">Inicio</a><a href="/es/products">Productos</a><a href="/es/transition">Transición y ChaRM</a><a href="/es/ai">IA y automatización</a><a href="/es/services">Servicios</a><a href="/es/about">Quiénes somos</a><a href="/es/contact">Contacto</a></div></nav>
+<nav id="main-navigation" class="view-tabs" aria-label="Principal"><div class="wrap view-tabs-inner"><a href="/es/" aria-current="page">Inicio</a><a href="/es/servicenow">DIFF Adapter for ServiceNow</a><a href="/es/calm2ms">Calm2MS</a><a href="/es/services">Servicios</a><a href="/es/ai">Agentes IA</a><a href="/es/about">Quiénes somos</a><a href="/es/contact">Contacto</a></div></nav>
 <main>
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">SAP Solution Manager → SAP Cloud ALM</div>
-      <h1>Transforma tu SAP ALM. <em>Mantén el control</em> de lo que importa.</h1>
-      <p class="lead">Pasa de Solution Manager a SAP Cloud ALM con un plan claro. Conserva los controles de cambios, el historial y las integraciones de las que depende tu negocio.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="mailto:info@alm365cloud.com?subject=Transici%C3%B3n%20a%20SAP%20Cloud%20ALM">Escríbenos sobre tu SolMan &rarr;</a>
-        <a class="btn btn-ghost" href="/es/packages">Ver los paquetes</a>
-      </div>
-      <div class="deadline" aria-label="Fechas de mantenimiento de SolMan 7.2">
-        <div><b id="d-days">—</b><small>días hasta el 31.12.2027</small></div>
-        <div><b>31.12.2027</b><small>fin del mantenimiento estándar de SolMan 7.2</small></div>
-        <div><b>31.12.2030</b><small>ampliado, opcional y de pago</small></div>
-      </div>
-      <p class="deadline-note">La verdadera restricción no es 2027. Es el ciclo presupuestario que tiene que cerrarse antes, y la congelación de cambios en torno a tu cutover de S/4.</p>
-    </div>
-
-    <div class="console" role="group" aria-label="Ejemplo de correspondencia entre capacidades de Solution Manager y Cloud ALM">
-      <div class="console-bar"><div class="dots"><i></i><i></i><i></i></div><span>readiness-check · fit/gap</span><span>ejemplo</span></div>
-      <div class="map">
-        <div class="map-row"><span class="from">SolDoc / bibliotecas</span><span class="arrow">→</span><span class="to">Solution processes (SDT)<a class="map-link" href="/es/calm2ms#migration">Documentos: Calm2MS Migration →</a></span><span class="pill ok">Disponible</span></div>
-        <div class="map-row"><span class="from">Test Suite</span><span class="arrow">→</span><span class="to">Test Management</span><span class="pill ok">Disponible</span></div>
-        <div class="map-row"><span class="from">Ejecución de cambios en ChaRM</span><span class="arrow">→</span><span class="to">Features + Deployment Mgmt</span><span class="pill warn">Parcial</span></div>
-        <div class="map-row"><span class="from">Focused Build WBS</span><span class="arrow">→</span><span class="to">Requirements / User stories</span><span class="pill warn">Manual</span></div>
-        <div class="map-row"><span class="from">Monitorización técnica</span><span class="arrow">→</span><span class="to">Operations (reimplementar)</span><span class="pill warn">Reconstruir</span></div>
-        <div class="map-row"><span class="from">Retrofit / CSOL</span><span class="arrow">→</span><span class="to">Roadmap / herramienta de partner</span><span class="pill warn">Roadmap</span></div>
-        <div class="map-row"><span class="from">Variantes / aprobaciones de ChaRM</span><span class="arrow">→</span><span class="to">ServiceNow / Jira / Azure DevOps</span><span class="pill warn">Integración</span></div>
-        <div class="map-row"><span class="from">IT Service Desk</span><span class="arrow">→</span><span class="to">ITSM externo (paquete 2)</span><span class="pill gap">Solo SolMan</span></div>
-      </div>
-      <div class="console-foot">
-        <span><i style="background:var(--ok)"></i>Lo cubre la vía de SAP</span>
-        <span><i style="background:var(--warn)"></i>Reconstruir o roadmap</span>
-        <span><i style="background:var(--gap)"></i>Fuera del alcance de SAP</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="products" class="products-intro home-products">
+<section class="hero home-hero">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow" style="color:var(--cyan)">Productos</div>
-      <h2>Dos productos para tu entorno SAP Cloud ALM.</h2>
+    <div class="home-hero-head">
+      <div class="eyebrow">Productos para SAP Cloud ALM</div>
+      <h1>SAP Cloud ALM, conectado a <em>ServiceNow y SharePoint.</em></h1>
+      <p class="lead">Dos productos que hacen que Cloud ALM trabaje con las herramientas que tus equipos ya usan. Alrededor de ellos, servicios SAP ALM y agentes IA para llegar antes.</p>
     </div>
-    <div class="prod-cards">
+    <div class="prod-cards hero-prods">
       <a class="prod-card" href="/es/servicenow">
         <span class="badge badge-prod">En producción</span>
-        <h3>DIFF Adapter for ServiceNow</h3>
+        <h2>DIFF Adapter for ServiceNow</h2>
         <div class="flowline"><b>SAP Cloud ALM</b><span>→</span><b>ServiceNow</b></div>
-        <p>Las alertas de monitorización de Cloud ALM se convierten en una incidencia de ServiceNow por problema, asignada al equipo adecuado y cerrada cuando el problema se resuelve.</p>
+        <p>Las alertas de monitorización de Cloud ALM se convierten en una incidencia de ServiceNow por problema, asignada al equipo correcto y cerrada cuando el problema se recupera.</p>
+        <div class="prod-stats"><div><b>1</b><small>problema → 1 incidencia</small></div><div><b>5</b><small>fuentes de monitorización</small></div><div><b>4–6 sem.</b><small>despliegue habitual</small></div></div>
         <span class="more-link">Página del producto →</span>
       </a>
       <a class="prod-card" href="/es/calm2ms">
         <span class="badge badge-prod">Disponible</span>
-        <h3>Calm2MS · Documentos de Cloud ALM en SharePoint</h3>
+        <h2>Calm2MS · Documentos de Cloud ALM en SharePoint</h2>
         <div class="flowline"><b>SAP Cloud ALM</b><span>⇄</span><b>Microsoft SharePoint</b></div>
-        <p>Cloud ALM guarda sus documentos en tu propia biblioteca de SharePoint: un solo archivo, historial de versiones en SharePoint, en los dos sentidos. Calm2MS Migration se trae también tus documentos de Solution Manager.</p>
+        <p>Cloud ALM guarda sus documentos en tu propia biblioteca de SharePoint: un solo archivo, historial de versiones en SharePoint, en los dos sentidos. Calm2MS Migration trae tus documentos de Solution Manager.</p>
+        <div class="prod-stats"><div><b>1</b><small>archivo, en tu biblioteca</small></div><div><b>2 sentidos</b><small>sube en cualquiera de las dos</small></div><div><b>0</b><small>cuotas por usuario</small></div></div>
         <span class="more-link">Página del producto →</span>
       </a>
     </div>
   </div>
 </section>
 
-<section id="solutions" class="solutions"><div class="wrap"><div class="sec-head"><div class="eyebrow">Nuestra experiencia</div><h2>Cuatro formas de hacer avanzar tu SAP ALM.</h2><p class="lead">Consultoría especializada, soluciones de integración y automatización inteligente para tu entorno SAP.</p></div><div class="solutions-grid">
-<a class="solution-card" href="/es/transition"><span>01 / TRANSICIÓN</span><h3>Solution Manager → Cloud ALM</h3><p>Preparación, paquetes de transición y fit/gap a medida.</p><b>Explorar la transición →</b></a>
-<a class="solution-card" href="/es/products"><span>02 / PRODUCTOS</span><h3>Ecosistema ALM conectado</h3><p>Soluciones de integración de procesos, documentos y ServiceNow.</p><b>Explorar los productos →</b></a>
-<a class="solution-card" href="/es/ai"><span>03 / AUTOMATIZACIÓN</span><h3>Entrega asistida por IA</h3><p>Aceleración práctica con supervisión de consultores.</p><b>Explorar la IA →</b></a>
-<a class="solution-card" href="/es/services"><span>04 / SERVICIOS</span><h3>Implantación y operación</h3><p>Monitorización, integración, soporte y asesoría.</p><b>Explorar los servicios →</b></a>
+<section id="more" class="solutions"><div class="wrap"><div class="sec-head"><div class="eyebrow">Además, de ALM365 Cloud</div><h2>Servicios y agentes IA alrededor de los productos.</h2><p class="lead">Los productos vienen con la experiencia SAP ALM que hay detrás: te sacamos de Solution Manager, operamos Cloud ALM contigo y usamos agentes IA para hacer más rápido el trabajo repetitivo.</p></div><div class="solutions-grid three">
+<a class="solution-card" href="/es/transition"><span>01 / TRANSICIÓN</span><h3>Solution Manager → Cloud ALM</h3><p>Estimación a partir del Readiness Check, paquetes de transición y fit/gap acotado. El mantenimiento estándar de SolMan 7.2 termina el 31.12.2027.</p><b>Ver la transición →</b></a>
+<a class="solution-card" href="/es/services"><span>02 / SERVICIOS</span><h3>Servicios de Cloud ALM</h3><p>Implantación, monitorización y operación, integración, soporte y asesoría para tenants nuevos y existentes.</p><b>Ver los servicios →</b></a>
+<a class="solution-card" href="/es/ai"><span>03 / AGENTES IA</span><h3>Agentes IA con control del consultor</h3><p>Los agentes configuran Cloud ALM mediante APIs soportadas; un consultor aprueba cada acción y todas quedan registradas.</p><b>Ver los agentes IA →</b></a>
 </div></div></section>
 
 <section id="evidence">
@@ -149,12 +112,12 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Siguiente paso</div>
-      <h2>Empieza por tu Readiness Check, o por un correo.</h2>
-      <p class="lead">El SAP Readiness Check es gratuito y se ejecuta en tu SolMan. Envíanos la exportación y te devolvemos una estimación acotada por paquete. Si prefieres escribir primero, respondemos en dos días laborables.</p>
+      <h2>Mira un producto funcionando con tus datos.</h2>
+      <p class="lead">Una demo del DIFF Adapter con tus alertas, o de Calm2MS con tu tenant. Escríbenos y respondemos en dos días laborables.</p>
     </div>
     <div class="cta-row">
-      <a class="btn btn-primary" href="/es/transition">Cómo funciona la estimación</a>
-      <a class="btn btn-ghost" href="/es/packages">Comparar los paquetes</a>
+      <a class="btn btn-primary" href="mailto:info@alm365cloud.com?subject=DIFF%20Adapter%20for%20ServiceNow">Demo del DIFF Adapter →</a>
+      <a class="btn btn-ghost" href="mailto:info@alm365cloud.com?subject=Demo%20de%20Calm2MS">Demo de Calm2MS</a>
       <a class="btn btn-ghost" href="/es/contact">Habla con nosotros</a>
     </div>
   </div>

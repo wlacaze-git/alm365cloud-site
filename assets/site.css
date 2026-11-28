@@ -344,3 +344,18 @@ section{scroll-margin-top:130px}
 /* Standalone pages carry an h1 where the home page had an h2. */
 h1{font-size:clamp(30px,4.2vw,48px);font-weight:700}
 .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}.lang a{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 11px;color:var(--muted);text-decoration:none;font:600 13px/1 var(--body)}.lang a:hover{color:var(--text)}.lang a[aria-current="page"]{background:rgba(246,162,58,.12);color:var(--amber)}.lang .flag{width:18px;height:12px;border-radius:2px;box-shadow:0 0 0 1px rgba(231,236,246,.18);flex:0 0 auto}@media (max-width:500px){header.nav .wrap{gap:8px}.brand{font-size:17px;gap:8px}.lang a{min-height:38px;padding:0 7px}.lang .code{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.nav-actions{gap:6px}.nav .btn{padding:9px 9px;font-size:13px}}@media (max-width:500px){header.nav .brand{white-space:nowrap}header.nav .brand span{display:none}}@media (max-width:370px){header.nav .brand{font-size:0;gap:0}.lang a{padding:0 6px}.nav .btn{padding:9px 7px}}
+
+/* Home: the two products lead, services and AI agents follow. */
+.home-hero{padding-block:64px 80px}
+.home-hero-head{display:grid;gap:18px;max-width:860px;margin-bottom:40px}
+.hero-prods .prod-card{padding:36px;gap:16px}
+.hero-prods .prod-card h2{font-size:clamp(22px,2.4vw,30px);line-height:1.2}
+.prod-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.prod-stats div{background:var(--ink);padding:14px 16px;display:grid;gap:2px}
+.prod-stats b{font-family:var(--display);font-size:22px;color:var(--amber);line-height:1.1}
+.prod-stats small{font-size:12px;color:var(--muted);line-height:1.35}
+.solutions-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.solman-fit{border-top:1px solid var(--line)}
+@media (max-width:960px){.solutions-grid.three{grid-template-columns:1fr}}
+@media (max-width:860px){.hero-prods{grid-template-columns:1fr}.home-hero{padding-block:40px 56px}}
+@media (max-width:420px){.prod-stats{grid-template-columns:1fr}}

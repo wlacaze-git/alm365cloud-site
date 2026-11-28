@@ -434,6 +434,31 @@ footer a{color:var(--text)}
 #dfa .t-inc2{font:400 10.5px var(--body);fill:var(--muted)}
 #dfa .t-rule{font:500 10px var(--mono);fill:var(--ok)}
 .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}.lang a{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 11px;color:var(--muted);text-decoration:none;font:600 13px/1 var(--body)}.lang a:hover{color:var(--text)}.lang a[aria-current="page"]{background:rgba(246,162,58,.12);color:var(--amber)}.lang .flag{width:18px;height:12px;border-radius:2px;box-shadow:0 0 0 1px rgba(231,236,246,.18);flex:0 0 auto}@media (max-width:500px){header.nav .wrap{gap:8px}.brand{font-size:17px;gap:8px}.lang a{min-height:38px;padding:0 7px}.lang .code{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.nav-actions{gap:6px}.nav .btn{padding:9px 9px;font-size:13px}}@media (max-width:500px){header.nav .brand{white-space:nowrap}header.nav .brand span{display:none}}@media (max-width:370px){header.nav .brand{font-size:0;gap:0}.lang a{padding:0 6px}.nav .btn{padding:9px 7px}}
+
+/* Product page as tabs: one section at a time, no long scroll */
+.pbar{position:sticky;top:112px;z-index:7;background:color-mix(in srgb,var(--panel) 94%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.pbar-inner{display:flex;align-items:center;gap:16px;min-height:56px}
+.pbar-name{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--amber);white-space:nowrap}
+.pbar-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;padding-block:8px}
+.pbar-tabs::-webkit-scrollbar{display:none}
+.pbar-tabs a{padding:8px 14px;border-radius:999px;color:var(--muted);text-decoration:none;font:600 13px var(--body);white-space:nowrap;border:1px solid transparent}
+.pbar-tabs a:hover{color:var(--text);border-color:var(--line)}
+.pbar-tabs a[aria-current="true"]{color:var(--cyan);background:rgba(63,182,232,.12);border-color:rgba(63,182,232,.35)}
+.pbar .btn{padding:8px 16px;font-size:13px;white-space:nowrap}
+.sn-panel>section{padding-block:56px}
+.sn-panel>section.hero{padding-block:48px 56px}
+.sn-panel>section+section{border-top:1px solid var(--line)}
+.tabs-on .sn-panel{display:none}
+.tabs-on .sn-panel.is-active{display:block;min-height:calc(100dvh - 300px);animation:pfade .25s ease}
+.tabs-on .sn-panel>section:first-child{border-top:0}
+@keyframes pfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sn-pager{display:none}
+.tabs-on .sn-pager{display:flex;justify-content:space-between;gap:12px;padding-block:0 48px}
+.sn-pager a{display:inline-flex;flex-direction:column;gap:2px;padding:12px 18px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--text);font-weight:600;font-size:15px}
+.sn-pager a small{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sn-pager a:hover{border-color:var(--cyan)}
+.sn-pager a.nx{margin-left:auto;text-align:right}
+@media (max-width:860px){.pbar{top:64px}.pbar-name,.pbar .btn{display:none}.sn-panel>section{padding-block:40px}}
 </style>
 </head>
 <body>
@@ -449,11 +474,13 @@ footer a{color:var(--text)}
 </header>
 
 <nav id="main-navigation" class="view-tabs" aria-label="Main sections"><div class="wrap view-tabs-inner">
-<a href="/">Overview</a><a href="/products" aria-current="page">Products</a><a href="/transition">Transition &amp; ChaRM</a><a href="/ai">AI &amp; Automation</a><a href="/services">Services</a><a href="/about">About</a><a href="/contact">Contact</a>
+<a href="/">Overview</a><a href="/servicenow" aria-current="page">DIFF Adapter for ServiceNow</a><a href="/calm2ms">Calm2MS</a><a href="/services">Services</a><a href="/ai">AI agents</a><a href="/about">About</a><a href="/contact">Contact</a>
 </div></nav>
 
 <main id="top" class="sn-main">
-<section class="hero sn-hero">
+<div id="pbar" class="pbar"><div class="wrap pbar-inner"><span class="pbar-name">DIFF Adapter for ServiceNow</span><nav class="pbar-tabs" aria-label="Product sections"><a href="#overview" data-tab="overview" aria-current="true">Overview</a><a href="#problem" data-tab="problem">Why</a><a href="#how" data-tab="how">How it works</a><a href="#who" data-tab="who">Teams</a><a href="#sources" data-tab="sources">Coverage</a><a href="#start" data-tab="start">Rollout</a><a href="#faq" data-tab="faq">Roadmap & FAQ</a><a href="#contact" data-tab="contact">Contact</a></nav><a class="btn btn-primary" href="mailto:info@alm365cloud.com?subject=DIFF%20Adapter%20for%20ServiceNow">Ask for a walkthrough &rarr;</a></div></div>
+<div class="sn-panel is-active" data-tab="overview">
+<section id="overview" class="hero sn-hero">
   <div class="wrap hero-grid">
     <div>
       <div class="sn-badges"><span class="badge badge-prod">Productive</span><div class="eyebrow">Product 01 · DIFF Adapter for ServiceNow</div></div>
@@ -495,7 +522,9 @@ footer a{color:var(--text)}
     </div>
   </div>
 </section>
-
+<div class="wrap sn-pager"><a class="nx" href="#problem"><small>Next &rarr;</small>Why</a></div>
+</div>
+<div class="sn-panel" data-tab="problem">
 <section id="problem">
   <div class="wrap">
     <div class="sec-head">
@@ -511,7 +540,9 @@ footer a{color:var(--text)}
     </div>
   </div>
 </section>
-
+<div class="wrap sn-pager"><a href="#overview"><small>&larr; Previous</small>Overview</a><a class="nx" href="#how"><small>Next &rarr;</small>How it works</a></div>
+</div>
+<div class="sn-panel" data-tab="how">
 <section id="how">
   <div class="wrap">
     <div class="sec-head">
@@ -584,7 +615,9 @@ footer a{color:var(--text)}
 
   </div>
 </section>
-
+<div class="wrap sn-pager"><a href="#problem"><small>&larr; Previous</small>Why</a><a class="nx" href="#who"><small>Next &rarr;</small>Teams</a></div>
+</div>
+<div class="sn-panel" data-tab="who">
 <section id="who">
   <div class="wrap">
     <div class="sec-head">
@@ -622,7 +655,9 @@ footer a{color:var(--text)}
     </div>
   </div>
 </section>
-
+<div class="wrap sn-pager"><a href="#how"><small>&larr; Previous</small>How it works</a><a class="nx" href="#sources"><small>Next &rarr;</small>Coverage</a></div>
+</div>
+<div class="sn-panel" data-tab="sources">
 <section id="sources">
   <div class="wrap">
     <div class="sec-head">
@@ -667,7 +702,9 @@ footer a{color:var(--text)}
     </div>
   </div>
 </section>
-
+<div class="wrap sn-pager"><a href="#who"><small>&larr; Previous</small>Teams</a><a class="nx" href="#start"><small>Next &rarr;</small>Rollout</a></div>
+</div>
+<div class="sn-panel" data-tab="start">
 <section id="start">
   <div class="wrap sgv-foot" style="margin-top:0">
     <div>
@@ -696,7 +733,9 @@ footer a{color:var(--text)}
     </div>
   </div>
 </section>
-
+<div class="wrap sn-pager"><a href="#sources"><small>&larr; Previous</small>Coverage</a><a class="nx" href="#faq"><small>Next &rarr;</small>Roadmap & FAQ</a></div>
+</div>
+<div class="sn-panel" data-tab="faq">
 <section id="next">
   <div class="wrap">
     <div class="sec-head">
@@ -727,7 +766,9 @@ footer a{color:var(--text)}
     </div>
   </div>
 </section>
-
+<div class="wrap sn-pager"><a href="#start"><small>&larr; Previous</small>Rollout</a><a class="nx" href="#contact"><small>Next &rarr;</small>Contact</a></div>
+</div>
+<div class="sn-panel" data-tab="contact">
 <section id="contact" class="contact">
   <div class="wrap contact-grid">
     <div class="sec-head" style="margin:0">
@@ -750,6 +791,8 @@ footer a{color:var(--text)}
     </div>
   </div>
 </section>
+<div class="wrap sn-pager"><a href="#faq"><small>&larr; Previous</small>Roadmap & FAQ</a></div>
+</div>
 </main>
 
 <footer>
@@ -939,6 +982,40 @@ footer a{color:var(--text)}
 })();
 </script>
 
+<script>
+/* Product tabs: show one panel at a time; every section stays in the HTML (works without JS) */
+(function(){
+  var bar=document.getElementById('pbar');if(!bar)return;
+  var panels=[].slice.call(document.querySelectorAll('.sn-panel'));
+  var tabs=[].slice.call(bar.querySelectorAll('a[data-tab]'));
+  document.documentElement.classList.add('tabs-on');
+  function stick(){var h=document.querySelector('header.nav'),n=document.getElementById('main-navigation');
+    var t=(h?h.offsetHeight:64)+(n&&n.offsetParent!==null&&getComputedStyle(n).position==='sticky'?n.offsetHeight:0);bar.style.top=t+'px'}
+  function top0(){try{window.scrollTo({top:0,left:0,behavior:'instant'})}catch(e){window.scrollTo(0,0)}}
+  function panelOf(id){var el=id&&document.getElementById(id);return el?el.closest('.sn-panel'):null}
+  function show(id,scroll){
+    var p=panelOf(id)||panels[0];
+    panels.forEach(function(x){x.classList.toggle('is-active',x===p)});
+    tabs.forEach(function(a){var on=a.getAttribute('data-tab')===p.getAttribute('data-tab');a.setAttribute('aria-current',on?'true':'false');
+      if(on&&a.scrollIntoView){var b=a.parentNode;b.scrollLeft=a.offsetLeft-b.offsetWidth/2+a.offsetWidth/2}});
+    if(!scroll)return;
+    var el=document.getElementById(id);
+    if(el&&el!==p.firstElementChild){el.scrollIntoView({behavior:'instant'})}else{top0()}
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
+    var id=a.getAttribute('href').slice(1);if(!panelOf(id))return;
+    e.preventDefault();
+    if(location.hash!=='#'+id)history.pushState(null,'','#'+id);
+    show(id,true);
+  });
+  window.addEventListener('popstate',function(){show(location.hash.slice(1),true)});
+  window.addEventListener('resize',stick);
+  stick();
+  var h=location.hash.slice(1);show(h,false);
+  if(h&&panelOf(h)){if(panelOf(h).firstElementChild.id===h){top0();setTimeout(top0,0)}else{document.getElementById(h).scrollIntoView({behavior:'instant'})}}
+})();
+</script>
 <script src="/assets/analytics.js" defer></script>
 </body>
 </html>
